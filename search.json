@@ -1,0 +1,107 @@
+[
+  {
+    "objectID": "oda-trends.html",
+    "href": "oda-trends.html",
+    "title": "Where Does the Money Go?",
+    "section": "",
+    "text": "Data Story  ·  OECD DAC  ·  Official Development Assistance"
+  },
+  {
+    "objectID": "oda-trends.html#key-numbers",
+    "href": "oda-trends.html#key-numbers",
+    "title": "Where Does the Money Go?",
+    "section": "Key numbers",
+    "text": "Key numbers\n\n\n\nUS ODA change 2025\n\n\n−56.9%\n\n\nLargest reduction by any donor in any year on record\n\n\n\n\nGermany 2025 rank\n\n\n#1\n\n\nFirst time Germany leads all DAC donors in history\n\n\n\n\nTotal DAC ODA 2025\n\n\n−23.1%\n\n\nLargest annual contraction on record; back to 2015 levels\n\n\n\n\nHumanitarian ODA 2025\n\n\n−35.8%\n\n\nSecond consecutive fall after five years of growth\n\n\n\n\nSources: OECD DAC Statistics. Final 2024 data released December 2025; preliminary 2025 data released April 2026. Country-level 2025 values for France, Japan, Sweden, Netherlands are author estimates."
+  },
+  {
+    "objectID": "SETUP.html",
+    "href": "SETUP.html",
+    "title": "",
+    "section": "",
+    "text": "Code"
+  },
+  {
+    "objectID": "SETUP.html#step-1-install-quarto",
+    "href": "SETUP.html#step-1-install-quarto",
+    "title": "",
+    "section": "Step 1 — Install Quarto",
+    "text": "Step 1 — Install Quarto\nGo to https://quarto.org/docs/get-started/ and download the installer for your OS. Takes about 2 minutes. No configuration needed."
+  },
+  {
+    "objectID": "SETUP.html#step-2-install-python-packages",
+    "href": "SETUP.html#step-2-install-python-packages",
+    "title": "",
+    "section": "Step 2 — Install Python packages",
+    "text": "Step 2 — Install Python packages\nOpen your terminal and run:\npip install plotly pandas jupyter nbformat"
+  },
+  {
+    "objectID": "SETUP.html#step-3-set-up-the-project",
+    "href": "SETUP.html#step-3-set-up-the-project",
+    "title": "",
+    "section": "Step 3 — Set up the project",
+    "text": "Step 3 — Set up the project\nCopy the entire quarto-oda-site/ folder to wherever you keep projects.\nYour folder should look like:\nquarto-oda-site/\n  _quarto.yml       ← site configuration\n  styles.css        ← dark theme\n  index.qmd         ← homepage\n  oda-trends.qmd    ← first post\n  oda-deep-dive.qmd ← second post (add later)"
+  },
+  {
+    "objectID": "SETUP.html#step-4-preview-locally",
+    "href": "SETUP.html#step-4-preview-locally",
+    "title": "",
+    "section": "Step 4 — Preview locally",
+    "text": "Step 4 — Preview locally\nIn your terminal, navigate to the folder and run:\ncd quarto-oda-site\nquarto preview\nThis opens the site in your browser at http://localhost:4200 Hot-reloads as you edit files. Ctrl+C to stop."
+  },
+  {
+    "objectID": "SETUP.html#step-5-create-a-github-repository",
+    "href": "SETUP.html#step-5-create-a-github-repository",
+    "title": "",
+    "section": "Step 5 — Create a GitHub repository",
+    "text": "Step 5 — Create a GitHub repository\n\nGo to github.com and sign in (or create a free account)\nClick “New repository”\nName it data-stories (or anything you like)\nSet it to Public\nClick “Create repository”"
+  },
+  {
+    "objectID": "SETUP.html#step-6-publish-to-github-pages",
+    "href": "SETUP.html#step-6-publish-to-github-pages",
+    "title": "",
+    "section": "Step 6 — Publish to GitHub Pages",
+    "text": "Step 6 — Publish to GitHub Pages\nIn your terminal (inside the project folder), run:\nquarto publish gh-pages\nQuarto will: - Ask you to authenticate with GitHub (opens browser) - Render all your .qmd files to HTML - Push the output to a gh-pages branch - Print the live URL (e.g. https://yourusername.github.io/data-stories)\nThat’s it. Every time you update a post, run quarto publish gh-pages again."
+  },
+  {
+    "objectID": "SETUP.html#step-7-link-from-wordpress",
+    "href": "SETUP.html#step-7-link-from-wordpress",
+    "title": "",
+    "section": "Step 7 — Link from WordPress",
+    "text": "Step 7 — Link from WordPress\nNow that your site has a real URL, you can link to individual posts from WordPress using normal text links — no iframes or scripts needed.\nOr add a “Data Stories” page in WordPress that links out to the Quarto site."
+  },
+  {
+    "objectID": "SETUP.html#adding-new-posts",
+    "href": "SETUP.html#adding-new-posts",
+    "title": "",
+    "section": "Adding new posts",
+    "text": "Adding new posts\n\nCreate a new file like my-new-post.qmd in the project folder\nAdd it to the navbar in _quarto.yml if you want it in the menu\nRun quarto publish gh-pages"
+  },
+  {
+    "objectID": "SETUP.html#editing-existing-posts",
+    "href": "SETUP.html#editing-existing-posts",
+    "title": "",
+    "section": "Editing existing posts",
+    "text": "Editing existing posts\nJust edit the .qmd file and re-publish. Quarto only re-renders changed files (controlled by freeze: auto in _quarto.yml)."
+  },
+  {
+    "objectID": "SETUP.html#useful-quarto-reference",
+    "href": "SETUP.html#useful-quarto-reference",
+    "title": "",
+    "section": "Useful Quarto reference",
+    "text": "Useful Quarto reference\n\nFull docs: https://quarto.org/docs/websites/\nPlotly in Quarto: https://quarto.org/docs/interactive/widgets/plotly.html\nTheming: https://quarto.org/docs/output-formats/html-themes.html"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Data Stories in Global Development",
+    "section": "",
+    "text": "Machine Learning for Social Science  ·  Boston, MA"
+  },
+  {
+    "objectID": "index.html#posts",
+    "href": "index.html#posts",
+    "title": "Data Stories in Global Development",
+    "section": "Posts",
+    "text": "Posts\n\n\n\nPost\nTopic\nData source\n\n\n\n\nWhere Does the Money Go?\nODA donor trends 2010–2025 including the 2025 collapse\nOECD DAC\n\n\nAid in Depth\nBudget shares, sector flows, and recipient countries\nOECD DAC / CRS\n\n\n\n\nAll code is reproducible. Click &lt;/&gt; Code on any chart to see the Python source."
+  }
+]

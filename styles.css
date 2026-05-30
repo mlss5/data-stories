@@ -1,0 +1,76 @@
+/* ── Fonts ── */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300&display=swap');
+
+/* ── Base ── */
+body {
+  font-family: 'Source Serif 4', Georgia, serif !important;
+  background-color: #060c1a !important;
+  color: #e2e8f0 !important;
+}
+
+/* ── Headings ── */
+h1, h2, h3 {
+  font-family: 'Playfair Display', Georgia, serif !important;
+  color: #ffffff !important;
+}
+h1 { font-size: 2.4rem; font-weight: 900; text-shadow: 0 0 40px rgba(96,165,250,0.25); }
+h2 { font-size: 1.6rem; border-top: 1px solid #1e2d45; padding-top: 1.4rem; margin-top: 2.8rem; }
+
+/* ── Navbar ── */
+.navbar {
+  background-color: #0d1424 !important;
+  border-bottom: 1px solid #1e2d45 !important;
+}
+.navbar-brand, .nav-link { color: #94a3b8 !important; font-family: 'Source Serif 4', serif; }
+.nav-link:hover { color: #60a5fa !important; }
+
+/* ── Callout / deck text ── */
+.lead {
+  font-style: italic;
+  font-weight: 300;
+  color: #94a3b8;
+  border-left: 3px solid #2563eb;
+  padding-left: 1rem;
+  line-height: 1.75;
+}
+
+/* ── Kicker ── */
+.kicker {
+  font-size: 0.65rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #60a5fa;
+  display: block;
+  margin-bottom: 0.75rem;
+}
+
+/* ── Stat cards ── */
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  margin: 1.5rem 0;
+}
+.stat-card {
+  background: #0d1424;
+  border: 1px solid #1e2d45;
+  border-left: 3px solid #2563eb;
+  border-radius: 8px;
+  padding: 16px;
+}
+.stat-card .val { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; color: #ef4444; }
+.stat-card .val.pos { color: #22c55e; }
+.stat-card .lbl { font-size: 0.65rem; letter-spacing: 2px; text-transform: uppercase; color: #64748b; margin-bottom: 4px; }
+.stat-card .note { font-size: 0.75rem; color: #64748b; font-style: italic; line-height: 1.4; }
+
+/* ── Tables ── */
+table { border-collapse: collapse; width: 100%; }
+th { background: #0d1424; color: #94a3b8; font-size: 0.75rem; letter-spacing: 1px; text-transform: uppercase; }
+td, th { border: 1px solid #1e2d45; padding: 8px 12px; }
+tr:nth-child(even) td { background: #0a1020; }
+
+/* ── Footer ── */
+.page-footer { background-color: #0d1424 !important; color: #3d5070 !important; font-size: 0.75rem; }
+
+/* ── Code blocks ── */
+pre { background: #0d1424 !important; border: 1px solid #1e2d45 !important; }
