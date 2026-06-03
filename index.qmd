@@ -1,0 +1,19 @@
+---
+title: "Data Stories in Social Science"
+subtitle: "Machine Learning for Social Science"
+---
+
+<span class="kicker">Machine Learning for Social Science &nbsp;·&nbsp; Boston, MA</span>
+
+::: {.lead}
+Applying data analysis and machine learning methods to questions in social science.
+Each post presents an interactive visualization of open-source data to surface
+stories that impact society today.
+:::
+
+## Posts
+
+| Post | Tags |
+|------|------|
+| [The Rise and Fall of Foreign Aid](oda-trends.qmd) | Global Development · Aid |
+
