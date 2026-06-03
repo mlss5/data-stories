@@ -1,5 +1,5 @@
 ---
-title: "The Rise and Fall of Foreign Aid"
+title: "The Rise and Fall of Foreign Aid"  
 subtitle: "ODA donor trends, 2010–2025"
 date: "2025-05-29"
 categories: [Data Story, Global Development, Aid, Foreign Aid, ODA]
