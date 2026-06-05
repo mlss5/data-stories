@@ -10,6 +10,8 @@ website:
         text: Home
       - href: oda-trends.qmd
         text: The Rise and Fall of Foreign Aid
+      - href: oda-deep-dive.qmd
+        text: Aid in Depth
     right:
       - icon: github
         href: https://github.com/mlss5/data-stories
