@@ -1,0 +1,344 @@
+---
+title: "Aid in Depth"
+subtitle: "Where does foreign aid actually go?"
+date: "2025-06-01"
+categories: [Data Story, Global Development, Aid, Foreign Aid, ODA, Recipients]
+---
+
+<span class="kicker">Data Story &nbsp;·&nbsp; OECD DAC &nbsp;·&nbsp; Bilateral Aid Flows 2010&#8211;2025</span>
+
+::: {.lead}
+Every dollar of foreign aid tells two stories: who gives, and who receives.
+This chart maps flows from the five largest donors each year to the countries
+that depend on that generosity most. Drag the slider to watch Ukraine's rise
+from minor recipient to the world's largest aid destination after 2022 —
+and to see how that shift displaced traditional recipients across Africa and South Asia.
+:::
+
+```{=html}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/d3-sankey@0.12.3/dist/d3-sankey.min.js"></script>
+
+<style>
+  .sk-year-control {
+    display: flex; align-items: center; gap: 18px; margin: 0 0 16px;
+  }
+  .sk-year-label {
+    font-family: 'Playfair Display', serif;
+    font-size: 30px; font-weight: 700; color: #60a5fa; min-width: 58px;
+  }
+  .sk-slider {
+    -webkit-appearance: none; appearance: none;
+    flex: 1; height: 4px; background: #1e2d45;
+    border-radius: 2px; outline: none; cursor: pointer;
+  }
+  .sk-slider::-webkit-slider-thumb {
+    -webkit-appearance: none; width: 18px; height: 18px;
+    background: #2563eb; border-radius: 50%; cursor: pointer;
+  }
+  .sk-slider::-moz-range-thumb {
+    width: 18px; height: 18px; background: #2563eb;
+    border-radius: 50%; border: none; cursor: pointer;
+  }
+  .sk-prelim { font-size: 11px; color: #f87171; font-style: italic; }
+  .sk-wrap {
+    background: #0d1424 !important;
+    border: 1px solid #1e2d45;
+    border-radius: 12px; padding: 20px 8px 12px;
+    overflow: hidden;
+  }
+  .sk-note {
+    font-size: 11px; color: #3d5070;
+    margin: 10px 0 0; line-height: 1.6; font-style: italic;
+  }
+  .sk-legend {
+    display: flex; flex-wrap: wrap; gap: 10px;
+    margin: 16px 0 0; font-size: 11px; color: #64748b;
+  }
+  .sk-legend-item { display: flex; align-items: center; gap: 5px; }
+  .sk-legend-dot {
+    width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0;
+  }
+</style>
+
+<div class="sk-year-control">
+  <span class="sk-year-label" id="sk-yr">2023</span>
+  <input type="range" class="sk-slider" id="sk-slider"
+         min="2010" max="2025" step="1" value="2023" />
+  <span class="sk-prelim" id="sk-prelim" style="display:none">Preliminary</span>
+</div>
+<div class="sk-wrap"><div id="sk-sankey"></div></div>
+<div id="sk-legend" class="sk-legend"></div>
+<p class="sk-note">
+  Showing top 5 donors by total ODA for the selected year, flowing to top 4 recipient
+  countries plus all other recipients combined. Flow widths proportional to USD billions.
+  Hover over any flow for exact values. Donor ranking and recipient composition update
+  dynamically as the year changes. Recipient shares are illustrative estimates based on
+  OECD DAC bilateral ODA tables.
+</p>
+
+<script>
+(function(){
+
+var YEARS = [2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025];
+
+// All donors ODA data
+var ALL_DONORS = {
+  'USA':         [30.4,31.1,30.7,31.5,33.1,31.1,33.6,35.3,34.0,34.6,35.5,42.3,55.3,64.5,60.2,25.9],
+  'Germany':     [12.7,14.1,13.1,14.1,16.6,17.8,24.7,24.7,25.0,23.8,28.4,32.2,35.0,36.4,35.2,29.1],
+  'EU Instit.':  [12.0,12.5,13.0,14.0,14.5,13.5,14.0,15.0,16.0,16.5,17.0,18.0,18.5,19.0,18.0,17.0],
+  'Japan':       [11.2,10.8,10.5,11.6, 9.2, 9.2,10.4,11.5, 9.2,15.5,16.3,17.6,17.5,19.7,16.8,15.0],
+  'France':      [12.9,13.1,12.0,11.4,10.6, 9.2, 9.6,11.3,12.2,12.2,14.1,15.4,15.9,15.1,14.5,12.9],
+  'UK':          [13.0,13.9,13.9,17.9,19.4,18.7,18.0,17.9,19.4,19.6,18.6,15.8,15.5,15.0,14.2,13.5],
+  'Canada':      [ 5.1, 5.5, 5.4, 4.9, 4.2, 4.3, 3.9, 4.3, 4.6, 4.7, 4.9, 6.1, 6.4, 6.0, 5.8, 5.5],
+  'Norway':      [ 4.4, 4.9, 4.8, 5.0, 5.1, 4.3, 4.4, 4.1, 4.3, 4.4, 4.7, 4.7, 5.0, 5.0, 4.8, 4.5],
+  'Sweden':      [ 4.5, 4.6, 5.2, 5.8, 6.2, 7.1, 6.8, 5.6, 5.8, 5.4, 5.2, 5.9, 5.0, 4.9, 4.6, 4.3],
+  'Netherlands': [ 5.4, 6.3, 5.5, 5.4, 5.6, 5.8, 4.9, 4.9, 5.6, 5.3, 5.3, 5.3, 5.9, 5.2, 4.8, 4.5],
+  'Switzerland': [ 2.3, 3.0, 3.0, 3.2, 3.2, 3.5, 3.6, 3.1, 3.1, 3.1, 3.1, 3.5, 4.0, 4.5, 4.3, 4.0],
+  'Italy':       [ 3.1, 3.0, 2.7, 3.4, 3.1, 3.8, 5.0, 5.1, 5.0, 4.9, 4.8, 6.0, 6.0, 5.0, 4.8, 4.5],
+  'Australia':   [ 3.8, 4.3, 5.1, 4.7, 4.2, 3.8, 3.1, 3.0, 2.9, 2.9, 2.8, 2.9, 3.0, 3.1, 3.0, 2.9],
+  'Denmark':     [ 2.9, 2.9, 2.7, 2.7, 3.0, 2.6, 2.4, 2.4, 2.5, 2.5, 2.8, 2.9, 3.0, 2.9, 2.7, 2.5],
+  'Spain':       [ 5.9, 4.2, 2.0, 2.0, 1.9, 1.7, 1.6, 2.4, 2.9, 3.0, 3.0, 3.5, 3.6, 3.5, 3.3, 3.1],
+  'Belgium':     [ 3.0, 2.8, 2.3, 2.3, 2.4, 1.9, 2.2, 2.2, 2.2, 2.2, 2.4, 2.5, 2.5, 2.4, 2.3, 2.1]
+};
+
+// Donor colors
+var DONOR_COLORS = {
+  'USA':'#60a5fa','Germany':'#4ade80','UK':'#f87171',
+  'France':'#c084fc','Japan':'#fb923c','EU Instit.':'#a78bfa',
+  'Canada':'#f472b6','Norway':'#fbbf24','Sweden':'#22d3ee',
+  'Netherlands':'#facc15','Switzerland':'#86efac','Italy':'#fca5a5',
+  'Australia':'#67e8f9','Denmark':'#d8b4fe','Spain':'#fdba74','Belgium':'#a5b4fc'
+};
+
+// Recipient share keys and list
+var REC_KEYS = [2010,2015,2020,2023,2025];
+// Cols: Ukraine|Ethiopia|Bangladesh|Nigeria|India|DRC|Pakistan|Other
+var RECIPS = ['Ukraine','Ethiopia','Bangladesh','Nigeria','India','DRC','Pakistan','Other'];
+
+var REC_SHARES = {
+  'USA':        [[0,8,5,8,5,7,12,55],[0,9,5,8,4,7,10,57],[1,9,5,8,3,8,8,58],[18,6,3,5,2,5,5,56],[20,5,3,5,2,5,5,55]],
+  'Germany':    [[0,7,4,3,12,4,3,67],[1,8,4,3,10,4,3,67],[2,8,5,3,8,4,3,67],[22,6,3,2,5,3,2,57],[25,6,3,2,5,3,2,54]],
+  'UK':         [[0,10,9,7,10,5,9,50],[1,11,9,7,8,5,8,51],[2,11,9,8,5,6,8,51],[15,8,7,6,3,5,7,49],[18,8,7,6,3,5,7,46]],
+  'France':     [[0,3,2,4,6,5,2,78],[0,3,2,5,5,5,2,78],[2,3,3,5,4,6,2,75],[10,3,2,4,3,5,2,71],[12,3,2,4,3,5,2,69]],
+  'Japan':      [[0,2,7,2,10,2,5,72],[0,2,7,2,8,2,5,74],[1,3,7,2,7,2,4,74],[4,3,7,2,6,2,4,72],[5,3,7,2,6,2,4,71]],
+  'EU Instit.': [[0,5,3,5,4,6,2,75],[0,5,3,5,3,6,2,76],[2,5,3,5,3,6,2,74],[15,4,2,4,2,5,2,66],[18,4,2,4,2,5,2,63]],
+  'Canada':     [[0,5,6,4,8,4,7,66],[0,6,6,4,7,4,6,67],[1,6,6,5,6,4,6,66],[12,5,5,4,5,4,5,60],[14,5,5,4,4,4,5,59]],
+  'Norway':     [[0,8,4,5,3,5,3,72],[0,8,4,5,3,5,3,72],[1,8,4,5,2,5,3,72],[10,7,3,5,2,5,3,65],[12,7,3,5,2,5,3,63]],
+  'Sweden':     [[0,7,4,5,3,5,3,73],[0,7,4,5,3,5,3,73],[1,7,4,5,3,5,3,72],[8,6,3,5,2,5,3,68],[10,6,3,5,2,5,3,66]],
+  'Italy':      [[0,3,2,5,5,6,2,77],[0,3,2,5,4,6,2,78],[1,3,2,5,3,6,2,78],[8,3,2,5,3,6,2,71],[10,3,2,4,3,6,2,70]],
+  'Australia':  [[0,2,8,2,6,2,5,75],[0,2,8,2,5,2,5,76],[0,2,8,2,5,2,4,77],[3,2,8,2,5,2,4,74],[4,2,8,2,5,2,4,73]],
+  'Spain':      [[0,4,2,6,4,5,2,77],[0,4,2,6,4,5,2,77],[1,4,2,6,3,5,2,77],[9,4,2,6,3,5,2,69],[10,4,2,5,3,5,2,69]],
+  'DEFAULT':    [[0,5,4,5,5,5,4,72],[0,5,4,5,4,5,4,73],[1,5,4,5,4,5,4,72],[10,5,3,5,3,5,3,66],[12,5,3,5,3,5,3,64]]
+};
+
+var REC_COLORS = {
+  'Ukraine':'#60a5fa','Ethiopia':'#4ade80','Bangladesh':'#fb923c',
+  'Nigeria':'#f87171','India':'#facc15','DRC':'#c084fc',
+  'Pakistan':'#22d3ee','Other recipients':'#334d6e'
+};
+
+// Interpolation helper
+function interp(year, keys, rows) {
+  if (year <= keys[0]) return rows[0].slice();
+  if (year >= keys[keys.length-1]) return rows[keys.length-1].slice();
+  for (var i=0; i<keys.length-1; i++) {
+    if (year >= keys[i] && year <= keys[i+1]) {
+      var t = (year-keys[i])/(keys[i+1]-keys[i]);
+      return rows[i].map(function(v,j){ return v + t*(rows[i+1][j]-v); });
+    }
+  }
+  return rows[0].slice();
+}
+
+function getFlows(year) {
+  var yi = YEARS.indexOf(year);
+
+  // Sort donors by ODA this year, take top 5
+  var donorODAs = {};
+  Object.keys(ALL_DONORS).forEach(function(n){
+    donorODAs[n] = ALL_DONORS[n][yi];
+  });
+  var top5 = Object.keys(donorODAs)
+    .sort(function(a,b){ return donorODAs[b]-donorODAs[a]; })
+    .slice(0,5);
+
+  // Compute raw flows to all recipients
+  var recipTotals = {};
+  RECIPS.filter(function(r){return r!=='Other';}).forEach(function(r){
+    recipTotals[r] = 0;
+  });
+
+  var rawByDonor = {};
+  top5.forEach(function(donor){
+    var oda = donorODAs[donor];
+    var sharesData = REC_SHARES[donor] || REC_SHARES['DEFAULT'];
+    var shares = interp(year, REC_KEYS, sharesData);
+    rawByDonor[donor] = {};
+    RECIPS.forEach(function(r,i){
+      var val = oda * shares[i] / 100;
+      rawByDonor[donor][r] = val;
+      if (r !== 'Other') {
+        recipTotals[r] = (recipTotals[r]||0) + val;
+      }
+    });
+  });
+
+  // Find top 4 recipients by total flow
+  var top4 = Object.keys(recipTotals)
+    .sort(function(a,b){ return recipTotals[b]-recipTotals[a]; })
+    .slice(0,4);
+
+  // Build final flows collapsing non-top4 into 'Other recipients'
+  var flows = [];
+  top5.forEach(function(donor){
+    var otherVal = 0;
+    RECIPS.forEach(function(r){
+      var val = rawByDonor[donor][r];
+      if (top4.indexOf(r) >= 0) {
+        if (val >= 0.05) flows.push({source:donor, target:r, value:val});
+      } else {
+        otherVal += val;
+      }
+    });
+    if (otherVal >= 0.1) {
+      flows.push({source:donor, target:'Other recipients', value:otherVal});
+    }
+  });
+
+  return {flows:flows, top5:top5, top4:top4};
+}
+
+function drawSankey(year) {
+  var result = getFlows(year);
+  var flows = result.flows;
+
+  var wrap = document.getElementById('sk-sankey');
+  wrap.innerHTML = '';
+
+  var ML=145, MR=160, MT=16, MB=16;
+  var totalW = (wrap.parentElement.clientWidth||860) - 40;
+  var W = totalW - ML - MR;
+  var H = 380;
+
+  var svg = d3.select('#sk-sankey').append('svg')
+    .attr('width', totalW)
+    .attr('height', H+MT+MB)
+    .append('g')
+    .attr('transform','translate('+ML+','+MT+')');
+
+  // Build ordered node list: sources left, targets right
+  var srcOrder = result.top5;
+  var tgtSeen = [];
+  flows.forEach(function(f){
+    if(tgtSeen.indexOf(f.target)<0) tgtSeen.push(f.target);
+  });
+  // Put 'Other recipients' last
+  tgtSeen = tgtSeen.filter(function(r){return r!=='Other recipients';});
+  tgtSeen.push('Other recipients');
+
+  var allNames = srcOrder.concat(tgtSeen);
+  var nodes = allNames.map(function(n){return {name:n};});
+  var links = flows.map(function(f){
+    return {
+      source: allNames.indexOf(f.source),
+      target: allNames.indexOf(f.target),
+      value: Math.max(f.value, 0.01)
+    };
+  });
+
+  var sk = d3.sankey()
+    .nodeWidth(16).nodePadding(12)
+    .extent([[0,0],[W,H]]);
+
+  var g = sk({
+    nodes: nodes.map(function(d){return Object.assign({},d);}),
+    links: links.map(function(d){return Object.assign({},d);})
+  });
+
+  function nColor(name){
+    return DONOR_COLORS[name] || REC_COLORS[name] || '#475569';
+  }
+
+  // Links
+  svg.append('g').selectAll('path').data(g.links).join('path')
+    .attr('d', d3.sankeyLinkHorizontal())
+    .attr('stroke', function(d){return nColor(d.source.name);})
+    .attr('stroke-width', function(d){return Math.max(1,d.width);})
+    .attr('fill','none').attr('opacity',0.32)
+    .on('mouseover',function(){d3.select(this).attr('opacity',0.62);})
+    .on('mouseout', function(){d3.select(this).attr('opacity',0.32);})
+    .append('title')
+    .text(function(d){
+      return d.source.name+' \u2192 '+d.target.name+': $'+d.value.toFixed(1)+'B';
+    });
+
+  // Nodes
+  svg.append('g').selectAll('rect').data(g.nodes).join('rect')
+    .attr('x',function(d){return d.x0;})
+    .attr('y',function(d){return d.y0;})
+    .attr('height',function(d){return Math.max(2,d.y1-d.y0);})
+    .attr('width',function(d){return d.x1-d.x0;})
+    .attr('fill',function(d){return nColor(d.name);})
+    .attr('rx',2)
+    .append('title')
+    .text(function(d){return d.name+': $'+d.value.toFixed(1)+'B';});
+
+  // Labels
+  svg.append('g').selectAll('text').data(g.nodes).join('text')
+    .attr('x',function(d){return d.x0<W/2 ? d.x0-8 : d.x1+8;})
+    .attr('y',function(d){return (d.y0+d.y1)/2;})
+    .attr('dy','0.35em')
+    .attr('text-anchor',function(d){return d.x0<W/2?'end':'start';})
+    .attr('fill','#94a3b8')
+    .attr('font-size',11)
+    .attr('font-family',"'Source Serif 4', Georgia, serif")
+    .text(function(d){return d.name;});
+
+  // Update legend
+  var legend = document.getElementById('sk-legend');
+  if (legend) {
+    legend.innerHTML = '<span style="color:#64748b;font-size:11px;margin-right:6px">Top 5 donors:</span>';
+    result.top5.forEach(function(name){
+      var item = document.createElement('span');
+      item.className = 'sk-legend-item';
+      item.innerHTML = '<span class="sk-legend-dot" style="background:'+nColor(name)+'"></span>'+name;
+      legend.appendChild(item);
+    });
+  }
+}
+
+function update(year) {
+  document.getElementById('sk-yr').textContent = year;
+  document.getElementById('sk-prelim').style.display = year>=2024?'inline':'none';
+  drawSankey(year);
+}
+
+document.getElementById('sk-slider').addEventListener('input', function(){
+  update(parseInt(this.value));
+});
+
+var _rt;
+window.addEventListener('resize', function(){
+  clearTimeout(_rt);
+  _rt = setTimeout(function(){
+    update(parseInt(document.getElementById('sk-slider').value));
+  }, 200);
+});
+
+if (document.readyState==='loading') {
+  document.addEventListener('DOMContentLoaded', function(){ update(2023); });
+} else {
+  update(2023);
+}
+
+})();
+</script>
+```
+
+---
+
+**Sources:** OECD DAC Statistics. Final 2024 data released December 2025;
+preliminary 2025 data released April 2026.
+Recipient country shares are illustrative estimates based on OECD DAC
+bilateral ODA tables and CRS project-level data.
