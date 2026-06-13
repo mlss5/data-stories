@@ -2,10 +2,18 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://mlss5.github.io/data-stories/index.html</loc>
-    <lastmod>2026-06-13T19:30:12.128Z</lastmod>
+    <lastmod>2026-06-13T20:31:24.917Z</lastmod>
   </url>
   <url>
     <loc>https://mlss5.github.io/data-stories/nato-vs-oda.html</loc>
-    <lastmod>2026-06-13T19:30:12.128Z</lastmod>
+    <lastmod>2026-06-13T20:31:24.917Z</lastmod>
+  </url>
+  <url>
+    <loc>https://mlss5.github.io/data-stories/oda-deep-dive.html</loc>
+    <lastmod>2026-06-13T20:31:24.918Z</lastmod>
+  </url>
+  <url>
+    <loc>https://mlss5.github.io/data-stories/oda-trends.html</loc>
+    <lastmod>2026-06-13T20:31:24.918Z</lastmod>
   </url>
 </urlset>
