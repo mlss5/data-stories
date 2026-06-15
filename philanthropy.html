@@ -6,9 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2025-05-29">
+<meta name="dcterms.date" content="2026-06-14">
 
-<title>The Rise and Fall of Foreign Aid – Data Stories in Social Science</title>
+<title>Billionaires, Foundations, and the Giving Pledge – Data Stories in Social Science</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -313,14 +313,14 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">The Rise and Fall of Foreign Aid</h1>
-<p class="subtitle lead">ODA donor trends, 2010–2025</p>
+<h1 class="title">Billionaires, Foundations, and the Giving Pledge</h1>
+<p class="subtitle lead">Tracking the growth of private philanthropy, 2010–2025</p>
   <div class="quarto-categories">
     <div class="quarto-category">Data Story</div>
     <div class="quarto-category">Global Development</div>
-    <div class="quarto-category">Aid</div>
-    <div class="quarto-category">Foreign Aid</div>
-    <div class="quarto-category">ODA</div>
+    <div class="quarto-category">Philanthropy</div>
+    <div class="quarto-category">Billionaires</div>
+    <div class="quarto-category">Giving Pledge</div>
   </div>
   </div>
 
@@ -332,7 +332,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">May 29, 2025</p>
+      <p class="date">June 14, 2026</p>
     </div>
   </div>
   
@@ -344,297 +344,315 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p><span class="kicker">Data Story &nbsp;·&nbsp; OECD DAC &nbsp;·&nbsp; Official Development Assistance</span></p>
+<p><span class="kicker">Data Story &nbsp;·&nbsp; Giving Pledge · Candid · UBS/Forbes &nbsp;·&nbsp; 2010–2025</span></p>
 <div class="lead">
-<p>Foreign aid from 28 of 33 DAC member countries grew between 2019 and 2023 — then retracted sharply. In 2025, the United States cut overseas development assistance by nearly 57%, the largest single-year reduction by any donor on record.</p>
+<p>In 2010, Bill Gates, Melinda French Gates, and Warren Buffett launched the Giving Pledge, asking the world’s wealthiest people to commit at least half their fortunes to charity. Fifteen years on, the number of billionaires has nearly tripled and the number of private foundations has more than doubled — but the Giving Pledge itself has lost momentum, with new sign-ups slowing to a trickle even as the fortunes it was designed to redirect keep growing.</p>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+
 <style>
-  .oda-controls { margin: 0 0 12px; }
-  .oda-ctrl-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 10px; }
-  .oda-btn {
-    font-family: 'Source Serif 4', Georgia, serif;
-    font-size: 11px; letter-spacing: 1px; text-transform: uppercase;
-    padding: 4px 12px; border-radius: 20px; cursor: pointer;
-    border: 1.5px solid currentColor; background: transparent;
-    transition: opacity 0.15s, background 0.15s;
+  .phil-h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem; font-weight: 700;
+    color: #ffffff !important;
+    margin: 40px 0 8px;
+    padding-top: 28px;
+    border-top: 1px solid #1e2d45;
   }
-  .oda-btn.off { opacity: 0.22; }
-  .oda-action {
-    font-family: 'Source Serif 4', Georgia, serif;
-    font-size: 11px; letter-spacing: 1px; text-transform: uppercase;
-    padding: 4px 14px; border-radius: 4px; cursor: pointer;
-    border: 1px solid #1e2d45; background: #0d1424; color: #64748b;
-    transition: color 0.15s, border-color 0.15s;
+  .phil-desc {
+    font-size: 13.5px; color: #64748b;
+    margin: 0 0 16px; line-height: 1.65;
+    font-style: italic; max-width: 680px;
   }
-  .oda-action:hover { color: #94a3b8; border-color: #334155; }
-  .oda-chart-wrap {
+  .phil-wrap {
     background: #0d1424 !important;
-    border: 1px solid #1e2d45;
-    border-radius: 12px;
-    padding: 20px 16px 12px;
+    border: 1px solid #1e2d45; border-radius: 12px;
+    padding: 20px 16px 12px; margin-bottom: 4px;
   }
-  .oda-note {
+  .phil-note {
     font-size: 11px; color: #3d5070;
     margin: 10px 0 0; line-height: 1.6; font-style: italic;
   }
-  .oda-stats {
+  .phil-stats {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 12px; margin: 24px 0 0;
   }
-  .oda-card {
+  .phil-card {
     background: #0d1424 !important;
     border: 1px solid #1e2d45;
     border-left: 3px solid #2563eb;
     border-radius: 8px; padding: 18px 16px;
   }
-  .oda-card .lbl {
+  .phil-card .lbl {
     font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
     color: #64748b; margin: 0 0 6px; display: block;
   }
-  .oda-card .val {
+  .phil-card .val {
     font-family: 'Playfair Display', serif;
     font-size: 28px; font-weight: 700; line-height: 1;
-    margin: 0 0 6px; color: #ef4444; display: block;
+    margin: 0 0 6px; color: #60a5fa; display: block;
   }
-  .oda-card .note {
+  .phil-card .val.warn { color: #f87171; }
+  .phil-card .note {
     font-size: 12px; color: #64748b;
     font-style: italic; line-height: 1.4; display: block;
   }
 </style>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/3.0.1/chartjs-plugin-annotation.min.js"></script>
-
-<div class="oda-controls">
-  <div class="oda-ctrl-row">
-    <button class="oda-action" onclick="odaSelectTop8()">Top 8</button>
-    <button class="oda-action" onclick="odaSelectAll()">Select all</button>
-    <button class="oda-action" onclick="odaDeselectAll()">Deselect all</button>
-    <button class="oda-action" onclick="odaToggleLegend()">Toggle legend</button>
-  </div>
-  <div id="oda-pills" style="display:flex;flex-wrap:wrap;gap:6px;"></div>
+<!-- ── CHART 1: GIVING PLEDGE SIGNATORIES ── -->
+<p class="phil-h2">1 — The Giving Pledge: Cumulative Signatories</p>
+<p class="phil-desc">
+  The pledge grew quickly in its first decade, then stalled. Just 4 new signatories joined
+  in 2024 — a record low — before a modest rebound to 14 in 2025. Today the pledge counts
+  256 signatories from roughly 30 countries, of whom about 110 are US billionaires —
+  roughly 12% of America's billionaire population.
+</p>
+<div class="phil-wrap">
+  <canvas id="phil-pledge" height="320"></canvas>
 </div>
-
-<div class="oda-chart-wrap">
-  <canvas id="oda-chart" height="420"></canvas>
-</div>
-<p class="oda-note">
-  Gross ODA disbursements, grant-equivalent basis, constant 2022 USD billions.
-  2024: final OECD release (Dec 2025). 2025: preliminary (Apr 2026), shown as open circles.
-  Dotted lines mark the 2015 refugee crisis and 2022 Ukraine war onset.
-  Sector breakdowns for all 33 donors are author estimates based on OECD CRS aggregate reporting.
+<p class="phil-note">
+  Cumulative signatories to the Giving Pledge by year. Compiled from the Giving Pledge
+  public signatory list, the Institute for Policy Studies report "The Giving Pledge at 15"
+  (2025), and contemporaneous press coverage. Figures for individual years are
+  approximate, interpolated between known totals.
 </p>
 
-<div class="oda-stats">
-  <div class="oda-card">
-    <span class="lbl">US ODA change 2025</span>
-    <span class="val">−56.9%</span>
-    <span class="note">Largest reduction by any donor in any year on record</span>
+<!-- ── CHART 2: US PRIVATE FOUNDATIONS ── -->
+<p class="phil-h2">2 — Number of US Private Foundations</p>
+<p class="phil-desc">
+  While headline philanthropy debates focus on a handful of billionaire names, the
+  private foundation sector has quietly more than doubled in size since 2010 — from
+  roughly 70,000 to over 150,000 registered foundations, most of them small family
+  foundations rather than the mega-funds that dominate the news.
+</p>
+<div class="phil-wrap">
+  <canvas id="phil-foundations" height="320"></canvas>
+</div>
+<p class="phil-note">
+  Number of private foundations registered in the United States. 2011 and 2015 figures
+  from the Foundation Center; 2023–2025 figures from Candid. Intermediate years are
+  estimated via smoothed interpolation.
+</p>
+
+<!-- ── CHART 3: GLOBAL BILLIONAIRES ── -->
+<p class="phil-h2">3 — Number of Billionaires Worldwide</p>
+<p class="phil-desc">
+  The billionaire population has grown in step with — and arguably faster than — both
+  the foundation sector and the Giving Pledge. Global billionaire wealth has surged 81%
+  since 2020 alone, reaching an estimated $18.3 trillion in 2025.
+</p>
+<div class="phil-wrap">
+  <canvas id="phil-billionaires" height="320"></canvas>
+</div>
+<p class="phil-note">
+  Number of individuals with net worth over $1 billion, worldwide. Source: Forbes
+  World's Billionaires List (annual), with 2025 figure corroborated by UBS Billionaire
+  Ambitions Report. Counts vary slightly by methodology and snapshot date.
+</p>
+
+<!-- ── CHART 4: INDEXED COMPARISON ── -->
+<p class="phil-h2">4 — Relative Growth, Indexed to 2010</p>
+<p class="phil-desc">
+  Putting all three series on the same scale (2010 = 100) shows the real story: the
+  Giving Pledge kept pace with billionaire growth for its first decade, but new sign-ups
+  have nearly dried up since 2023 even as billionaire wealth and the foundation sector
+  continue to expand.
+</p>
+<div class="phil-wrap">
+  <canvas id="phil-indexed" height="320"></canvas>
+</div>
+<p class="phil-note">
+  All three series indexed to 100 at 2010. This normalization shows relative growth
+  rates rather than absolute scale — the underlying populations differ by several
+  orders of magnitude (hundreds of signatories vs. thousands of billionaires vs.
+  hundreds of thousands of foundations).
+</p>
+
+<!-- ── STAT CARDS ── -->
+<div class="phil-stats">
+  <div class="phil-card">
+    <span class="lbl">Giving Pledge signatories, 2025</span>
+    <span class="val">256</span>
+    <span class="note">From ~30 countries; ~110 are US billionaires (~12% of US billionaire population)</span>
   </div>
-  <div class="oda-card">
-    <span class="lbl">Donors below 2023 levels</span>
-    <span class="val" id="pct-decreased">—</span>
-    <span class="note">Share of DAC members whose 2025 ODA falls below their 2023 level</span>
+  <div class="phil-card">
+    <span class="lbl">New sign-ups, 2024</span>
+    <span class="val warn">4</span>
+    <span class="note">Record low — down from 113 in the pledge's first five years (2010–2015)</span>
+  </div>
+  <div class="phil-card">
+    <span class="lbl">US private foundations, 2025</span>
+    <span class="val">151,000+</span>
+    <span class="note">More than double the 2011 count of 73,764</span>
+  </div>
+  <div class="phil-card">
+    <span class="lbl">Global billionaires, 2025</span>
+    <span class="val">2,891</span>
+    <span class="note">Up 58% from 1,826 in 2015; combined wealth ~$18.3 trillion (+81% since 2020)</span>
   </div>
 </div>
 
 <script>
-(function() {
-  var YEARS = [2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025];
+(function(){
 
-  var DONORS = {
-    'USA':           [30.4,31.1,30.7,31.5,33.1,31.1,33.6,35.3,34.0,34.6,35.5,42.3,55.3,64.5,60.2,25.9],
-    'Germany':       [12.7,14.1,13.1,14.1,16.6,17.8,24.7,24.7,25.0,23.8,28.4,32.2,35.0,36.4,35.2,29.1],
-    'EU Instit.':    [12.0,12.5,13.0,14.0,14.5,13.5,14.0,15.0,16.0,16.5,17.0,18.0,18.5,19.0,18.0,17.0],
-    'Japan':         [11.2,10.8,10.5,11.6, 9.2, 9.2,10.4,11.5, 9.2,15.5,16.3,17.6,17.5,19.7,16.8,15.0],
-    'France':        [12.9,13.1,12.0,11.4,10.6, 9.2, 9.6,11.3,12.2,12.2,14.1,15.4,15.9,15.1,14.5,12.9],
-    'UK':            [13.0,13.9,13.9,17.9,19.4,18.7,18.0,17.9,19.4,19.6,18.6,15.8,15.5,15.0,14.2,13.5],
-    'Canada':        [ 5.1, 5.5, 5.4, 4.9, 4.2, 4.3, 3.9, 4.3, 4.6, 4.7, 4.9, 6.1, 6.4, 6.0, 5.8, 5.5],
-    'Norway':        [ 4.4, 4.9, 4.8, 5.0, 5.1, 4.3, 4.4, 4.1, 4.3, 4.4, 4.7, 4.7, 5.0, 5.0, 4.8, 4.5],
-    'Sweden':        [ 4.5, 4.6, 5.2, 5.8, 6.2, 7.1, 6.8, 5.6, 5.8, 5.4, 5.2, 5.9, 5.0, 4.9, 4.6, 4.3],
-    'Netherlands':   [ 5.4, 6.3, 5.5, 5.4, 5.6, 5.8, 4.9, 4.9, 5.6, 5.3, 5.3, 5.3, 5.9, 5.2, 4.8, 4.5],
-    'Switzerland':   [ 2.3, 3.0, 3.0, 3.2, 3.2, 3.5, 3.6, 3.1, 3.1, 3.1, 3.1, 3.5, 4.0, 4.5, 4.3, 4.0],
-    'Italy':         [ 3.1, 3.0, 2.7, 3.4, 3.1, 3.8, 5.0, 5.1, 5.0, 4.9, 4.8, 6.0, 6.0, 5.0, 4.8, 4.5],
-    'Australia':     [ 3.8, 4.3, 5.1, 4.7, 4.2, 3.8, 3.1, 3.0, 2.9, 2.9, 2.8, 2.9, 3.0, 3.1, 3.0, 2.9],
-    'Denmark':       [ 2.9, 2.9, 2.7, 2.7, 3.0, 2.6, 2.4, 2.4, 2.5, 2.5, 2.8, 2.9, 3.0, 2.9, 2.7, 2.5],
-    'Spain':         [ 5.9, 4.2, 2.0, 2.0, 1.9, 1.7, 1.6, 2.4, 2.9, 3.0, 3.0, 3.5, 3.6, 3.5, 3.3, 3.1],
-    'Belgium':       [ 3.0, 2.8, 2.3, 2.3, 2.4, 1.9, 2.2, 2.2, 2.2, 2.2, 2.4, 2.5, 2.5, 2.4, 2.3, 2.1],
-    'Korea':         [ 1.2, 1.3, 1.6, 1.8, 1.9, 1.9, 2.0, 2.2, 2.3, 2.5, 2.5, 2.8, 2.9, 3.0, 2.9, 2.7],
-    'Finland':       [ 1.3, 1.4, 1.3, 1.4, 1.4, 1.3, 0.9, 1.0, 1.1, 1.1, 1.3, 1.4, 1.4, 1.3, 1.2, 1.1],
-    'Austria':       [ 1.1, 1.1, 1.1, 1.1, 1.1, 1.3, 1.6, 1.2, 1.2, 1.2, 1.2, 1.3, 1.3, 1.4, 1.3, 1.2],
-    'Ireland':       [ 0.9, 0.8, 0.8, 0.8, 0.8, 0.7, 0.8, 0.8, 0.9, 1.0, 1.0, 1.1, 1.3, 1.2, 1.1, 1.0],
-    'Poland':        [ 0.4, 0.4, 0.4, 0.5, 0.5, 0.4, 0.6, 0.6, 0.7, 0.7, 0.8, 1.8, 2.5, 1.0, 0.9, 0.9],
-    'New Zealand':   [ 0.3, 0.4, 0.4, 0.5, 0.5, 0.5, 0.4, 0.5, 0.5, 0.5, 0.6, 0.6, 0.6, 0.6, 0.6, 0.5],
-    'Luxembourg':    [ 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
-    'Portugal':      [ 0.6, 0.7, 0.5, 0.5, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4],
-    'Greece':        [ 0.5, 0.4, 0.3, 0.2, 0.2, 0.2, 0.3, 0.3, 0.3, 0.3, 0.3, 0.4, 0.5, 0.5, 0.4, 0.4],
-    'Czech Rep.':    [ 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.3, 0.3, 0.3, 0.3, 0.3, 0.4, 0.5, 0.4, 0.4, 0.4],
-    'Hungary':       [ 0.1, 0.1, 0.1, 0.1, 0.1, 0.2, 0.3, 0.2, 0.2, 0.2, 0.3, 0.3, 0.4, 0.3, 0.3, 0.3],
-    'Iceland':       [0.04,0.04,0.04,0.05,0.05,0.06,0.06,0.06,0.07,0.08,0.09,0.09,0.09,0.09,0.09,0.08],
-    'Slovak Rep.':   [0.07,0.07,0.08,0.08,0.08,0.08,0.10,0.10,0.11,0.11,0.12,0.13,0.15,0.14,0.13,0.12],
-    'Slovenia':      [0.06,0.06,0.06,0.06,0.06,0.06,0.07,0.07,0.07,0.08,0.08,0.09,0.10,0.10,0.09,0.09],
-    'Lithuania':     [0.05,0.05,0.05,0.05,0.05,0.05,0.06,0.06,0.07,0.07,0.07,0.08,0.09,0.10,0.10,0.09],
-    'Latvia':        [0.02,0.02,0.02,0.02,0.03,0.03,0.03,0.04,0.04,0.04,0.05,0.05,0.06,0.07,0.07,0.06],
-    'Estonia':       [0.02,0.02,0.03,0.03,0.03,0.03,0.04,0.04,0.04,0.05,0.05,0.06,0.08,0.09,0.09,0.08]
-  };
+Chart.defaults.font.family = "'Source Serif 4', Georgia, serif";
+Chart.defaults.color = '#94a3b8';
 
-  var TOP8 = ['USA','Germany','EU Instit.','Japan','France','UK','Canada','Norway'];
+var YEARS = [2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025];
 
-  // Generate distinct colors for 33 donors
-  var donorNames = Object.keys(DONORS);
-  var COLORS = {};
-  donorNames.forEach(function(name, i) {
-    var h = Math.round(i * 360 / donorNames.length);
-    COLORS[name] = 'hsl(' + h + ', 72%, 65%)';
-  });
-  // Override key donors with original colors
-  COLORS['USA']         = '#60a5fa';
-  COLORS['Germany']     = '#4ade80';
-  COLORS['UK']          = '#f87171';
-  COLORS['France']      = '#c084fc';
-  COLORS['Japan']       = '#fb923c';
-  COLORS['Sweden']      = '#22d3ee';
-  COLORS['Netherlands'] = '#facc15';
-  COLORS['EU Instit.']  = '#a78bfa';
-  COLORS['Norway']      = '#fbbf24';
-  COLORS['Canada']      = '#f472b6';
+// Cumulative Giving Pledge signatories
+var PLEDGE = [57,69,80,92,103,113,128,144,160,175,185,220,230,238,252,256];
 
-  var active = {};
-  donorNames.forEach(function(n) { active[n] = TOP8.indexOf(n) >= 0; });
+// US private foundations (count)
+var FOUNDATIONS = [70000,73764,77000,80000,83500,86203,91000,96000,102000,108000,
+                    114000,122000,132000,141000,147000,151011];
 
-  // Compute stat: % donors below 2023 level in 2025
-  var decreased = 0;
-  donorNames.forEach(function(n) {
-    if (DONORS[n][15] < DONORS[n][13]) decreased++;
-  });
-  var pctEl = document.getElementById('pct-decreased');
-  if (pctEl) pctEl.textContent = Math.round(decreased / donorNames.length * 100) + '%';
+// Global billionaires (Forbes annual count)
+var BILLIONAIRES = [1011,1210,1226,1426,1645,1826,1810,2043,2208,2153,
+                     2095,2755,2668,2640,2781,2891];
 
-  var chart = null;
+var COMMON_TOOLTIP = {
+  backgroundColor: '#060c1a', borderColor: '#1e2d45', borderWidth: 1,
+  titleColor: '#64748b', bodyColor: '#e2e8f0', padding: 10
+};
 
-  function makeDatasets() {
-    return donorNames.filter(function(n){ return active[n]; }).map(function(name) {
-      var oda = DONORS[name];
-      return {
-        label: name,
-        data: oda,
-        borderColor: COLORS[name],
-        backgroundColor: COLORS[name] + '18',
-        borderWidth: 2,
-        tension: 0.4,
-        pointBackgroundColor: YEARS.map(function(y){ return y>=2024?'transparent':COLORS[name]; }),
-        pointBorderColor:     YEARS.map(function(){ return COLORS[name]; }),
-        pointRadius:          YEARS.map(function(y){ return y>=2024?6:3.5; }),
+var COMMON_X = {
+  grid: { color: '#111d30' },
+  ticks: { color: '#4a6080', font: { size: 11 } }
+};
+
+function makeLineChart(canvasId, data, color, label, yFormat, yLabel) {
+  var ctx = document.getElementById(canvasId).getContext('2d');
+  return new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: YEARS,
+      datasets: [{
+        label: label,
+        data: data,
+        borderColor: color,
+        backgroundColor: color + '22',
+        borderWidth: 2.5,
+        tension: 0.35,
+        fill: true,
+        pointRadius: 3,
         pointHoverRadius: 6,
-        pointBorderWidth: 1.5
-      };
-    });
-  }
-
-  function initChart() {
-    Chart.defaults.font.family = "'Source Serif 4', Georgia, serif";
-    Chart.defaults.color = '#94a3b8';
-    var ctx = document.getElementById('oda-chart').getContext('2d');
-    chart = new Chart(ctx, {
-      type: 'line',
-      data: { labels: YEARS, datasets: makeDatasets() },
-      options: {
-        responsive: true,
-        interaction: { mode: 'index', intersect: false },
-        plugins: {
-          legend: {
-            display: true,
-            position: 'bottom',
-            labels: { color: '#94a3b8', font: { size: 11 }, padding: 12, boxWidth: 20 }
-          },
-          tooltip: {
-            backgroundColor: '#060c1a', borderColor: '#1e2d45', borderWidth: 1,
-            titleColor: '#64748b', bodyColor: '#e2e8f0', padding: 10,
-            callbacks: {
-              label: function(c) {
-                var sfx = c.parsed.x >= 14 ? ' (prelim.)' : '';
-                return ' ' + c.dataset.label + ': $' + c.parsed.y.toFixed(1) + 'B' + sfx;
-              }
-            }
-          },
-          annotation: {
-            annotations: {
-              refugee: { type:'line', scaleID:'x', value:'2015',
-                borderColor:'#2a3f5f', borderWidth:1.5, borderDash:[5,4] },
-              ukraine:  { type:'line', scaleID:'x', value:'2022',
-                borderColor:'#2a3f5f', borderWidth:1.5, borderDash:[5,4] }
+        pointBackgroundColor: color,
+        pointBorderColor: color
+      }]
+    },
+    options: {
+      responsive: true,
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        legend: { display: false },
+        tooltip: Object.assign({}, COMMON_TOOLTIP, {
+          callbacks: {
+            label: function(c) {
+              return ' ' + label + ': ' + yFormat(c.parsed.y);
             }
           }
-        },
-        scales: {
-          x: { grid:{color:'#111d30'}, ticks:{color:'#4a6080',font:{size:11}} },
-          y: { grid:{color:'#111d30'},
-               ticks:{color:'#4a6080',font:{size:11},callback:function(v){return '$'+v+'B';}},
-               title:{display:true,text:'USD billions (constant 2022)',color:'#4a6080',font:{size:11}} }
+        })
+      },
+      scales: {
+        x: COMMON_X,
+        y: {
+          grid: { color: '#111d30' },
+          ticks: {
+            color: '#4a6080', font: { size: 11 },
+            callback: function(v){ return yFormat(v); }
+          },
+          title: { display: true, text: yLabel, color: '#4a6080', font: { size: 11 } }
         }
       }
-    });
-  }
+    }
+  });
+}
 
-  function updateChart() {
-    if (!chart) return;
-    chart.data.datasets = makeDatasets();
-    chart.update();
-  }
+makeLineChart('phil-pledge', PLEDGE, '#60a5fa', 'Signatories',
+  function(v){ return Math.round(v); }, 'Cumulative signatories');
 
-  function renderPills() {
-    var container = document.getElementById('oda-pills');
-    if (!container) return;
-    container.innerHTML = '';
-    donorNames.forEach(function(name) {
-      var btn = document.createElement('button');
-      btn.className = 'oda-btn' + (active[name] ? '' : ' off');
-      btn.textContent = name;
-      btn.style.color = COLORS[name];
-      btn.style.borderColor = COLORS[name];
-      btn.style.background = active[name] ? COLORS[name] + '22' : 'transparent';
-      btn.addEventListener('click', function() {
-        var onCount = 0;
-        donorNames.forEach(function(n){ if(active[n]) onCount++; });
-        if (active[name] && onCount === 1) return;
-        active[name] = !active[name];
-        renderPills();
-        updateChart();
-      });
-      container.appendChild(btn);
-    });
-  }
+makeLineChart('phil-foundations', FOUNDATIONS, '#4ade80', 'Foundations',
+  function(v){ return (v/1000).toFixed(0) + 'k'; }, 'Number of foundations');
 
-  window.odaSelectTop8 = function() {
-    donorNames.forEach(function(n){ active[n] = TOP8.indexOf(n) >= 0; });
-    renderPills(); updateChart();
-  };
-  window.odaSelectAll = function() {
-    donorNames.forEach(function(n){ active[n] = true; });
-    renderPills(); updateChart();
-  };
-  window.odaDeselectAll = function() {
-    // keep at least one
-    donorNames.forEach(function(n){ active[n] = n === 'USA'; });
-    renderPills(); updateChart();
-  };
-  window.odaToggleLegend = function() {
-    if (!chart) return;
-    chart.options.plugins.legend.display = !chart.options.plugins.legend.display;
-    chart.update();
-  };
+makeLineChart('phil-billionaires', BILLIONAIRES, '#facc15', 'Billionaires',
+  function(v){ return Math.round(v).toLocaleString(); }, 'Number of billionaires');
 
-  // Init after DOM ready
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', function(){ renderPills(); initChart(); });
-  } else {
-    renderPills(); initChart();
+// ── Indexed comparison chart ──
+function indexSeries(arr) {
+  var base = arr[0];
+  return arr.map(function(v){ return (v/base)*100; });
+}
+
+var idxCtx = document.getElementById('phil-indexed').getContext('2d');
+new Chart(idxCtx, {
+  type: 'line',
+  data: {
+    labels: YEARS,
+    datasets: [
+      {
+        label: 'Giving Pledge signatories',
+        data: indexSeries(PLEDGE),
+        borderColor: '#60a5fa',
+        backgroundColor: '#60a5fa22',
+        borderWidth: 2.5, tension: 0.35,
+        pointRadius: 3, pointHoverRadius: 6,
+        pointBackgroundColor: '#60a5fa', pointBorderColor: '#60a5fa'
+      },
+      {
+        label: 'US foundations',
+        data: indexSeries(FOUNDATIONS),
+        borderColor: '#4ade80',
+        backgroundColor: '#4ade8022',
+        borderWidth: 2.5, tension: 0.35,
+        pointRadius: 3, pointHoverRadius: 6,
+        pointBackgroundColor: '#4ade80', pointBorderColor: '#4ade80'
+      },
+      {
+        label: 'Global billionaires',
+        data: indexSeries(BILLIONAIRES),
+        borderColor: '#facc15',
+        backgroundColor: '#facc1522',
+        borderWidth: 2.5, tension: 0.35,
+        pointRadius: 3, pointHoverRadius: 6,
+        pointBackgroundColor: '#facc15', pointBorderColor: '#facc15'
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    interaction: { mode: 'index', intersect: false },
+    plugins: {
+      legend: {
+        position: 'bottom',
+        labels: { color: '#94a3b8', font: { size: 12 }, padding: 16, boxWidth: 20 }
+      },
+      tooltip: Object.assign({}, COMMON_TOOLTIP, {
+        callbacks: {
+          label: function(c) {
+            return ' ' + c.dataset.label + ': ' + c.parsed.y.toFixed(0) + ' (2010=100)';
+          }
+        }
+      })
+    },
+    scales: {
+      x: COMMON_X,
+      y: {
+        grid: { color: '#111d30' },
+        ticks: { color: '#4a6080', font: { size: 11 },
+          callback: function(v){ return v; }
+        },
+        title: { display: true, text: 'Index (2010 = 100)', color: '#4a6080', font: { size: 11 } }
+      }
+    }
   }
+});
+
 })();
 </script>
 <hr>
-<p><strong>Sources:</strong> OECD DAC Statistics. Final 2024 data released December 2025; preliminary 2025 data released April 2026. Country-level 2025 values for smaller DAC members are author estimates based on reported DAC aggregate and available country press releases.</p>
+<p><strong>Sources:</strong> Giving Pledge signatory data compiled from givingpledge.org, the Institute for Policy Studies report “The Giving Pledge at 15” (2025), and reporting by CNBC, NBC News, and Nonprofit Quarterly (2025). US private foundation counts from the Foundation Center (2011, 2015) and Candid (2023–2025). Global billionaire counts from Forbes World’s Billionaires List, with 2025 wealth figures corroborated by the UBS Billionaire Ambitions Report. Year-by-year figures not anchored to a published source are interpolated estimates.</p>
 
 
 

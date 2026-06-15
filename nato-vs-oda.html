@@ -262,14 +262,29 @@ ul.task-list li input[type="checkbox"] {
     <a class="nav-link" href="./index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./oda-trends.html"> 
-<span class="menu-text">The Rise and Fall of Foreign Aid</span></a>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-posts" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Posts</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-posts">    
+        <li>
+    <a class="dropdown-item" href="./oda-trends.html">
+ <span class="dropdown-text">The Rise and Fall of Foreign Aid</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link active" href="./nato-vs-oda.html" aria-current="page"> 
-<span class="menu-text">Guns vs.&nbsp;Butter</span></a>
+        <li>
+    <a class="dropdown-item" href="./oda-deep-dive.html">
+ <span class="dropdown-text">Aid in Depth</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="./nato-vs-oda.html">
+ <span class="dropdown-text">Guns vs.&nbsp;Butter</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./philanthropy.html">
+ <span class="dropdown-text">Billionaires &amp; Foundations</span></a>
+  </li>  
+    </ul>
+  </li>
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item compact">
@@ -418,6 +433,8 @@ ul.task-list li input[type="checkbox"] {
   USD billions. NATO defense data: NATO Defence Expenditure of NATO Countries (2014–2025),
   published August 2025. 2024–2025 NATO figures are estimates. ODA data: OECD DAC Statistics.
   Countries shown are NATO members that are also OECD DAC donors.
+  <strong>Note the axis break at $100B</strong> — values beyond that point are compressed so the
+  USA's much larger totals don't flatten every other country's bars into invisibility.
 </p>
 
 <!-- ── CHART 2: TARGET QUADRANT ── -->
@@ -577,7 +594,25 @@ function getCountries() {
   return showUSA ? COUNTRIES : COUNTRIES.filter(function(c){return c!=='USA';});
 }
 
-// ── BAR CHART ──────────────────────────────────────────────────────────────
+// ── BAR CHART (with broken/compressed axis) ─────────────────────────────────
+// Axis is split: 0-100 maps linearly to 0-0.78 of the width (zoomed in),
+// 100-600 maps to 0.78-1.0 (compressed) so the USA's huge totals don't
+// crush the readability of every other country's bars.
+var BREAK_VAL = 100;   // value (USD bn) where the break occurs
+var MAX_VAL   = 600;   // max value the axis needs to reach (USA defense ~950 gets clipped/labeled)
+var BREAK_POS = 0.78;  // fraction of axis width devoted to 0-100
+
+function transformVal(v) {
+  if (v <= BREAK_VAL) return (v / BREAK_VAL) * BREAK_POS;
+  var capped = Math.min(v, MAX_VAL);
+  return BREAK_POS + ((capped - BREAK_VAL) / (MAX_VAL - BREAK_VAL)) * (1 - BREAK_POS);
+}
+function inverseTransform(p) {
+  if (p <= BREAK_POS) return (p / BREAK_POS) * BREAK_VAL;
+  return BREAK_VAL + ((p - BREAK_POS) / (1 - BREAK_POS)) * (MAX_VAL - BREAK_VAL);
+}
+var AXIS_TICKS = [0, 20, 40, 60, 80, 100, 200, 300, 400, 500, 600];
+
 function getBarData(year) {
   var yi = getIdx(year);
   var countries = getCountries();
@@ -589,12 +624,60 @@ function getBarData(year) {
     return aVal - bVal; // ascending for horizontal bar (largest at top)
   });
 
+  var rawDefense = countries.map(function(c){ return NATO_BN[c][yi]; });
+  var rawOda     = countries.map(function(c){ return ODA_BN[c][yi]; });
+
   return {
     labels: countries,
-    defense: countries.map(function(c){ return NATO_BN[c][yi]; }),
-    oda: countries.map(function(c){ return ODA_BN[c][yi]; })
+    rawDefense: rawDefense,
+    rawOda: rawOda,
+    defense: rawDefense.map(transformVal),
+    oda: rawOda.map(transformVal)
   };
 }
+
+// Plugin: draws a zigzag "break" mark on the x-axis at BREAK_POS
+var axisBreakPlugin = {
+  id: 'axisBreak',
+  afterDraw: function(chart) {
+    var xScale = chart.scales.x;
+    var area = chart.chartArea;
+    if (!xScale || !area) return;
+    var breakX = xScale.getPixelForValue(BREAK_POS);
+    var ctx = chart.ctx;
+    var zigH = 8;     // height of each zigzag tooth
+    var zigW = 6;     // width of zigzag band
+    ctx.save();
+    ctx.fillStyle = '#0d1424';
+    // background band to cover gridlines under the zigzag
+    ctx.fillRect(breakX - zigW, area.top, zigW * 2, area.bottom - area.top);
+    ctx.beginPath();
+    ctx.lineWidth = 1.5;
+    ctx.strokeStyle = '#475569';
+    var y = area.top;
+    var toggle = 1;
+    ctx.moveTo(breakX + toggle * zigW, y);
+    while (y < area.bottom) {
+      y += zigH;
+      toggle *= -1;
+      ctx.lineTo(breakX + toggle * zigW, Math.min(y, area.bottom));
+    }
+    ctx.stroke();
+    // second zigzag line, offset slightly, for the classic double-break look
+    ctx.beginPath();
+    y = area.top;
+    toggle = 1;
+    var offset = -zigW * 0.6;
+    ctx.moveTo(breakX + offset + toggle * zigW, y);
+    while (y < area.bottom) {
+      y += zigH;
+      toggle *= -1;
+      ctx.lineTo(breakX + offset + toggle * zigW, Math.min(y, area.bottom));
+    }
+    ctx.stroke();
+    ctx.restore();
+  }
+};
 
 function initBarChart(year) {
   var d = getBarData(year);
@@ -610,6 +693,7 @@ function initBarChart(year) {
         {
           label: 'Defense (NATO)',
           data: d.defense,
+          rawData: d.rawDefense,
           backgroundColor: '#f87171cc',
           borderColor: '#f87171',
           borderWidth: 1,
@@ -618,6 +702,7 @@ function initBarChart(year) {
         {
           label: 'ODA',
           data: d.oda,
+          rawData: d.rawOda,
           backgroundColor: '#60a5facc',
           borderColor: '#60a5fa',
           borderWidth: 1,
@@ -625,6 +710,7 @@ function initBarChart(year) {
         }
       ]
     },
+    plugins: [axisBreakPlugin],
     options: {
       indexAxis: 'y',
       responsive: true,
@@ -639,18 +725,34 @@ function initBarChart(year) {
           titleColor: '#94a3b8', bodyColor: '#e2e8f0', padding: 10,
           callbacks: {
             label: function(c) {
-              return ' ' + c.dataset.label + ': $' + c.parsed.x.toFixed(1) + 'B';
+              var raw = c.dataset.rawData[c.dataIndex];
+              var note = raw > MAX_VAL ? ' (off scale)' : '';
+              return ' ' + c.dataset.label + ': $' + raw.toFixed(1) + 'B' + note;
             }
           }
         }
       },
       scales: {
         x: {
-          grid: { color: '#111d30' },
-          ticks: { color: '#4a6080', font: { size: 11 },
-            callback: function(v){ return '$'+v+'B'; }
+          min: 0,
+          max: 1,
+          grid: {
+            color: '#111d30',
+            display: true
           },
-          title: { display: true, text: 'USD billions', color: '#4a6080', font: { size: 11 } }
+          afterBuildTicks: function(scale) {
+            scale.ticks = AXIS_TICKS.map(function(v) {
+              return { value: transformVal(v) };
+            });
+          },
+          ticks: {
+            color: '#4a6080', font: { size: 11 },
+            callback: function(val) {
+              var orig = Math.round(inverseTransform(val));
+              return '$' + orig + 'B';
+            }
+          },
+          title: { display: true, text: 'USD billions (axis compressed beyond $100B)', color: '#4a6080', font: { size: 11 } }
         },
         y: {
           grid: { color: '#111d30' },
@@ -667,7 +769,9 @@ function updateBarChart(year) {
   document.getElementById('gvb-bar').height = h;
   barChart.data.labels = d.labels;
   barChart.data.datasets[0].data = d.defense;
+  barChart.data.datasets[0].rawData = d.rawDefense;
   barChart.data.datasets[1].data = d.oda;
+  barChart.data.datasets[1].rawData = d.rawOda;
   barChart.update();
 }
 

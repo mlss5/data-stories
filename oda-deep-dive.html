@@ -262,14 +262,29 @@ ul.task-list li input[type="checkbox"] {
     <a class="nav-link" href="./index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./oda-trends.html"> 
-<span class="menu-text">The Rise and Fall of Foreign Aid</span></a>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-posts" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Posts</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-posts">    
+        <li>
+    <a class="dropdown-item" href="./oda-trends.html">
+ <span class="dropdown-text">The Rise and Fall of Foreign Aid</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./nato-vs-oda.html"> 
-<span class="menu-text">Guns vs.&nbsp;Butter</span></a>
+        <li>
+    <a class="dropdown-item" href="./oda-deep-dive.html">
+ <span class="dropdown-text">Aid in Depth</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="./nato-vs-oda.html">
+ <span class="dropdown-text">Guns vs.&nbsp;Butter</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./philanthropy.html">
+ <span class="dropdown-text">Billionaires &amp; Foundations</span></a>
+  </li>  
+    </ul>
+  </li>
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item compact">
@@ -387,9 +402,9 @@ ul.task-list li input[type="checkbox"] {
 <div class="sk-wrap"><div id="sk-sankey"></div></div>
 <div id="sk-legend" class="sk-legend"></div>
 <p class="sk-note">
-  Showing top 5 donors by total ODA for the selected year, flowing to top 4 recipient
+  Showing top 5 donors by total ODA for the selected year, flowing to the top 20 recipient
   countries plus all other recipients combined. Flow widths proportional to USD billions.
-  Hover over any flow for exact values. Donor ranking and recipient composition update
+  Hover over any flow for exact values. Donor ranking and recipient flows update
   dynamically as the year changes. Recipient shares are illustrative estimates based on
   OECD DAC bilateral ODA tables.
 </p>
@@ -428,31 +443,52 @@ var DONOR_COLORS = {
   'Australia':'#67e8f9','Denmark':'#d8b4fe','Spain':'#fdba74','Belgium':'#a5b4fc'
 };
 
-// Recipient share keys and list
-var REC_KEYS = [2010,2015,2020,2023,2025];
-// Cols: Ukraine|Ethiopia|Bangladesh|Nigeria|India|DRC|Pakistan|Other
-var RECIPS = ['Ukraine','Ethiopia','Bangladesh','Nigeria','India','DRC','Pakistan','Other'];
+// ── Recipient model ──────────────────────────────────────────────────────
+// Rather than hand-coding a giant table (16 donors x 5 years x 21 categories),
+// we model each donor's allocation as a global BASE distribution (how ODA is
+// spread across major recipients in a typical year) multiplied by a per-donor
+// TILT (relative emphasis), then renormalized. This keeps the data compact
+// while still producing donor-specific, year-varying flows.
 
-var REC_SHARES = {
-  'USA':        [[0,8,5,8,5,7,12,55],[0,9,5,8,4,7,10,57],[1,9,5,8,3,8,8,58],[18,6,3,5,2,5,5,56],[20,5,3,5,2,5,5,55]],
-  'Germany':    [[0,7,4,3,12,4,3,67],[1,8,4,3,10,4,3,67],[2,8,5,3,8,4,3,67],[22,6,3,2,5,3,2,57],[25,6,3,2,5,3,2,54]],
-  'UK':         [[0,10,9,7,10,5,9,50],[1,11,9,7,8,5,8,51],[2,11,9,8,5,6,8,51],[15,8,7,6,3,5,7,49],[18,8,7,6,3,5,7,46]],
-  'France':     [[0,3,2,4,6,5,2,78],[0,3,2,5,5,5,2,78],[2,3,3,5,4,6,2,75],[10,3,2,4,3,5,2,71],[12,3,2,4,3,5,2,69]],
-  'Japan':      [[0,2,7,2,10,2,5,72],[0,2,7,2,8,2,5,74],[1,3,7,2,7,2,4,74],[4,3,7,2,6,2,4,72],[5,3,7,2,6,2,4,71]],
-  'EU Instit.': [[0,5,3,5,4,6,2,75],[0,5,3,5,3,6,2,76],[2,5,3,5,3,6,2,74],[15,4,2,4,2,5,2,66],[18,4,2,4,2,5,2,63]],
-  'Canada':     [[0,5,6,4,8,4,7,66],[0,6,6,4,7,4,6,67],[1,6,6,5,6,4,6,66],[12,5,5,4,5,4,5,60],[14,5,5,4,4,4,5,59]],
-  'Norway':     [[0,8,4,5,3,5,3,72],[0,8,4,5,3,5,3,72],[1,8,4,5,2,5,3,72],[10,7,3,5,2,5,3,65],[12,7,3,5,2,5,3,63]],
-  'Sweden':     [[0,7,4,5,3,5,3,73],[0,7,4,5,3,5,3,73],[1,7,4,5,3,5,3,72],[8,6,3,5,2,5,3,68],[10,6,3,5,2,5,3,66]],
-  'Italy':      [[0,3,2,5,5,6,2,77],[0,3,2,5,4,6,2,78],[1,3,2,5,3,6,2,78],[8,3,2,5,3,6,2,71],[10,3,2,4,3,6,2,70]],
-  'Australia':  [[0,2,8,2,6,2,5,75],[0,2,8,2,5,2,5,76],[0,2,8,2,5,2,4,77],[3,2,8,2,5,2,4,74],[4,2,8,2,5,2,4,73]],
-  'Spain':      [[0,4,2,6,4,5,2,77],[0,4,2,6,4,5,2,77],[1,4,2,6,3,5,2,77],[9,4,2,6,3,5,2,69],[10,4,2,5,3,5,2,69]],
-  'DEFAULT':    [[0,5,4,5,5,5,4,72],[0,5,4,5,4,5,4,73],[1,5,4,5,4,5,4,72],[10,5,3,5,3,5,3,66],[12,5,3,5,3,5,3,64]]
+var REC_KEYS = [2010,2015,2020,2023,2025];
+
+// Top 20 named recipient countries (21st category = 'Other recipients')
+var RECIPS = [
+  'Ukraine','Afghanistan','Ethiopia','Bangladesh','Nigeria','India','DRC','Pakistan',
+  'Yemen','Syria','Somalia','South Sudan','Kenya','Tanzania','Mozambique','Vietnam',
+  'Jordan','Egypt','Colombia','Iraq'
+];
+var ALL_TARGETS = RECIPS.concat(['Other recipients']);
+
+// Global base distribution by year (20 named + Other), each row sums to ~100
+var BASE_SHARES = [
+  /* 2010 */ [0.5, 6,   3.5, 2.5, 2,   2.5, 2.5, 4,   1,   0.5, 1,   1,   2,   2,   1.5, 2,   1,   1.5, 1,   3,  59  ],
+  /* 2015 */ [3,   5,   3.5, 2.5, 2,   2.5, 2.5, 4,   2,   3,   1.5, 2,   2,   2,   1.5, 2,   2,   1.5, 1,   3,  51.5],
+  /* 2020 */ [6,   4,   4,   3,   2.5, 2.5, 3,   3.5, 2.5, 3.5, 2,   2.5, 2.5, 2,   2,   1.5, 2,   1.5, 1.5, 2.5,45.5],
+  /* 2023 */ [15,  2.5, 3.5, 2.5, 2,   2,   3,   3,   2,   3,   1.5, 2,   2,   1.5, 1.5, 1,   1.5, 1.5, 1.5, 2,  45.5],
+  /* 2025 */ [18,  2,   3,   2,   2,   2,   2.5, 2.5, 1.5, 2.5, 1,   1.5, 1.5, 1,   1,   1,   1.5, 1.5, 1.5, 1.5,49  ]
+];
+
+// Per-donor tilt (relative emphasis vs. base, ~1.0 = average). Order matches
+// RECIPS + 'Other'. Only donors that ever appear in a top-5 need an entry;
+// everyone else falls back to DEFAULT (no tilt).
+var DONOR_TILT = {
+  'USA':        [1.3, 1.8, 0.8, 0.9, 0.8, 0.6, 0.7, 1.2, 1.0, 1.2, 1.3, 1.2, 1.0, 0.7, 0.5, 0.8, 2.0, 2.2, 2.5, 2.5, 0.9],
+  'Germany':    [1.6, 1.0, 1.1, 1.0, 1.0, 1.0, 1.0, 0.9, 0.9, 1.8, 0.9, 0.9, 1.0, 1.1, 1.0, 0.8, 1.5, 1.0, 0.6, 0.9, 1.0],
+  'UK':         [1.2, 1.3, 1.3, 1.8, 1.6, 1.4, 1.0, 1.7, 1.8, 1.6, 1.5, 1.4, 1.6, 1.5, 1.3, 0.7, 1.2, 0.8, 0.5, 1.0, 0.9],
+  'France':     [0.9, 0.6, 0.8, 0.4, 0.7, 0.5, 2.0, 0.4, 0.8, 1.3, 0.7, 0.6, 0.7, 0.6, 1.2, 1.5, 1.3, 1.4, 0.8, 0.9, 1.1],
+  'Japan':      [0.8, 0.9, 0.6, 1.8, 0.5, 1.8, 0.4, 1.3, 0.3, 0.3, 0.4, 0.4, 0.7, 0.8, 0.6, 2.5, 0.5, 0.8, 0.4, 0.5, 1.2],
+  'EU Instit.': [2.2, 1.0, 1.1, 0.8, 1.0, 0.7, 1.1, 0.9, 1.0, 1.5, 1.2, 1.2, 1.0, 1.0, 1.0, 0.6, 1.8, 1.6, 0.7, 1.0, 0.9],
+  'DEFAULT':    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
 };
 
 var REC_COLORS = {
-  'Ukraine':'#60a5fa','Ethiopia':'#4ade80','Bangladesh':'#fb923c',
-  'Nigeria':'#f87171','India':'#facc15','DRC':'#c084fc',
-  'Pakistan':'#22d3ee','Other recipients':'#334d6e'
+  'Ukraine':'#60a5fa','Afghanistan':'#f87171','Ethiopia':'#4ade80','Bangladesh':'#fb923c',
+  'Nigeria':'#facc15','India':'#c084fc','DRC':'#22d3ee','Pakistan':'#a78bfa',
+  'Yemen':'#f472b6','Syria':'#fbbf24','Somalia':'#86efac','South Sudan':'#fca5a5',
+  'Kenya':'#67e8f9','Tanzania':'#d8b4fe','Mozambique':'#fdba74','Vietnam':'#a5b4fc',
+  'Jordan':'#6ee7b7','Egypt':'#fde68a','Colombia':'#e879f9','Iraq':'#34d399',
+  'Other recipients':'#334d6e'
 };
 
 // Interpolation helper
@@ -468,6 +504,15 @@ function interp(year, keys, rows) {
   return rows[0].slice();
 }
 
+// Returns shares (summing to 100) across ALL_TARGETS for a given donor/year
+function getRecipientShares(donor, year) {
+  var base = interp(year, REC_KEYS, BASE_SHARES); // 21 values
+  var tilt = DONOR_TILT[donor] || DONOR_TILT['DEFAULT'];
+  var raw = base.map(function(b,i){ return b * (tilt[i] || 1); });
+  var sum = raw.reduce(function(a,b){ return a+b; }, 0);
+  return raw.map(function(v){ return v/sum*100; });
+}
+
 function getFlows(year) {
   var yi = YEARS.indexOf(year);
 
@@ -480,50 +525,22 @@ function getFlows(year) {
     .sort(function(a,b){ return donorODAs[b]-donorODAs[a]; })
     .slice(0,5);
 
-  // Compute raw flows to all recipients
-  var recipTotals = {};
-  RECIPS.filter(function(r){return r!=='Other';}).forEach(function(r){
-    recipTotals[r] = 0;
-  });
+  // Build flows: each top-5 donor -> each of the 20 named recipients + Other
+  var flows = [];
+  var THRESHOLD = 0.08; // USD bn, hide tiny slivers
 
-  var rawByDonor = {};
   top5.forEach(function(donor){
     var oda = donorODAs[donor];
-    var sharesData = REC_SHARES[donor] || REC_SHARES['DEFAULT'];
-    var shares = interp(year, REC_KEYS, sharesData);
-    rawByDonor[donor] = {};
-    RECIPS.forEach(function(r,i){
+    var shares = getRecipientShares(donor, year); // 21 values, aligned to ALL_TARGETS
+    ALL_TARGETS.forEach(function(target, i){
       var val = oda * shares[i] / 100;
-      rawByDonor[donor][r] = val;
-      if (r !== 'Other') {
-        recipTotals[r] = (recipTotals[r]||0) + val;
+      if (val >= THRESHOLD) {
+        flows.push({source: donor, target: target, value: val});
       }
     });
   });
 
-  // Find top 4 recipients by total flow
-  var top4 = Object.keys(recipTotals)
-    .sort(function(a,b){ return recipTotals[b]-recipTotals[a]; })
-    .slice(0,4);
-
-  // Build final flows collapsing non-top4 into 'Other recipients'
-  var flows = [];
-  top5.forEach(function(donor){
-    var otherVal = 0;
-    RECIPS.forEach(function(r){
-      var val = rawByDonor[donor][r];
-      if (top4.indexOf(r) >= 0) {
-        if (val >= 0.05) flows.push({source:donor, target:r, value:val});
-      } else {
-        otherVal += val;
-      }
-    });
-    if (otherVal >= 0.1) {
-      flows.push({source:donor, target:'Other recipients', value:otherVal});
-    }
-  });
-
-  return {flows:flows, top5:top5, top4:top4};
+  return {flows:flows, top5:top5};
 }
 
 function drawSankey(year) {
@@ -533,10 +550,10 @@ function drawSankey(year) {
   var wrap = document.getElementById('sk-sankey');
   wrap.innerHTML = '';
 
-  var ML=145, MR=160, MT=16, MB=16;
+  var ML=145, MR=170, MT=16, MB=16;
   var totalW = (wrap.parentElement.clientWidth||860) - 40;
   var W = totalW - ML - MR;
-  var H = 380;
+  var H = 620;
 
   var svg = d3.select('#sk-sankey').append('svg')
     .attr('width', totalW)
@@ -565,7 +582,7 @@ function drawSankey(year) {
   });
 
   var sk = d3.sankey()
-    .nodeWidth(16).nodePadding(12)
+    .nodeWidth(14).nodePadding(6)
     .extent([[0,0],[W,H]]);
 
   var g = sk({
@@ -608,7 +625,7 @@ function drawSankey(year) {
     .attr('dy','0.35em')
     .attr('text-anchor',function(d){return d.x0<W/2?'end':'start';})
     .attr('fill','#94a3b8')
-    .attr('font-size',11)
+    .attr('font-size',10)
     .attr('font-family',"'Source Serif 4', Georgia, serif")
     .text(function(d){return d.name;});
 

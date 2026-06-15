@@ -24,6 +24,24 @@ h2 { font-size: 1.6rem; border-top: 1px solid #1e2d45; padding-top: 1.4rem; marg
 .navbar-brand, .nav-link { color: #94a3b8 !important; font-family: 'Source Serif 4', serif; }
 .nav-link:hover { color: #60a5fa !important; }
 
+/* ── Navbar dropdown menu ("Posts") ── */
+.navbar .dropdown-menu {
+  background-color: #0d1424 !important;
+  border: 1px solid #1e2d45 !important;
+}
+.navbar .dropdown-item {
+  color: #94a3b8 !important;
+  background-color: transparent !important;
+}
+.navbar .dropdown-item:hover,
+.navbar .dropdown-item:focus {
+  color: #ffffff !important;
+  background-color: #1e2d45 !important;
+}
+.navbar .dropdown-divider {
+  border-top: 1px solid #1e2d45 !important;
+}
+
 /* ── Callout / deck text ── */
 .lead {
   font-style: italic;
@@ -70,7 +88,22 @@ td, th { border: 1px solid #1e2d45; padding: 8px 12px; }
 tr:nth-child(even) td { background: #0a1020; }
 
 /* ── Footer ── */
-.page-footer { background-color: #0d1424 !important; color: #3d5070 !important; font-size: 0.75rem; }
+.page-footer,
+footer.footer,
+.nav-footer {
+  background-color: #060c1a !important;
+  color: #3d5070 !important;
+  font-size: 0.75rem;
+  border-top: 1px solid #1e2d45 !important;
+}
+.nav-footer-left,
+.nav-footer-center,
+.nav-footer-right {
+  color: #3d5070 !important;
+}
+.nav-footer a, footer.footer a {
+  color: #60a5fa !important;
+}
 
 /* ── Code blocks ── */
 pre { background: #0d1424 !important; border: 1px solid #1e2d45 !important; }
