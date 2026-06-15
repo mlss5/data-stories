@@ -1,0 +1,333 @@
+---
+title: "Billionaires, Foundations, and the Giving Pledge"
+subtitle: "Tracking the growth of private philanthropy, 2010–2025"
+date: "2026-06-14"
+categories: [Data Story, Global Development, Philanthropy, Billionaires, Giving Pledge]
+---
+
+<span class="kicker">Data Story &nbsp;·&nbsp; Giving Pledge &middot; Candid &middot; UBS/Forbes &nbsp;·&nbsp; 2010&#8211;2025</span>
+
+::: {.lead}
+In 2010, Bill Gates, Melinda French Gates, and Warren Buffett launched the Giving Pledge,
+asking the world's wealthiest people to commit at least half their fortunes to charity.
+Fifteen years on, the number of billionaires has nearly tripled and the number of
+private foundations has more than doubled — but the Giving Pledge itself has lost momentum,
+with new sign-ups slowing to a trickle even as the fortunes it was designed to redirect
+keep growing.
+:::
+
+```{=html}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+
+<style>
+  .phil-h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem; font-weight: 700;
+    color: #ffffff !important;
+    margin: 40px 0 8px;
+    padding-top: 28px;
+    border-top: 1px solid #1e2d45;
+  }
+  .phil-desc {
+    font-size: 13.5px; color: #64748b;
+    margin: 0 0 16px; line-height: 1.65;
+    font-style: italic; max-width: 680px;
+  }
+  .phil-wrap {
+    background: #0d1424 !important;
+    border: 1px solid #1e2d45; border-radius: 12px;
+    padding: 20px 16px 12px; margin-bottom: 4px;
+  }
+  .phil-note {
+    font-size: 11px; color: #3d5070;
+    margin: 10px 0 0; line-height: 1.6; font-style: italic;
+  }
+  .phil-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px; margin: 24px 0 0;
+  }
+  .phil-card {
+    background: #0d1424 !important;
+    border: 1px solid #1e2d45;
+    border-left: 3px solid #2563eb;
+    border-radius: 8px; padding: 18px 16px;
+  }
+  .phil-card .lbl {
+    font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+    color: #64748b; margin: 0 0 6px; display: block;
+  }
+  .phil-card .val {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px; font-weight: 700; line-height: 1;
+    margin: 0 0 6px; color: #60a5fa; display: block;
+  }
+  .phil-card .val.warn { color: #f87171; }
+  .phil-card .note {
+    font-size: 12px; color: #64748b;
+    font-style: italic; line-height: 1.4; display: block;
+  }
+</style>
+
+<!-- ── CHART 1: GIVING PLEDGE SIGNATORIES ── -->
+<p class="phil-h2">1 &mdash; The Giving Pledge: Cumulative Signatories</p>
+<p class="phil-desc">
+  The pledge grew quickly in its first decade, then stalled. Just 4 new signatories joined
+  in 2024 — a record low — before a modest rebound to 14 in 2025. Today the pledge counts
+  256 signatories from roughly 30 countries, of whom about 110 are US billionaires —
+  roughly 12% of America's billionaire population.
+</p>
+<div class="phil-wrap">
+  <canvas id="phil-pledge" height="320"></canvas>
+</div>
+<p class="phil-note">
+  Cumulative signatories to the Giving Pledge by year. Compiled from the Giving Pledge
+  public signatory list, the Institute for Policy Studies report "The Giving Pledge at 15"
+  (2025), and contemporaneous press coverage. Figures for individual years are
+  approximate, interpolated between known totals.
+</p>
+
+<!-- ── CHART 2: US PRIVATE FOUNDATIONS ── -->
+<p class="phil-h2">2 &mdash; Number of US Private Foundations</p>
+<p class="phil-desc">
+  While headline philanthropy debates focus on a handful of billionaire names, the
+  private foundation sector has quietly more than doubled in size since 2010 — from
+  roughly 70,000 to over 150,000 registered foundations, most of them small family
+  foundations rather than the mega-funds that dominate the news.
+</p>
+<div class="phil-wrap">
+  <canvas id="phil-foundations" height="320"></canvas>
+</div>
+<p class="phil-note">
+  Number of private foundations registered in the United States. 2011 and 2015 figures
+  from the Foundation Center; 2023&#8211;2025 figures from Candid. Intermediate years are
+  estimated via smoothed interpolation.
+</p>
+
+<!-- ── CHART 3: GLOBAL BILLIONAIRES ── -->
+<p class="phil-h2">3 &mdash; Number of Billionaires Worldwide</p>
+<p class="phil-desc">
+  The billionaire population has grown in step with — and arguably faster than — both
+  the foundation sector and the Giving Pledge. Global billionaire wealth has surged 81%
+  since 2020 alone, reaching an estimated $18.3 trillion in 2025.
+</p>
+<div class="phil-wrap">
+  <canvas id="phil-billionaires" height="320"></canvas>
+</div>
+<p class="phil-note">
+  Number of individuals with net worth over $1 billion, worldwide. Source: Forbes
+  World's Billionaires List (annual), with 2025 figure corroborated by UBS Billionaire
+  Ambitions Report. Counts vary slightly by methodology and snapshot date.
+</p>
+
+<!-- ── CHART 4: INDEXED COMPARISON ── -->
+<p class="phil-h2">4 &mdash; Relative Growth, Indexed to 2010</p>
+<p class="phil-desc">
+  Putting all three series on the same scale (2010 = 100) shows the real story: the
+  Giving Pledge kept pace with billionaire growth for its first decade, but new sign-ups
+  have nearly dried up since 2023 even as billionaire wealth and the foundation sector
+  continue to expand.
+</p>
+<div class="phil-wrap">
+  <canvas id="phil-indexed" height="320"></canvas>
+</div>
+<p class="phil-note">
+  All three series indexed to 100 at 2010. This normalization shows relative growth
+  rates rather than absolute scale &mdash; the underlying populations differ by several
+  orders of magnitude (hundreds of signatories vs. thousands of billionaires vs.
+  hundreds of thousands of foundations).
+</p>
+
+<!-- ── STAT CARDS ── -->
+<div class="phil-stats">
+  <div class="phil-card">
+    <span class="lbl">Giving Pledge signatories, 2025</span>
+    <span class="val">256</span>
+    <span class="note">From ~30 countries; ~110 are US billionaires (~12% of US billionaire population)</span>
+  </div>
+  <div class="phil-card">
+    <span class="lbl">New sign-ups, 2024</span>
+    <span class="val warn">4</span>
+    <span class="note">Record low — down from 113 in the pledge's first five years (2010&#8211;2015)</span>
+  </div>
+  <div class="phil-card">
+    <span class="lbl">US private foundations, 2025</span>
+    <span class="val">151,000+</span>
+    <span class="note">More than double the 2011 count of 73,764</span>
+  </div>
+  <div class="phil-card">
+    <span class="lbl">Global billionaires, 2025</span>
+    <span class="val">2,891</span>
+    <span class="note">Up 58% from 1,826 in 2015; combined wealth ~$18.3 trillion (+81% since 2020)</span>
+  </div>
+</div>
+
+<script>
+(function(){
+
+Chart.defaults.font.family = "'Source Serif 4', Georgia, serif";
+Chart.defaults.color = '#94a3b8';
+
+var YEARS = [2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025];
+
+// Cumulative Giving Pledge signatories
+var PLEDGE = [57,69,80,92,103,113,128,144,160,175,185,220,230,238,252,256];
+
+// US private foundations (count)
+var FOUNDATIONS = [70000,73764,77000,80000,83500,86203,91000,96000,102000,108000,
+                    114000,122000,132000,141000,147000,151011];
+
+// Global billionaires (Forbes annual count)
+var BILLIONAIRES = [1011,1210,1226,1426,1645,1826,1810,2043,2208,2153,
+                     2095,2755,2668,2640,2781,2891];
+
+var COMMON_TOOLTIP = {
+  backgroundColor: '#060c1a', borderColor: '#1e2d45', borderWidth: 1,
+  titleColor: '#64748b', bodyColor: '#e2e8f0', padding: 10
+};
+
+var COMMON_X = {
+  grid: { color: '#111d30' },
+  ticks: { color: '#4a6080', font: { size: 11 } }
+};
+
+function makeLineChart(canvasId, data, color, label, yFormat, yLabel) {
+  var ctx = document.getElementById(canvasId).getContext('2d');
+  return new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: YEARS,
+      datasets: [{
+        label: label,
+        data: data,
+        borderColor: color,
+        backgroundColor: color + '22',
+        borderWidth: 2.5,
+        tension: 0.35,
+        fill: true,
+        pointRadius: 3,
+        pointHoverRadius: 6,
+        pointBackgroundColor: color,
+        pointBorderColor: color
+      }]
+    },
+    options: {
+      responsive: true,
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        legend: { display: false },
+        tooltip: Object.assign({}, COMMON_TOOLTIP, {
+          callbacks: {
+            label: function(c) {
+              return ' ' + label + ': ' + yFormat(c.parsed.y);
+            }
+          }
+        })
+      },
+      scales: {
+        x: COMMON_X,
+        y: {
+          grid: { color: '#111d30' },
+          ticks: {
+            color: '#4a6080', font: { size: 11 },
+            callback: function(v){ return yFormat(v); }
+          },
+          title: { display: true, text: yLabel, color: '#4a6080', font: { size: 11 } }
+        }
+      }
+    }
+  });
+}
+
+makeLineChart('phil-pledge', PLEDGE, '#60a5fa', 'Signatories',
+  function(v){ return Math.round(v); }, 'Cumulative signatories');
+
+makeLineChart('phil-foundations', FOUNDATIONS, '#4ade80', 'Foundations',
+  function(v){ return (v/1000).toFixed(0) + 'k'; }, 'Number of foundations');
+
+makeLineChart('phil-billionaires', BILLIONAIRES, '#facc15', 'Billionaires',
+  function(v){ return Math.round(v).toLocaleString(); }, 'Number of billionaires');
+
+// ── Indexed comparison chart ──
+function indexSeries(arr) {
+  var base = arr[0];
+  return arr.map(function(v){ return (v/base)*100; });
+}
+
+var idxCtx = document.getElementById('phil-indexed').getContext('2d');
+new Chart(idxCtx, {
+  type: 'line',
+  data: {
+    labels: YEARS,
+    datasets: [
+      {
+        label: 'Giving Pledge signatories',
+        data: indexSeries(PLEDGE),
+        borderColor: '#60a5fa',
+        backgroundColor: '#60a5fa22',
+        borderWidth: 2.5, tension: 0.35,
+        pointRadius: 3, pointHoverRadius: 6,
+        pointBackgroundColor: '#60a5fa', pointBorderColor: '#60a5fa'
+      },
+      {
+        label: 'US foundations',
+        data: indexSeries(FOUNDATIONS),
+        borderColor: '#4ade80',
+        backgroundColor: '#4ade8022',
+        borderWidth: 2.5, tension: 0.35,
+        pointRadius: 3, pointHoverRadius: 6,
+        pointBackgroundColor: '#4ade80', pointBorderColor: '#4ade80'
+      },
+      {
+        label: 'Global billionaires',
+        data: indexSeries(BILLIONAIRES),
+        borderColor: '#facc15',
+        backgroundColor: '#facc1522',
+        borderWidth: 2.5, tension: 0.35,
+        pointRadius: 3, pointHoverRadius: 6,
+        pointBackgroundColor: '#facc15', pointBorderColor: '#facc15'
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    interaction: { mode: 'index', intersect: false },
+    plugins: {
+      legend: {
+        position: 'bottom',
+        labels: { color: '#94a3b8', font: { size: 12 }, padding: 16, boxWidth: 20 }
+      },
+      tooltip: Object.assign({}, COMMON_TOOLTIP, {
+        callbacks: {
+          label: function(c) {
+            return ' ' + c.dataset.label + ': ' + c.parsed.y.toFixed(0) + ' (2010=100)';
+          }
+        }
+      })
+    },
+    scales: {
+      x: COMMON_X,
+      y: {
+        grid: { color: '#111d30' },
+        ticks: { color: '#4a6080', font: { size: 11 },
+          callback: function(v){ return v; }
+        },
+        title: { display: true, text: 'Index (2010 = 100)', color: '#4a6080', font: { size: 11 } }
+      }
+    }
+  }
+});
+
+})();
+</script>
+```
+
+---
+
+**Sources:** Giving Pledge signatory data compiled from givingpledge.org, the Institute
+for Policy Studies report "The Giving Pledge at 15" (2025), and reporting by CNBC, NBC
+News, and Nonprofit Quarterly (2025). US private foundation counts from the Foundation
+Center (2011, 2015) and Candid (2023&#8211;2025). Global billionaire counts from Forbes
+World's Billionaires List, with 2025 wealth figures corroborated by the UBS Billionaire
+Ambitions Report. Year-by-year figures not anchored to a published source are
+interpolated estimates.

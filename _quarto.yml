@@ -1,0 +1,38 @@
+project:
+  type: website
+  output-dir: _site
+
+website:
+  title: "Data Stories in Social Science"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - text: Posts
+        menu:
+          - href: oda-trends.qmd
+            text: "The Rise and Fall of Foreign Aid"
+          - href: oda-deep-dive.qmd
+            text: "Aid in Depth"
+          - href: nato-vs-oda.qmd
+            text: "Guns vs. Butter"
+          - href: philanthropy.qmd
+            text: "Billionaires & Foundations"
+    right:
+      - icon: github
+        href: https://github.com/mlss5/data-stories
+  page-footer:
+    center: "© 2025 Machine Learning for Social Science"
+
+format:
+  html:
+    theme:
+      dark: slate
+    css: styles.css
+    toc: true
+    smooth-scroll: true
+
+execute:
+  freeze: auto
+  echo: false
+  warning: false
