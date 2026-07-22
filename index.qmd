@@ -19,4 +19,5 @@ stories that impact society today.
 | [Aid in Depth](oda-deep-dive.qmd) | Global Development · Aid · Recipients |
 | [Guns vs. Butter](nato-vs-oda.qmd) | Global Development · Aid · NATO · Defense |
 | [Billionaires, Foundations, and the Giving Pledge](philanthropy.qmd) | Philanthropy · Billionaires · Giving Pledge |
+| [How Much Has Boston Warmed? 133 Years of Daily Highs and Lows](boston-weather.qmd) | Weather · Climate · Boston |
 

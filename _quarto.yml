@@ -18,8 +18,8 @@ website:
             text: "Guns vs. Butter"
           - href: philanthropy.qmd
             text: "Billionaires & Foundations"
-          - href: wages-vs-prices.qmd
-            text: "Keeping Up?"
+          - href: boston-weather.qmd
+            text: "Boston's Rising Temperatures"
     right:
       - icon: github
         href: https://github.com/mlss5/data-stories
