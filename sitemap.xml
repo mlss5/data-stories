@@ -1,31 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://mlss5.github.io/data-stories/boston-wind.html</loc>
+    <lastmod>2026-07-22T20:46:04.296Z</lastmod>
+  </url>
+  <url>
     <loc>https://mlss5.github.io/data-stories/oda-trends.html</loc>
-    <lastmod>2026-07-22T20:19:56.490Z</lastmod>
-  </url>
-  <url>
-    <loc>https://mlss5.github.io/data-stories/oda-deep-dive.html</loc>
-    <lastmod>2026-07-22T20:19:56.490Z</lastmod>
-  </url>
-  <url>
-    <loc>https://mlss5.github.io/data-stories/nato-vs-oda.html</loc>
-    <lastmod>2026-07-22T20:19:56.490Z</lastmod>
-  </url>
-  <url>
-    <loc>https://mlss5.github.io/data-stories/boston-weather.html</loc>
-    <lastmod>2026-07-22T20:19:56.490Z</lastmod>
+    <lastmod>2026-07-22T20:46:04.296Z</lastmod>
   </url>
   <url>
     <loc>https://mlss5.github.io/data-stories/wages-vs-prices.html</loc>
-    <lastmod>2026-07-22T20:19:56.491Z</lastmod>
+    <lastmod>2026-07-22T20:46:04.296Z</lastmod>
   </url>
   <url>
-    <loc>https://mlss5.github.io/data-stories/index.html</loc>
-    <lastmod>2026-07-22T20:19:56.490Z</lastmod>
+    <loc>https://mlss5.github.io/data-stories/oda-deep-dive.html</loc>
+    <lastmod>2026-07-22T20:46:04.296Z</lastmod>
+  </url>
+  <url>
+    <loc>https://mlss5.github.io/data-stories/boston-weather.html</loc>
+    <lastmod>2026-07-22T20:46:04.296Z</lastmod>
   </url>
   <url>
     <loc>https://mlss5.github.io/data-stories/philanthropy.html</loc>
-    <lastmod>2026-07-22T20:19:56.490Z</lastmod>
+    <lastmod>2026-07-22T20:46:04.296Z</lastmod>
+  </url>
+  <url>
+    <loc>https://mlss5.github.io/data-stories/nato-vs-oda.html</loc>
+    <lastmod>2026-07-22T20:46:04.296Z</lastmod>
+  </url>
+  <url>
+    <loc>https://mlss5.github.io/data-stories/index.html</loc>
+    <lastmod>2026-07-22T20:46:04.296Z</lastmod>
   </url>
 </urlset>
