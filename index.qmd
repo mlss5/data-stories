@@ -20,4 +20,5 @@ stories that impact society today.
 | [Guns vs. Butter](nato-vs-oda.qmd) | Global Development · Aid · NATO · Defense |
 | [Billionaires, Foundations, and the Giving Pledge](philanthropy.qmd) | Philanthropy · Billionaires · Giving Pledge |
 | [How Much Has Boston Warmed? 133 Years of Daily Highs and Lows](boston-weather.qmd) | Weather · Climate · Boston |
+| [Boston's Windiest Year: What the Record Actually Shows](boston-wind.qmd) | Weather · Wind · Boston |
 

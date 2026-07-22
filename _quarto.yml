@@ -20,6 +20,8 @@ website:
             text: "Billionaires & Foundations"
           - href: boston-weather.qmd
             text: "Boston's Rising Temperatures"
+          - href: boston-wind.qmd
+            text: "Boston's Windiest Year"
     right:
       - icon: github
         href: https://github.com/mlss5/data-stories
