@@ -1,19 +1,5 @@
 [
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Data Stories in Social Science",
-    "section": "",
-    "text": "Machine Learning for Social Science  ·  Boston, MA"
-  },
-  {
-    "objectID": "index.html#posts",
-    "href": "index.html#posts",
-    "title": "Data Stories in Social Science",
-    "section": "Posts",
-    "text": "Posts\n\n\n\nPost\nTags\n\n\n\n\nThe Rise and Fall of Foreign Aid\nGlobal Development · Aid\n\n\nAid in Depth\nGlobal Development · Aid · Recipients\n\n\nGuns vs. Butter\nGlobal Development · Aid · NATO · Defense\n\n\nBillionaires, Foundations, and the Giving Pledge\nPhilanthropy · Billionaires · Giving Pledge"
-  },
-  {
     "objectID": "oda-trends.html",
     "href": "oda-trends.html",
     "title": "The Rise and Fall of Foreign Aid",
@@ -26,6 +12,48 @@
     "title": "Aid in Depth",
     "section": "",
     "text": "Data Story  ·  OECD DAC  ·  Bilateral Aid Flows 2010–2025\n\nEvery dollar of foreign aid tells two stories: who gives, and who receives. This chart maps flows from the five largest donors each year to the countries that depend on that generosity most. Drag the slider to watch Ukraine’s rise from minor recipient to the world’s largest aid destination after 2022 — and to see how that shift displaced traditional recipients across Africa and South Asia.\n\n\n\n\n\n\n\n  2023\n  \n  Preliminary\n\n\n\n\n  Showing top 5 donors by total ODA for the selected year, flowing to the top 20 recipient\n  countries plus all other recipients combined. Flow widths proportional to USD billions.\n  Hover over any flow for exact values. Donor ranking and recipient flows update\n  dynamically as the year changes. Recipient shares are illustrative estimates based on\n  OECD DAC bilateral ODA tables.\n\n\n\n\nSources: OECD DAC Statistics. Final 2024 data released December 2025; preliminary 2025 data released April 2026. Recipient country shares are illustrative estimates based on OECD DAC bilateral ODA tables and CRS project-level data."
+  },
+  {
+    "objectID": "nato-vs-oda.html",
+    "href": "nato-vs-oda.html",
+    "title": "Guns vs. Butter",
+    "section": "",
+    "text": "Data Story  ·  NATO & OECD DAC  ·  Defense and Aid Spending 2014–2025\n\nEvery government faces a version of the same tradeoff: how much to spend on security at home versus stability abroad. NATO asks members to spend 2% of GDP on defense. The OECD asks donors to give 0.7% of GNI in foreign aid. Almost no country has ever met both targets simultaneously — and the gap is growing.\n\n\n\n\n\n\n\n  2023\n  \n  Preliminary\n\n\n\n1 — Absolute Spending: Defense vs. Aid\n\n  The United States dwarfs all other donors on defense — but also on aid, until 2025.\n  Toggle USA on and off to see the distribution among other allies more clearly.\n  Note how Poland's defense bar surges after 2022, while its aid bar barely registers.\n\n\n  Toggle USA\n  Sort by: Defense\n\n\n  \n\n\n  USD billions. NATO defense data: NATO Defence Expenditure of NATO Countries (2014–2025),\n  published August 2025. 2024–2025 NATO figures are estimates. ODA data: OECD DAC Statistics.\n  Countries shown are NATO members that are also OECD DAC donors.\n  Note the axis break at $100B — values beyond that point are compressed so the\n  USA's much larger totals don't flatten every other country's bars into invisibility.\n\n\n\n2 — Who Meets the Targets?\n\n  The vertical line marks NATO's 2% of GDP defense target; the horizontal line marks the 0.7% of GNI\n  ODA target. The top-right quadrant — meeting both commitments — has historically been almost empty.\n  Drag the year slider above to watch countries migrate across quadrants over time.\n\n\n  \n\n\n  Defense spending as % of GDP (NATO definition). ODA as % of GNI (OECD DAC definition,\n  GNI approximated from IMF GDP estimates). Reference lines: 2% NATO target (vertical),\n  0.7% ODA target (horizontal). Finland joined NATO April 2023; Sweden March 2024.\n\n\n\n\nSources: NATO Defence Expenditure of NATO Countries (2014–2025), published August 2025 (estimates for 2024–2025). OECD DAC Statistics, final 2024 release December 2025, preliminary 2025 release April 2026. GDP estimates: IMF World Economic Outlook. ODA/GNI ratios are approximated using GDP as proxy for GNI. Countries shown are NATO members that are also OECD DAC donors. Finland joined NATO April 2023; Sweden joined March 2024."
+  },
+  {
+    "objectID": "boston-weather.html",
+    "href": "boston-weather.html",
+    "title": "How Much Has Boston Warmed? 133 Years of Daily Highs and Lows",
+    "section": "",
+    "text": "Data Story  ·  Boston, MA  ·  Weather and Climate"
+  },
+  {
+    "objectID": "boston-weather.html#one-city-two-weather-stations",
+    "href": "boston-weather.html#one-city-two-weather-stations",
+    "title": "How Much Has Boston Warmed? 133 Years of Daily Highs and Lows",
+    "section": "One city, two weather stations",
+    "text": "One city, two weather stations\nA 133-year daily temperature record for any single American city doesn’t come from one continuous source. Boston’s does not either. From 1893 to 1935, the official readings came from a downtown “Boston City” station; since 1936, they’ve come from Boston Logan International Airport, built on filled tidal flats in East Boston. Both feed into the same NOAA-maintained record used here, and splicing stations like this is standard practice in long climate series — it’s the same approach the National Weather Service itself uses to construct Boston’s official climate normals.\nIt’s also a genuine caveat rather than a footnote. Airport stations tend to sit on open, paved ground surrounded by jet exhaust and less vegetation than a downtown site, which can nudge readings — especially daytime highs — slightly warmer than an old-city location would show for identical weather. The 1936 station change is marked on the chart below; it’s worth keeping in mind when comparing eras on either side of that line.\n\n\n\n\n\n\n\n\nAnnual average of daily high and low temperatures, Boston, MA, 1893–2025. Dotted line marks 1936, when the official record switches from the downtown Boston City station to Boston Logan International Airport. Green line is a trailing 10-year average of the annual mean temperature ((high + low) / 2), smoothing year-to-year noise to show the underlying trend. Click any legend item to isolate that line.\n\n\n\nWarmest year on record 2021 Average high 61.8°F, average low 47.3°F\n\n\nColdest year on record 1904 Average high 55.1°F, average low 39.3°F\n\n\nDaytime high, 1893–1902 → 2016–2025 +3.1°F Decade average rose from 57.7°F to 60.9°F\n\n\nNighttime low, 1893–1902 → 2016–2025 +4.0°F Decade average rose from 42.1°F to 46.1°F — nights are warming faster than days"
+  },
+  {
+    "objectID": "boston-weather.html#nights-are-warming-faster-than-days",
+    "href": "boston-weather.html#nights-are-warming-faster-than-days",
+    "title": "How Much Has Boston Warmed? 133 Years of Daily Highs and Lows",
+    "section": "Nights are warming faster than days",
+    "text": "Nights are warming faster than days\nThe gap between the two lines has narrowed over time, and that’s the more interesting half of the story. If Boston were simply getting a uniformly warmer version of the same climate, the high and low lines would have shifted upward by roughly the same amount. Instead, the average low has risen about four degrees since the 1890s, versus roughly three degrees for the average high.\nThis isn’t unique to Boston — nighttime lows warming faster than daytime highs is a well-documented pattern across much of the United States, and several forces plausibly contribute: cloud cover and humidity trap outgoing heat overnight, urban and airport development reduces how quickly the ground radiates heat away after sunset, and warming winters mean fewer of the historically frigid, clear, dry nights that used to pull the coldest lows down hard. Because Logan Airport itself has been built up substantially since 1936 — more pavement, more infrastructure, more heat-retaining surface around the immediate station — some of this narrowing could also reflect the station’s own changing surroundings rather than the regional climate alone. Both are almost certainly part of the picture; disentangling exactly how much is beyond what this single-station record can settle."
+  },
+  {
+    "objectID": "boston-weather.html#a-record-increasingly-stacked-with-recent-years",
+    "href": "boston-weather.html#a-record-increasingly-stacked-with-recent-years",
+    "title": "How Much Has Boston Warmed? 133 Years of Daily Highs and Lows",
+    "section": "A record increasingly stacked with recent years",
+    "text": "A record increasingly stacked with recent years\nThe chart’s ranking tells its own story. Of the ten warmest years since 1893, eight occurred in 2010 or later: 2021, 2012, 2023, 2010, 2024, 2022, 2020, and 2016. But the list isn’t a clean, monotonic march upward — 1949 and 1953 also crack the top ten, both comfortably warmer than most years around them. Those two mid-century years are a reminder that a single unusually warm year has always been possible in Boston’s climate; what’s changed is the odds. A “top-ten warmest year” used to be a rare, scattered event across the twentieth century. Now it is the typical outcome of any given year in the 2010s and 2020s."
+  },
+  {
+    "objectID": "boston-weather.html#what-a-single-station-cant-tell-you",
+    "href": "boston-weather.html#what-a-single-station-cant-tell-you",
+    "title": "How Much Has Boston Warmed? 133 Years of Daily Highs and Lows",
+    "section": "What a single station can’t tell you",
+    "text": "What a single station can’t tell you\nThis is one station’s daily-average record, and it leaves real gaps. It says nothing about precipitation, snowfall, or storm intensity — a separate and increasingly important part of New England’s changing climate. It says nothing about single-day extremes: a year with a mild average can still contain a record-breaking heat wave or cold snap that this chart smooths away entirely. It reflects one site’s specific microclimate — coastal, low-lying, airport-adjacent — which won’t match temperature trends recorded a few miles inland or at higher elevation. And because the underlying source splices two station records at 1936, some caution is warranted when comparing eras directly across that seam. A natural next post on this thread would push into extremes directly: the frequency of 90°F+ days, or how the length of Boston’s frost-free growing season has changed over the same 133 years.\n\n\nSources: Annual average daily high and low temperatures for Boston, Massachusetts, 1893–2025, based on NOAA climate data (Boston City station, 1893–1935; Boston Logan International Airport, GHCND:USW00014739, 1936–2025), as compiled by Extreme Weather Watch."
   },
   {
     "objectID": "wages-vs-prices.html",
@@ -56,11 +84,18 @@
     "text": "What this measure can’t tell you\nA national average hides as much as it reveals. It says nothing about how pay has diverged by region, industry, education, race, or gender over the same period, and it says nothing about the well-documented widening gap between average and median pay since the 1980s — a separate and important part of the inequality story that a single average wage line cannot show. It is also, deliberately, a manufacturing-sector measure in an economy where manufacturing’s employment share has fallen for decades; a similar exercise using service-sector or all-private-sector pay (available only from 1964 onward) would likely tell a somewhat different recent story. And because it tracks cash wages only, it understates how total compensation — wages plus benefits — has grown, particularly since employer-sponsored health insurance became widespread. Future posts on this site could push further into any of these threads: a sectoral breakdown, a look at the minimum wage specifically, or a comparison against productivity growth.\n\n\nSources: Wages — U.S. Bureau of Labor Statistics, Average Hourly Earnings of Production and Nonsupervisory Employees, Manufacturing (series CES3000000008), 1939–2025; National Bureau of Economic Research Macrohistory Database, series a08050a (Paul H. Douglas, Real Wages in the United States, 1890–1926) for 1900–1919 and series a08050b (National Industrial Conference Board, Wages, Hours, and Employment in the United States: 1914–1936) for 1920–1933; 1934–1938 linearly interpolated between these two series due to a gap in consistent annual reporting during the NIRA/early-FLSA transition. Prices — Federal Reserve Bank of Minneapolis, Consumer Price Index, 1800– (splicing BLS historical cost-of-living estimates for 1900–1912 with the official Consumer Price Index, 1913–2025)."
   },
   {
-    "objectID": "nato-vs-oda.html",
-    "href": "nato-vs-oda.html",
-    "title": "Guns vs. Butter",
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Data Stories in Social Science",
     "section": "",
-    "text": "Data Story  ·  NATO & OECD DAC  ·  Defense and Aid Spending 2014–2025\n\nEvery government faces a version of the same tradeoff: how much to spend on security at home versus stability abroad. NATO asks members to spend 2% of GDP on defense. The OECD asks donors to give 0.7% of GNI in foreign aid. Almost no country has ever met both targets simultaneously — and the gap is growing.\n\n\n\n\n\n\n\n  2023\n  \n  Preliminary\n\n\n\n1 — Absolute Spending: Defense vs. Aid\n\n  The United States dwarfs all other donors on defense — but also on aid, until 2025.\n  Toggle USA on and off to see the distribution among other allies more clearly.\n  Note how Poland's defense bar surges after 2022, while its aid bar barely registers.\n\n\n  Toggle USA\n  Sort by: Defense\n\n\n  \n\n\n  USD billions. NATO defense data: NATO Defence Expenditure of NATO Countries (2014–2025),\n  published August 2025. 2024–2025 NATO figures are estimates. ODA data: OECD DAC Statistics.\n  Countries shown are NATO members that are also OECD DAC donors.\n  Note the axis break at $100B — values beyond that point are compressed so the\n  USA's much larger totals don't flatten every other country's bars into invisibility.\n\n\n\n2 — Who Meets the Targets?\n\n  The vertical line marks NATO's 2% of GDP defense target; the horizontal line marks the 0.7% of GNI\n  ODA target. The top-right quadrant — meeting both commitments — has historically been almost empty.\n  Drag the year slider above to watch countries migrate across quadrants over time.\n\n\n  \n\n\n  Defense spending as % of GDP (NATO definition). ODA as % of GNI (OECD DAC definition,\n  GNI approximated from IMF GDP estimates). Reference lines: 2% NATO target (vertical),\n  0.7% ODA target (horizontal). Finland joined NATO April 2023; Sweden March 2024.\n\n\n\n\nSources: NATO Defence Expenditure of NATO Countries (2014–2025), published August 2025 (estimates for 2024–2025). OECD DAC Statistics, final 2024 release December 2025, preliminary 2025 release April 2026. GDP estimates: IMF World Economic Outlook. ODA/GNI ratios are approximated using GDP as proxy for GNI. Countries shown are NATO members that are also OECD DAC donors. Finland joined NATO April 2023; Sweden joined March 2024."
+    "text": "Machine Learning for Social Science  ·  Boston, MA"
+  },
+  {
+    "objectID": "index.html#posts",
+    "href": "index.html#posts",
+    "title": "Data Stories in Social Science",
+    "section": "Posts",
+    "text": "Posts\n\n\n\nPost\nTags\n\n\n\n\nThe Rise and Fall of Foreign Aid\nGlobal Development · Aid\n\n\nAid in Depth\nGlobal Development · Aid · Recipients\n\n\nGuns vs. Butter\nGlobal Development · Aid · NATO · Defense\n\n\nBillionaires, Foundations, and the Giving Pledge\nPhilanthropy · Billionaires · Giving Pledge\n\n\nHow Much Has Boston Warmed? 133 Years of Daily Highs and Lows\nWeather · Climate · Boston"
   },
   {
     "objectID": "philanthropy.html",

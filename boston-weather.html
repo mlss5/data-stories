@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="dcterms.date" content="2026-07-22">
 
-<title>Data Stories in Social Science</title>
+<title>How Much Has Boston Warmed? 133 Years of Daily Highs and Lows – Data Stories in Social Science</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -258,7 +259,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link" href="./index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item dropdown ">
@@ -312,7 +313,10 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#posts" id="toc-posts" class="nav-link active" data-scroll-target="#posts">Posts</a></li>
+  <li><a href="#one-city-two-weather-stations" id="toc-one-city-two-weather-stations" class="nav-link active" data-scroll-target="#one-city-two-weather-stations">One city, two weather stations</a></li>
+  <li><a href="#nights-are-warming-faster-than-days" id="toc-nights-are-warming-faster-than-days" class="nav-link" data-scroll-target="#nights-are-warming-faster-than-days">Nights are warming faster than days</a></li>
+  <li><a href="#a-record-increasingly-stacked-with-recent-years" id="toc-a-record-increasingly-stacked-with-recent-years" class="nav-link" data-scroll-target="#a-record-increasingly-stacked-with-recent-years">A record increasingly stacked with recent years</a></li>
+  <li><a href="#what-a-single-station-cant-tell-you" id="toc-what-a-single-station-cant-tell-you" class="nav-link" data-scroll-target="#what-a-single-station-cant-tell-you">What a single station can’t tell you</a></li>
   </ul>
 </nav>
     </div>
@@ -322,15 +326,28 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Data Stories in Social Science</h1>
-<p class="subtitle lead">Machine Learning for Social Science</p>
-</div>
+<h1 class="title">How Much Has Boston Warmed? 133 Years of Daily Highs and Lows</h1>
+<p class="subtitle lead">Annual average daily high and low temperatures, 1893–2025</p>
+  <div class="quarto-categories">
+    <div class="quarto-category">Data Story</div>
+    <div class="quarto-category">Boston</div>
+    <div class="quarto-category">Weather</div>
+    <div class="quarto-category">Climate</div>
+    <div class="quarto-category">Temperature</div>
+  </div>
+  </div>
 
 
 
 <div class="quarto-title-meta">
 
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">July 22, 2026</p>
+    </div>
+  </div>
   
     
   </div>
@@ -340,42 +357,206 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p><span class="kicker">Machine Learning for Social Science &nbsp;·&nbsp; Boston, MA</span></p>
+<p>
+<span class="kicker">Data Story &nbsp;·&nbsp; Boston, MA &nbsp;·&nbsp; Weather and Climate</span>
+</p>
 <div class="lead">
-<p>Applying data analysis and machine learning methods to questions in social science. Each post presents an interactive visualization of open-source data to surface stories that impact society today.</p>
+<p>
+Boston’s average daily high temperature has climbed from 57.7°F in the 1890s to 60.9°F over the last ten years — a gain of roughly three degrees. The average nightly low has climbed even more, from 42.1°F to 46.1°F, nearly four degrees. Eight of the ten warmest years in Boston’s 133-year record have occurred since 2010. Only two years from the twentieth century, 1949 and 1953, still crack the top ten.
+</p>
 </div>
-<section id="posts" class="level2">
-<h2 class="anchored" data-anchor-id="posts">Posts</h2>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Post</th>
-<th>Tags</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><a href="./oda-trends.html">The Rise and Fall of Foreign Aid</a></td>
-<td>Global Development · Aid</td>
-</tr>
-<tr class="even">
-<td><a href="./oda-deep-dive.html">Aid in Depth</a></td>
-<td>Global Development · Aid · Recipients</td>
-</tr>
-<tr class="odd">
-<td><a href="./nato-vs-oda.html">Guns vs.&nbsp;Butter</a></td>
-<td>Global Development · Aid · NATO · Defense</td>
-</tr>
-<tr class="even">
-<td><a href="./philanthropy.html">Billionaires, Foundations, and the Giving Pledge</a></td>
-<td>Philanthropy · Billionaires · Giving Pledge</td>
-</tr>
-<tr class="odd">
-<td><a href="./boston-weather.html">How Much Has Boston Warmed? 133 Years of Daily Highs and Lows</a></td>
-<td>Weather · Climate · Boston</td>
-</tr>
-</tbody>
-</table>
+<section id="one-city-two-weather-stations" class="level2">
+<h2 class="anchored" data-anchor-id="one-city-two-weather-stations">One city, two weather stations</h2>
+<p>A 133-year daily temperature record for any single American city doesn’t come from one continuous source. Boston’s does not either. From 1893 to 1935, the official readings came from a downtown “Boston City” station; since 1936, they’ve come from Boston Logan International Airport, built on filled tidal flats in East Boston. Both feed into the same NOAA-maintained record used here, and splicing stations like this is standard practice in long climate series — it’s the same approach the National Weather Service itself uses to construct Boston’s official climate normals.</p>
+<p>It’s also a genuine caveat rather than a footnote. Airport stations tend to sit on open, paved ground surrounded by jet exhaust and less vegetation than a downtown site, which can nudge readings — especially daytime highs — slightly warmer than an old-city location would show for identical weather. The 1936 station change is marked on the chart below; it’s worth keeping in mind when comparing eras on either side of that line.</p>
+<style>
+.bw-chart-wrap {
+  background: #0d1424 !important;
+  border: 1px solid #1e2d45;
+  border-radius: 12px;
+  padding: 20px 16px 12px;
+  margin-top: 1.5rem;
+}
+.bw-note {
+  font-size: 11px; color: #3d5070;
+  margin: 10px 0 0; line-height: 1.6; font-style: italic;
+}
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/3.0.1/chartjs-plugin-annotation.min.js"></script>
+<div class="bw-chart-wrap">
+<canvas id="bw-chart" height="420">
+</canvas>
+</div>
+<p class="bw-note">
+Annual average of daily high and low temperatures, Boston, MA, 1893–2025. Dotted line marks 1936, when the official record switches from the downtown Boston City station to Boston Logan International Airport. Green line is a trailing 10-year average of the annual mean temperature ((high + low) / 2), smoothing year-to-year noise to show the underlying trend. Click any legend item to isolate that line.
+</p>
+<div class="stat-grid">
+<div class="stat-card">
+<p><span class="lbl">Warmest year on record</span> <span class="val pos">2021</span> <span class="note">Average high 61.8°F, average low 47.3°F</span></p>
+</div>
+<div class="stat-card">
+<p><span class="lbl">Coldest year on record</span> <span class="val">1904</span> <span class="note">Average high 55.1°F, average low 39.3°F</span></p>
+</div>
+<div class="stat-card">
+<p><span class="lbl">Daytime high, 1893–1902 → 2016–2025</span> <span class="val pos">+3.1°F</span> <span class="note">Decade average rose from 57.7°F to 60.9°F</span></p>
+</div>
+<div class="stat-card">
+<p><span class="lbl">Nighttime low, 1893–1902 → 2016–2025</span> <span class="val pos">+4.0°F</span> <span class="note">Decade average rose from 42.1°F to 46.1°F — nights are warming faster than days</span></p>
+</div>
+</div>
+<script>
+(function() {
+  var YEARS = [];
+  for (var y = 1893; y <= 2025; y++) { YEARS.push(String(y)); }
+
+  // Annual average daily high temperature, °F.
+  // 1893-1935: Boston City station. 1936-2025: Boston Logan International Airport (GHCND:USW00014739).
+  // Source: NOAA, compiled by Extreme Weather Watch.
+  var HIGH = [
+    56.1,58.5,58.0,57.1,58.0,58.1,58.3,59.3,56.3,57.5, // 1893-1902
+    57.2,55.1,57.1,57.8,56.5,59.4,58.2,58.4,58.8,58.7, // 1903-1912
+    60.5,57.9,58.7,57.5,55.6,58.0,58.9,57.8,60.4,59.1, // 1913-1922
+    58.5,58.4,59.9,57.0,59.9,59.2,59.7,60.5,60.9,60.7, // 1923-1932
+    59.0,57.0,56.7,58.0,58.9,59.0,57.8,56.0,59.7,58.5, // 1933-1942
+    57.9,59.0,59.0,60.4,59.6,58.9,62.1,59.6,60.2,60.3, // 1943-1952
+    61.6,59.2,59.1,58.3,60.7,57.3,59.9,59.0,58.6,57.9, // 1953-1962
+    59.4,58.2,57.7,59.0,56.7,57.3,58.1,58.6,59.2,57.9, // 1963-1972
+    60.6,58.7,60.5,60.7,60.4,57.9,59.8,58.7,59.1,58.8, // 1973-1982
+    60.9,59.2,58.8,58.8,58.0,59.4,58.2,61.2,61.5,57.8, // 1983-1992
+    59.6,60.6,59.2,58.2,58.5,60.4,60.6,58.1,60.1,60.6, // 1993-2002
+    57.4,58.2,58.3,60.6,59.4,59.5,58.0,61.3,60.8,61.6, // 2003-2012
+    59.7,58.7,59.6,61.2,59.9,60.4,60.8,61.2,61.8,61.6, // 2013-2022
+    61.1,61.0,59.6                                      // 2023-2025
+  ];
+
+  // Annual average daily low temperature, °F. Same sources and station splice as HIGH.
+  var LOW = [
+    40.3,42.6,42.0,41.6,42.1,43.6,42.2,42.6,41.9,42.1, // 1893-1902
+    42.1,39.3,41.4,42.5,41.2,43.1,43.0,43.4,43.4,42.6, // 1903-1912
+    44.4,41.8,43.9,42.1,40.5,42.0,43.5,42.5,44.6,43.6, // 1913-1922
+    42.4,42.7,43.7,41.2,43.9,43.7,43.2,44.3,45.3,44.4, // 1923-1932
+    43.1,41.0,41.3,41.9,43.7,43.4,42.1,41.1,43.0,43.2, // 1933-1942
+    42.1,43.0,43.1,43.3,43.1,42.8,45.4,43.1,44.3,44.9, // 1943-1952
+    45.7,43.7,43.9,43.1,44.5,42.9,43.9,43.9,43.6,42.0, // 1953-1962
+    42.9,42.3,41.8,44.2,42.5,43.7,44.5,43.3,43.5,43.1, // 1963-1972
+    45.6,43.4,45.3,43.8,44.9,43.1,44.7,42.8,44.0,43.5, // 1973-1982
+    45.7,44.2,43.4,43.2,43.1,43.5,42.7,45.4,45.5,42.7, // 1983-1992
+    43.9,44.0,44.0,43.8,43.5,45.9,45.1,43.3,45.2,45.3, // 1993-2002
+    43.2,43.5,43.9,45.9,44.1,44.8,43.8,46.5,46.1,47.0, // 2003-2012
+    44.6,43.8,43.9,45.8,45.3,45.8,46.0,46.0,47.3,45.7, // 2013-2022
+    47.1,46.6,45.0                                      // 2023-2025
+  ];
+
+  var MEAN = HIGH.map(function(h, i) { return (h + LOW[i]) / 2; });
+
+  var ROLL_WINDOW = 10;
+  var rollMean = MEAN.map(function(v, i) {
+    if (i < ROLL_WINDOW - 1) { return null; }
+    var sum = 0;
+    for (var k = i - (ROLL_WINDOW - 1); k <= i; k++) { sum += MEAN[k]; }
+    return sum / ROLL_WINDOW;
+  });
+
+  Chart.defaults.font.family = "'Source Serif 4', Georgia, serif";
+  Chart.defaults.color = '#94a3b8';
+  var ctx = document.getElementById('bw-chart').getContext('2d');
+
+  new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: YEARS,
+      datasets: [
+        {
+          label: 'Average daily high (°F)',
+          data: HIGH,
+          borderColor: '#ef4444',
+          backgroundColor: '#ef444418',
+          borderWidth: 1.5,
+          pointRadius: 0,
+          pointHoverRadius: 4,
+          tension: 0.15
+        },
+        {
+          label: 'Average daily low (°F)',
+          data: LOW,
+          borderColor: '#60a5fa',
+          backgroundColor: '#60a5fa18',
+          borderWidth: 1.5,
+          pointRadius: 0,
+          pointHoverRadius: 4,
+          tension: 0.15
+        },
+        {
+          label: '10-yr average mean temperature',
+          data: rollMean,
+          borderColor: '#22c55e',
+          backgroundColor: '#22c55e18',
+          borderWidth: 2.5,
+          pointRadius: 0,
+          pointHoverRadius: 4,
+          tension: 0.2
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        legend: {
+          display: true,
+          position: 'bottom',
+          labels: { color: '#94a3b8', font: { size: 11 }, padding: 12, boxWidth: 20 }
+        },
+        tooltip: {
+          backgroundColor: '#060c1a', borderColor: '#1e2d45', borderWidth: 1,
+          titleColor: '#64748b', bodyColor: '#e2e8f0', padding: 10,
+          callbacks: {
+            label: function(c) {
+              if (c.parsed.y === null) { return null; }
+              return ' ' + c.dataset.label + ': ' + c.parsed.y.toFixed(1) + '°F';
+            }
+          }
+        },
+        annotation: {
+          annotations: {
+            stationChange: { type: 'line', scaleID: 'x', value: '1936',
+              borderColor: '#2a3f5f', borderWidth: 1.5, borderDash: [5,4] }
+          }
+        }
+      },
+      scales: {
+        x: {
+          grid: { color: '#111d30' },
+          ticks: { color: '#4a6080', font: { size: 11 }, autoSkip: true, maxTicksLimit: 16, maxRotation: 0 }
+        },
+        y: {
+          grid: { color: '#111d30' },
+          ticks: { color: '#4a6080', font: { size: 11 } },
+          title: { display: true, text: 'Degrees Fahrenheit', color: '#4a6080', font: { size: 11 } }
+        }
+      }
+    }
+  });
+})();
+</script>
+</section>
+<section id="nights-are-warming-faster-than-days" class="level2">
+<h2 class="anchored" data-anchor-id="nights-are-warming-faster-than-days">Nights are warming faster than days</h2>
+<p>The gap between the two lines has narrowed over time, and that’s the more interesting half of the story. If Boston were simply getting a uniformly warmer version of the same climate, the high and low lines would have shifted upward by roughly the same amount. Instead, the average low has risen about four degrees since the 1890s, versus roughly three degrees for the average high.</p>
+<p>This isn’t unique to Boston — nighttime lows warming faster than daytime highs is a well-documented pattern across much of the United States, and several forces plausibly contribute: cloud cover and humidity trap outgoing heat overnight, urban and airport development reduces how quickly the ground radiates heat away after sunset, and warming winters mean fewer of the historically frigid, clear, dry nights that used to pull the coldest lows down hard. Because Logan Airport itself has been built up substantially since 1936 — more pavement, more infrastructure, more heat-retaining surface around the immediate station — some of this narrowing could also reflect the station’s own changing surroundings rather than the regional climate alone. Both are almost certainly part of the picture; disentangling exactly how much is beyond what this single-station record can settle.</p>
+</section>
+<section id="a-record-increasingly-stacked-with-recent-years" class="level2">
+<h2 class="anchored" data-anchor-id="a-record-increasingly-stacked-with-recent-years">A record increasingly stacked with recent years</h2>
+<p>The chart’s ranking tells its own story. Of the ten warmest years since 1893, eight occurred in 2010 or later: 2021, 2012, 2023, 2010, 2024, 2022, 2020, and 2016. But the list isn’t a clean, monotonic march upward — 1949 and 1953 also crack the top ten, both comfortably warmer than most years around them. Those two mid-century years are a reminder that a single unusually warm year has always been possible in Boston’s climate; what’s changed is the odds. A “top-ten warmest year” used to be a rare, scattered event across the twentieth century. Now it is the typical outcome of any given year in the 2010s and 2020s.</p>
+</section>
+<section id="what-a-single-station-cant-tell-you" class="level2">
+<h2 class="anchored" data-anchor-id="what-a-single-station-cant-tell-you">What a single station can’t tell you</h2>
+<p>This is one station’s daily-average record, and it leaves real gaps. It says nothing about precipitation, snowfall, or storm intensity — a separate and increasingly important part of New England’s changing climate. It says nothing about single-day extremes: a year with a mild average can still contain a record-breaking heat wave or cold snap that this chart smooths away entirely. It reflects one site’s specific microclimate — coastal, low-lying, airport-adjacent — which won’t match temperature trends recorded a few miles inland or at higher elevation. And because the underlying source splices two station records at 1936, some caution is warranted when comparing eras directly across that seam. A natural next post on this thread would push into extremes directly: the frequency of 90°F+ days, or how the length of Boston’s frost-free growing season has changed over the same 133 years.</p>
+<hr>
+<p>
+<strong>Sources:</strong> Annual average daily high and low temperatures for Boston, Massachusetts, 1893–2025, based on NOAA climate data (Boston City station, 1893–1935; Boston Logan International Airport, GHCND:USW00014739, 1936–2025), as compiled by Extreme Weather Watch.
+</p>
 
 
 </section>
