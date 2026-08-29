@@ -1,0 +1,222 @@
+---
+title: "Cameras After the Smartphone"
+subtitle: "Worldwide digital camera shipments and the DSLR-to-mirrorless handoff, 2010–2025"
+categories: [Data Story, Consumer Electronics, Cameras, Photography]
+date: 2026-08-29
+---
+
+<p><span class="kicker">Data Story &nbsp;·&nbsp; CIPA &nbsp;·&nbsp; Camera & Imaging Products Association</span></p>
+
+<div class="lead">
+<p>In 2010, the world's camera makers shipped 121.5 million digital cameras — the high-water mark of a category the smartphone was about to gut. By 2023, annual shipments had fallen 94%, to 7.7 million. Then something unusual happened: shipments rose for two straight years, the first back-to-back increase in nearly two decades, driven almost entirely by two very different products — professional-grade mirrorless bodies, and a pocket-sized point-and-shoot revival led by Gen Z.</p>
+</div>
+
+## Finding a real time series
+
+CIPA, the Japanese trade association whose members include Canon, Nikon, Sony, Fujifilm, Panasonic, and Olympus/OM Digital, has published monthly worldwide shipment data since the 1990s and is the industry-standard source everyone from Statista to DPReview ultimately cites. The association's own historical PDF archive isn't set up for scraping, so the series below is reconstructed from CIPA's published monthly and annual releases as reported by CIPA itself and cross-checked against PetaPixel, DPReview, and Statista, rather than pulled from a single downloadable file.
+
+The reconstruction is solid back to 2010, where multiple independent citations of CIPA's own numbers agree to the unit. Before that, CIPA's public releases are harder to assemble into a clean annual series without a paid Statista subscription, so the chart below starts in 2010 — already well past the digital camera's rise from a standing start of about 5 million units shipped in 1995. Film camera shipments stopped being tracked in comparable form once CIPA's reporting shifted almost entirely to digital in the mid-2000s; today's small film-camera market (Kodak's revived Ektachrome stock, Pentax's new mechanical film camera) isn't large enough to appear as a separate line in CIPA's own releases, so it's addressed qualitatively rather than charted here.
+
+<style>
+.cam-chart-wrap {
+  background: #0d1424 !important;
+  border: 1px solid #1e2d45;
+  border-radius: 12px;
+  padding: 20px 16px 12px;
+  margin-top: 1.5rem;
+}
+.cam-note {
+  font-size: 11px; color: #3d5070;
+  margin: 10px 0 0; line-height: 1.6; font-style: italic;
+}
+</style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/3.0.1/chartjs-plugin-annotation.min.js"></script>
+
+<div class="cam-chart-wrap">
+<canvas id="cam-chart" height="380"></canvas>
+</div>
+<p class="cam-note">
+Worldwide shipments of digital still cameras by CIPA member companies, all types combined (compact/fixed-lens, DSLR, and mirrorless interchangeable-lens). Dotted lines mark the 2010 peak and 2023 trough.
+</p>
+
+<div class="stat-grid">
+<div class="stat-card">
+<span class="lbl">2010 peak</span>
+<span class="val">121.5M</span>
+<span class="note">Highest annual shipment total CIPA has recorded</span>
+</div>
+<div class="stat-card">
+<span class="lbl">2023 trough</span>
+<span class="val">7.7M</span>
+<span class="note">93.6% below the 2010 peak — the smartphone-driven collapse</span>
+</div>
+<div class="stat-card">
+<span class="lbl">2025 shipments</span>
+<span class="val pos">9.4M</span>
+<span class="note">Second consecutive annual increase — first back-to-back growth since the mid-2000s</span>
+</div>
+<div class="stat-card">
+<span class="lbl">Growth off the trough</span>
+<span class="val pos">+22.3%</span>
+<span class="note">2023 → 2025, though still a sliver of the 2010 peak</span>
+</div>
+</div>
+
+<script>
+(function() {
+  var YEARS = [2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025];
+  var TOTAL = [121.46,115.52,98.14,62.84,43.43,35.40,24.19,24.98,19.42,15.22,8.89,8.36,8.01,7.72,8.49,9.44];
+
+  Chart.defaults.font.family = "'Source Serif 4', Georgia, serif";
+  Chart.defaults.color = '#94a3b8';
+
+  var ctx = document.getElementById('cam-chart').getContext('2d');
+  new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: YEARS,
+      datasets: [{
+        label: 'Worldwide digital camera shipments',
+        data: TOTAL,
+        borderColor: '#60a5fa',
+        backgroundColor: '#60a5fa18',
+        borderWidth: 2.5,
+        tension: 0.35,
+        fill: true,
+        pointBackgroundColor: '#60a5fa',
+        pointBorderColor: '#60a5fa',
+        pointRadius: 4,
+        pointHoverRadius: 6
+      }]
+    },
+    options: {
+      responsive: true,
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: '#060c1a', borderColor: '#1e2d45', borderWidth: 1,
+          titleColor: '#64748b', bodyColor: '#e2e8f0', padding: 10,
+          callbacks: {
+            label: function(c) { return ' ' + c.parsed.y.toFixed(1) + 'M units'; }
+          }
+        },
+        annotation: {
+          annotations: {
+            peak: { type:'line', scaleID:'x', value:'2010',
+              borderColor:'#2a3f5f', borderWidth:1.5, borderDash:[5,4],
+              label: { display:true, content:'2010 peak', position:'start',
+                       color:'#4a6080', font:{size:10}, backgroundColor:'transparent' } },
+            trough: { type:'line', scaleID:'x', value:'2023',
+              borderColor:'#2a3f5f', borderWidth:1.5, borderDash:[5,4],
+              label: { display:true, content:'2023 trough', position:'start',
+                       color:'#4a6080', font:{size:10}, backgroundColor:'transparent' } }
+          }
+        }
+      },
+      scales: {
+        x: { grid:{color:'#111d30'}, ticks:{color:'#4a6080',font:{size:11}} },
+        y: { grid:{color:'#111d30'},
+             ticks:{color:'#4a6080',font:{size:11},callback:function(v){return v+'M';}},
+             title:{display:true,text:'Units shipped (millions)',color:'#4a6080',font:{size:11}} }
+      }
+    }
+  });
+})();
+</script>
+
+## The format war: who won the shrinking pie
+
+The total collapsed, but the mix inside it changed even more dramatically. In 2010, compact point-and-shoots — the cameras smartphones killed first — still accounted for 109 million of the 121.5 million units shipped, with DSLRs and the just-launched mirrorless format (Panasonic's Lumix G1 had shipped barely a year earlier) making up the remaining 12.5 million between them. By 2025, the compact category had shrunk to 2.4 million units but mirrorless had grown into the dominant force in the industry at 6.3 million units, while DSLRs — which Canon and Nikon have largely stopped developing — had fallen to just 691,000, kept alive mainly by Pentax and a market for cheap used bodies.
+
+<div class="cam-chart-wrap">
+<canvas id="cam-format-chart" height="320"></canvas>
+</div>
+<p class="cam-note">
+2010: CIPA reported compact and interchangeable-lens shipments as two categories; mirrorless was under 1% of the 12.5M interchangeable-lens total that year and isn't broken out separately.
+2025: DSLR, mirrorless, and compact are each reported individually by CIPA.
+</p>
+
+<div class="stat-grid">
+<div class="stat-card">
+<span class="lbl">Mirrorless share, 2025</span>
+<span class="val pos">66.9%</span>
+<span class="note">Up from a rounding error in 2010; overtook compacts as the top category in 2022</span>
+</div>
+<div class="stat-card">
+<span class="lbl">DSLR share, 2025</span>
+<span class="val">7.3%</span>
+<span class="note">691,000 units, down from ~998,000 in 2024 — Canon and Nikon have largely exited the format</span>
+</div>
+<div class="stat-card">
+<span class="lbl">Compact shipments, 2025</span>
+<span class="val pos">+29.6%</span>
+<span class="note">2.4M units, the fastest-growing category — a "digicam" revival led by younger buyers</span>
+</div>
+<div class="stat-card">
+<span class="lbl">Avg. export value per body</span>
+<span class="val">$282 vs $711</span>
+<span class="note">DSLR vs. mirrorless, 2025 — most remaining DSLR volume is low-end inventory, not pro gear</span>
+</div>
+</div>
+
+<script>
+(function() {
+  var ctx2 = document.getElementById('cam-format-chart').getContext('2d');
+  new Chart(ctx2, {
+    type: 'bar',
+    data: {
+      labels: ['2010', '2025'],
+      datasets: [
+        {
+          label: 'Compact / fixed-lens',
+          data: [109.0, 2.44],
+          backgroundColor: '#facc15'
+        },
+        {
+          label: 'DSLR (incl. early ILC in 2010)',
+          data: [12.5, 0.69],
+          backgroundColor: '#f87171'
+        },
+        {
+          label: 'Mirrorless',
+          data: [0, 6.31],
+          backgroundColor: '#4ade80'
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          display: true, position: 'bottom',
+          labels: { color: '#94a3b8', font: { size: 11 }, padding: 12, boxWidth: 16 }
+        },
+        tooltip: {
+          backgroundColor: '#060c1a', borderColor: '#1e2d45', borderWidth: 1,
+          titleColor: '#64748b', bodyColor: '#e2e8f0', padding: 10,
+          callbacks: {
+            label: function(c) { return ' ' + c.dataset.label + ': ' + c.parsed.y.toFixed(2) + 'M units'; }
+          }
+        }
+      },
+      scales: {
+        x: { stacked: true, grid:{display:false}, ticks:{color:'#4a6080',font:{size:12}} },
+        y: { stacked: true, grid:{color:'#111d30'},
+             ticks:{color:'#4a6080',font:{size:11},callback:function(v){return v+'M';}},
+             title:{display:true,text:'Units shipped (millions)',color:'#4a6080',font:{size:11}} }
+      }
+    }
+  });
+})();
+</script>
+
+## Two different recoveries, one chart
+
+The 2024–2025 uptick isn't one story but two. At the top of the market, mirrorless bodies keep getting more expensive and more capable, and buyers — increasingly professionals and serious enthusiasts rather than casual shooters — keep paying for them; shipment value has grown faster than unit volume for several years running. At the bottom, a cohort too young to have owned a point-and-shoot the first time around has been driving demand for compact cameras like the Fujifilm X100 series and screen-free novelties like the Camp Snap, treating a dedicated camera as a deliberate alternative to a phone rather than a worse version of one. Both trends show up as growth in the same chart, but they're selling to different customers for different reasons — which is presumably why CIPA's own 2026 shipment forecasts still describe a wide range (6.3–7.4 million interchangeable-lens bodies) rather than a confident single number.
+
+---
+
+**Sources:** Camera & Imaging Products Association (CIPA), worldwide monthly and annual digital still camera shipment statistics, as reported by CIPA and independently cited by PetaPixel, DPReview, Digital Camera World, Fstoppers, and Statista. 2025 figures reflect CIPA's full-year release (February 2026); 2026 references are CIPA's preliminary/forecast data as of mid-2026. The 2010 compact/interchangeable-lens split is drawn from CIPA's own reported totals for that year.
