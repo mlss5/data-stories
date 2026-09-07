@@ -1,0 +1,234 @@
+---
+title: "The Camera in Everyone's Pocket"
+subtitle: "Smartphone shipments vs. the collapse of the compact camera, 2007–2025"
+categories: [Data Story, Consumer Electronics, Smartphones, Cameras]
+date: 2026-09-05
+---
+
+<p><span class="kicker">Data Story &nbsp;·&nbsp; IDC &nbsp;·&nbsp; CIPA</span></p>
+
+<div class="lead">
+<p>BlackBerry shipped a camera phone before Apple shipped a phone at all. The BlackBerry Pearl arrived in September 2006 with a 1.3-megapixel camera — RIM had deliberately left cameras off every earlier model, because its enterprise customers didn't want employees photographing sensitive offices. The iPhone launched nine months later. What followed wasn't just BlackBerry's collapse; it was the compact camera's. By the time smartphone shipments passed a billion units a year, the point-and-shoot camera — the device the camera phone was actually competing with — had been reduced to a rounding error.</p>
+</div>
+
+## Two industries, one dataset problem
+
+The camera side of this story is CIPA's — the same worldwide shipment data used in <a href="camera-shipments.qmd">our earlier post on the DSLR-to-mirrorless transition</a>. The smartphone side comes from IDC's Worldwide Quarterly Mobile Phone Tracker, the industry-standard source that most outlets (and Statista's own smartphone-shipment statistics) ultimately cite. The two trackers don't share a methodology — IDC counts all Android and iOS manufacturers combined, CIPA counts a defined list of Japanese-headquartered camera brands — but both report worldwide unit shipments to the same rough standard, which is what makes overlaying them meaningful.
+
+2007–2009 smartphone totals are reconstructed estimates (IDC's own press archive gets sparse before its 2010–2011 releases), interpolated between known points: Apple's own reported 3.3 million iPhones in 2007, RIM's roughly 20% share of a 175-million-unit market in 2009, and Nokia's continued Symbian dominance through the period. 2010 onward are IDC's own published totals, cited repeatedly across its press releases. Compact camera figures are CIPA's, identical to the previous post.
+
+<style>
+.cam-chart-wrap {
+  background: #0d1424 !important;
+  border: 1px solid #1e2d45;
+  border-radius: 12px;
+  padding: 20px 16px 12px;
+  margin-top: 1.5rem;
+}
+.cam-note {
+  font-size: 11px; color: #3d5070;
+  margin: 10px 0 0; line-height: 1.6; font-style: italic;
+}
+</style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/3.0.1/chartjs-plugin-annotation.min.js"></script>
+
+<div class="cam-chart-wrap">
+<canvas id="sp-chart" height="420"></canvas>
+</div>
+<p class="cam-note">
+Worldwide unit shipments, log scale (necessary since the two lines span three orders of magnitude by the end of the period). Smartphone totals: IDC Worldwide Quarterly Mobile Phone Tracker (2007–2009 estimated, see note above). Compact/fixed-lens camera totals: CIPA.
+</p>
+
+<div class="stat-grid">
+<div class="stat-card">
+<span class="lbl">2007: smartphones vs. compacts</span>
+<span class="val">122M vs. 92M</span>
+<span class="note">Smartphones — across all makers, not just Apple — already outshipped dedicated compacts the year the iPhone launched</span>
+</div>
+<div class="stat-card">
+<span class="lbl">2016: smartphone peak</span>
+<span class="val">1.47B</span>
+<span class="note">Same year CIPA's compact shipments fell below 13 million — an 116-to-1 ratio</span>
+</div>
+<div class="stat-card">
+<span class="lbl">2025 ratio</span>
+<span class="val pos">516-to-1</span>
+<span class="note">1.26 billion smartphones shipped for every 2.4 million compact cameras</span>
+</div>
+<div class="stat-card">
+<span class="lbl">Compact camera decline, 2010–2023</span>
+<span class="val">−98.4%</span>
+<span class="note">108.6 million units (2010) to 1.7 million (2023), CIPA's trough year</span>
+</div>
+</div>
+
+<script>
+(function() {
+  var YEARS = [2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025];
+
+  // Worldwide smartphone shipments, millions of units. 2007-2009 estimated (see note above);
+  // 2010-2025 from IDC's published totals as reported in IDC press releases and widely re-cited.
+  var SMARTPHONE = [122,139,173,305,494,725,1004,1301,1432,1470,1462,1405,1371,1252,1350,1206,1160,1240,1259];
+
+  // Compact/fixed-lens camera shipments, millions of units. CIPA, identical to the prior post.
+  var COMPACT = [91.74,109.30,95.99,108.57,99.83,77.98,45.71,29.59,22.34,12.58,13.30,8.66,6.76,3.58,3.01,2.08,1.72,2.94,2.44];
+
+  Chart.defaults.font.family = "'Source Serif 4', Georgia, serif";
+  Chart.defaults.color = '#94a3b8';
+
+  var ctx = document.getElementById('sp-chart').getContext('2d');
+  new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: YEARS,
+      datasets: [
+        {
+          label: 'Smartphones (all makers)',
+          data: SMARTPHONE,
+          borderColor: '#60a5fa',
+          backgroundColor: '#60a5fa15',
+          borderWidth: 2.5,
+          tension: 0.3,
+          fill: true,
+          pointRadius: 2.5,
+          pointHoverRadius: 5,
+          pointBackgroundColor: '#60a5fa',
+          pointBorderColor: '#60a5fa'
+        },
+        {
+          label: 'Compact / fixed-lens cameras',
+          data: COMPACT,
+          borderColor: '#facc15',
+          backgroundColor: '#facc1510',
+          borderWidth: 2.25,
+          tension: 0.3,
+          pointRadius: 2.5,
+          pointHoverRadius: 5,
+          pointBackgroundColor: '#facc15',
+          pointBorderColor: '#facc15'
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        legend: {
+          display: true, position: 'bottom',
+          labels: { color: '#94a3b8', font: { size: 11 }, padding: 12, boxWidth: 16 }
+        },
+        tooltip: {
+          backgroundColor: '#060c1a', borderColor: '#1e2d45', borderWidth: 1,
+          titleColor: '#64748b', bodyColor: '#e2e8f0', padding: 10,
+          callbacks: {
+            label: function(c) { return ' ' + c.dataset.label + ': ' + c.parsed.y.toFixed(1) + 'M units'; }
+          }
+        },
+        annotation: {
+          annotations: {
+            iphone: { type:'line', scaleID:'x', value:'2007',
+              borderColor:'#2a3f5f', borderWidth:1.5, borderDash:[5,4],
+              label: { display:true, content:'iPhone launches', position:'start',
+                       color:'#4a6080', font:{size:10}, backgroundColor:'transparent' } }
+          }
+        }
+      },
+      scales: {
+        x: { grid:{color:'#111d30'}, ticks:{color:'#4a6080',font:{size:11}} },
+        y: { type:'logarithmic', grid:{color:'#111d30'},
+             ticks:{color:'#4a6080',font:{size:11},
+               callback:function(v){
+                 if (v===1000||v===100||v===10||v===1) return v+'M';
+                 return null;
+               }},
+             title:{display:true,text:'Units shipped (millions, log scale)',color:'#4a6080',font:{size:11}} }
+      }
+    }
+  });
+})();
+</script>
+
+## The pioneer that got left behind
+
+BlackBerry's own trajectory is a case study within the case study. RIM held its cameras back for years on principle — the BlackBerry 7230 (2003) had Bluetooth and a color screen but no camera; corporate IT departments and government buildings were actively hostile to camera phones at the time, and RIM's whole business was selling into those buildings. The Pearl broke with that policy in 2006, and it worked: RIM's shipments roughly tripled over the next four years, peaking around 2011. Then BlackBerry OS's browser, app ecosystem, and touchscreen kept losing to iOS and Android, the camera-first feature that once differentiated the Pearl became table stakes on every phone, and BlackBerry's hardware shipments collapsed even faster than they'd grown.
+
+<div class="cam-chart-wrap">
+<canvas id="bb-chart" height="320"></canvas>
+</div>
+<p class="cam-note">
+BlackBerry (RIM) worldwide smartphone shipments, calendar-year estimates reconstructed from RIM/BlackBerry quarterly and fiscal-year filings (SEC Forms 6-K and 40-F) and contemporaneous market-share reporting; RIM's fiscal year ran March–February, so calendar-year figures are approximate. Shipments fell below 1 million annually by 2016, after which BlackBerry-branded phones were made under license by TCL rather than by BlackBerry itself.
+</p>
+
+<div class="stat-grid">
+<div class="stat-card">
+<span class="lbl">First BlackBerry with a camera</span>
+<span class="val">2006</span>
+<span class="note">BlackBerry Pearl 8100, 1.3 MP — RIM had avoided cameras until then for enterprise-security reasons</span>
+</div>
+<div class="stat-card">
+<span class="lbl">BlackBerry peak shipments</span>
+<span class="val">~51M</span>
+<span class="note">Calendar 2011, roughly five years after adding a camera</span>
+</div>
+<div class="stat-card">
+<span class="lbl">Fiscal 2012 → fiscal 2013</span>
+<span class="val">−42.7%</span>
+<span class="note">Shipments fell from ~49.0M to ~28.1M in a single fiscal year, per RIM's own 40-F filing</span>
+</div>
+<div class="stat-card">
+<span class="lbl">Global smartphone share, Q1 2011 → 2013</span>
+<span class="val">13.6% → &lt;3%</span>
+<span class="note">BlackBerry's collapse in relative terms was even faster than in absolute units</span>
+</div>
+</div>
+
+<script>
+(function() {
+  var BB_YEARS = [2007,2008,2009,2010,2011,2012,2013,2014,2015,2016];
+  // Calendar-year estimates, millions of units. See chart note for sourcing and caveats.
+  var BB_SHIPMENTS = [11,19,34,48,51,32,19,11,6,3];
+
+  var ctx2 = document.getElementById('bb-chart').getContext('2d');
+  new Chart(ctx2, {
+    type: 'bar',
+    data: {
+      labels: BB_YEARS,
+      datasets: [{
+        label: 'BlackBerry shipments',
+        data: BB_SHIPMENTS,
+        backgroundColor: BB_YEARS.map(function(y){ return y <= 2011 ? '#4ade80' : '#f87171'; }),
+        borderRadius: 3
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: '#060c1a', borderColor: '#1e2d45', borderWidth: 1,
+          titleColor: '#64748b', bodyColor: '#e2e8f0', padding: 10,
+          callbacks: {
+            label: function(c) { return ' ' + c.parsed.y.toFixed(0) + 'M units shipped'; }
+          }
+        }
+      },
+      scales: {
+        x: { grid:{display:false}, ticks:{color:'#4a6080',font:{size:11}} },
+        y: { grid:{color:'#111d30'},
+             ticks:{color:'#4a6080',font:{size:11},callback:function(v){return v+'M';}},
+             title:{display:true,text:'Units shipped (millions)',color:'#4a6080',font:{size:11}} }
+      }
+    }
+  });
+})();
+</script>
+
+## The feature that won wasn't the camera
+
+It's tempting to read this as "camera phones killed cameras," and directionally that's right — but BlackBerry's own arc shows the camera alone was never the differentiator. RIM added a perfectly serviceable camera in 2006 and gained share for years afterward; it lost that share to companies that paired a camera with instant sharing, an app ecosystem, and a touchscreen built around photos and video rather than email. The compact camera didn't lose to "a camera in a phone" — it lost to a phone where the camera was one part of a always-with-you, always-connected package that no dedicated camera, however good the sensor, could match. Which is also, per the previous post, exactly the gap mirrorless cameras and revived point-and-shoots are now trying to compete on different terms altogether: image quality and a deliberate, single-purpose object, rather than convenience.
+
+---
+
+**Sources:** International Data Corporation (IDC), Worldwide Quarterly Mobile Phone Tracker, as reported in IDC press releases and widely re-cited by Statista, GSMArena, PhoneArena, and InformationWeek; 2007–2009 figures are estimated (see methodology note above). Camera & Imaging Products Association (CIPA), worldwide digital still camera shipment statistics, as used in the companion post on this site. BlackBerry/RIM shipment figures are reconstructed from Research In Motion/BlackBerry SEC filings (Forms 6-K, 40-F) and contemporaneous market-share reporting from Statista and businesstats.com.
