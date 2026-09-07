@@ -1,0 +1,288 @@
+---
+title: "The Rest of What the Smartphone Killed"
+subtitle: "Cameras, GPS units, and MP3 players against smartphone growth — and the sharing platforms that sealed it"
+categories: [Data Story, Consumer Electronics, Smartphones, Social Media]
+date: 2026-09-07
+---
+
+<p><span class="kicker">Data Story &nbsp;·&nbsp; CIPA &nbsp;·&nbsp; IDC &nbsp;·&nbsp; SEC Filings &nbsp;·&nbsp; Company Disclosures</span></p>
+
+<div class="lead">
+<p>Four unrelated companies — a Japanese camera consortium, a Kansas GPS maker, Apple's own music-player division, and a Cisco subsidiary that made pocket camcorders — all got hit by the same wave, in roughly the same decade, for roughly the same reason. None of them lost to a single feature. They lost to a device that combined their one feature with an app store and a "share" button.</p>
+</div>
+
+## Four graveyards, four different data sources
+
+Putting these on one chart means stitching together four industries that don't track themselves the same way. Digital camera shipments are CIPA's, the same series used in <a href="camera-shipments.qmd">the earlier post on this site</a>. Smartphone shipments are IDC's, as in <a href="smartphones-vs-cameras.qmd">the BlackBerry post</a>. Portable GPS (personal navigation device, or PND) shipments come from a mix of Statista's tracked series and Garmin's own SEC filings — Garmin was around 30–38% of the global PND market through this period, so its filings are a useful cross-check even though the chart uses total-market figures, not Garmin alone. iPod unit sales are Apple's own reported figures, by fiscal year (Apple's fiscal year runs October–September, close enough to calendar year not to distort the shape of the curve). Camcorders don't have a clean global aggregate at all — CIPA and IDC don't track them, so that category gets a separate case study below instead of a line on the chart.
+
+The PND and iPod series both stop partway through the chart, and that's deliberate rather than a data gap: both categories didn't decline to some small stable niche the way cameras did. They mostly stopped being tracked as distinct products, because they stopped being distinct products — Garmin pivoted its PND-era engineering into fitness watches and marine/aviation electronics, and Apple folded the iPod Touch into being basically a Wi-Fi-only iPhone until discontinuing the whole line in 2022.
+
+<style>
+.cam-chart-wrap {
+  background: #0d1424 !important;
+  border: 1px solid #1e2d45;
+  border-radius: 12px;
+  padding: 20px 16px 12px;
+  margin-top: 1.5rem;
+}
+.cam-note {
+  font-size: 11px; color: #3d5070;
+  margin: 10px 0 0; line-height: 1.6; font-style: italic;
+}
+</style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/3.0.1/chartjs-plugin-annotation.min.js"></script>
+
+<div class="cam-chart-wrap">
+<canvas id="grave-chart" height="420"></canvas>
+</div>
+<p class="cam-note">
+Worldwide unit shipments, log scale. Cameras: CIPA (all types combined). Smartphones: IDC (2007–2009 estimated). Portable GPS: Statista-tracked global PND shipments and Garmin SEC filings, 2007–2015 only — the mass-market auto-PND category effectively stopped being tracked as a distinct global aggregate after that. iPod: Apple's own reported unit sales by fiscal year, 2007–2014 only — the last year Apple broke the category out separately.
+</p>
+
+<div class="stat-grid">
+<div class="stat-card">
+<span class="lbl">Garmin PND shipments, 2008 peak</span>
+<span class="val">~40M</span>
+<span class="note">Same year the iPhone 3G shipped with built-in GPS and free Google Maps navigation</span>
+</div>
+<div class="stat-card">
+<span class="lbl">Garmin automotive revenue, 2008→2014</span>
+<span class="val">−56%</span>
+<span class="note">$2.5B to $1.5B — Garmin survived by pivoting into fitness, marine, and aviation</span>
+</div>
+<div class="stat-card">
+<span class="lbl">iPod unit sales, 2008→2014</span>
+<span class="val">−74%</span>
+<span class="note">54.8M to 14.4M — Apple's own product cannibalizing itself, by design</span>
+</div>
+<div class="stat-card">
+<span class="lbl">iPod discontinued</span>
+<span class="val">May 2022</span>
+<span class="note">After 450 million lifetime units sold and 20+ years on the market</span>
+</div>
+</div>
+
+<script>
+(function() {
+  var YEARS = [2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025];
+
+  var SMARTPHONE = [122,139,173,305,494,725,1004,1301,1432,1470,1462,1405,1371,1252,1350,1206,1160,1240,1259];
+  var CAMERAS    = [100.0,119.0,105.9,121.46,115.52,98.14,62.84,43.43,35.40,24.19,24.98,19.42,15.22,8.89,8.36,8.01,7.72,8.49,9.44];
+  var PND        = [29,40,36,40,42,30,22,19,17,null,null,null,null,null,null,null,null,null,null];
+  var IPOD       = [51.6,54.8,54.1,50.3,42.6,35.2,26.4,14.4,null,null,null,null,null,null,null,null,null,null,null];
+
+  Chart.defaults.font.family = "'Source Serif 4', Georgia, serif";
+  Chart.defaults.color = '#94a3b8';
+
+  var ctx = document.getElementById('grave-chart').getContext('2d');
+  new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: YEARS,
+      datasets: [
+        {
+          label: 'Smartphones (all makers)',
+          data: SMARTPHONE,
+          borderColor: '#60a5fa', backgroundColor: '#60a5fa12',
+          borderWidth: 2.5, tension: 0.3, fill: true,
+          pointRadius: 2.5, pointHoverRadius: 5,
+          pointBackgroundColor: '#60a5fa', pointBorderColor: '#60a5fa'
+        },
+        {
+          label: 'Digital cameras (all types)',
+          data: CAMERAS,
+          borderColor: '#facc15', backgroundColor: '#facc1510',
+          borderWidth: 2.25, tension: 0.3,
+          pointRadius: 2.5, pointHoverRadius: 5,
+          pointBackgroundColor: '#facc15', pointBorderColor: '#facc15'
+        },
+        {
+          label: 'Portable GPS (PND)',
+          data: PND,
+          borderColor: '#4ade80', backgroundColor: '#4ade8010',
+          borderWidth: 2.25, tension: 0.3,
+          pointRadius: 2.5, pointHoverRadius: 5,
+          pointBackgroundColor: '#4ade80', pointBorderColor: '#4ade80'
+        },
+        {
+          label: 'iPod',
+          data: IPOD,
+          borderColor: '#f87171', backgroundColor: '#f8717110',
+          borderWidth: 2.25, tension: 0.3,
+          pointRadius: 2.5, pointHoverRadius: 5,
+          pointBackgroundColor: '#f87171', pointBorderColor: '#f87171'
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        legend: {
+          display: true, position: 'bottom',
+          labels: { color: '#94a3b8', font: { size: 11 }, padding: 12, boxWidth: 16 }
+        },
+        tooltip: {
+          backgroundColor: '#060c1a', borderColor: '#1e2d45', borderWidth: 1,
+          titleColor: '#64748b', bodyColor: '#e2e8f0', padding: 10,
+          callbacks: {
+            label: function(c) {
+              if (c.parsed.y === null) return null;
+              return ' ' + c.dataset.label + ': ' + c.parsed.y.toFixed(1) + 'M units';
+            }
+          }
+        },
+        annotation: {
+          annotations: {
+            iphone3g: { type:'line', scaleID:'x', value:'2008',
+              borderColor:'#2a3f5f', borderWidth:1.5, borderDash:[5,4],
+              label: { display:true, content:'iPhone 3G: GPS + App Store', position:'start',
+                       color:'#4a6080', font:{size:10}, backgroundColor:'transparent' } }
+          }
+        }
+      },
+      scales: {
+        x: { grid:{color:'#111d30'}, ticks:{color:'#4a6080',font:{size:11}} },
+        y: { type:'logarithmic', grid:{color:'#111d30'},
+             ticks:{color:'#4a6080',font:{size:11},
+               callback:function(v){
+                 if (v===1000||v===100||v===10||v===1) return v+'M';
+                 return null;
+               }},
+             title:{display:true,text:'Units shipped (millions, log scale)',color:'#4a6080',font:{size:11}} }
+      }
+    }
+  });
+})();
+</script>
+
+## The one that doesn't fit on the chart: camcorders
+
+The Flip Video camera is worth a stat card of its own because its rise-and-fall happened almost entirely within the smartphone-camera era, compressed into five years rather than a decade. Pure Digital Technologies launched the Flip in 2006 as a stripped-down, pocket-sized camcorder that did one thing well: record decent video and get it onto a computer with a flip-out USB connector, no cables required. It sold nearly 5 million units by September 2010 and briefly became the #1-selling camcorder brand in the US. Cisco, which had bought the brand for $590 million in 2009, killed it in April 2011 — one day before a new model was due on shelves. The reasoning was almost apologetic: smartphone video had gotten good enough, and more importantly, uploadable enough, that a device whose entire pitch was "simple to shoot, simple to share" had nothing left to be simple about.
+
+<div class="stat-grid">
+<div class="stat-card">
+<span class="lbl">Flip camcorder lifespan</span>
+<span class="val">2006–2011</span>
+<span class="note">Five years from launch to discontinuation, most of it spent as the US's #1 camcorder brand</span>
+</div>
+<div class="stat-card">
+<span class="lbl">Units sold before shutdown</span>
+<span class="val">~5M</span>
+<span class="note">Cumulative worldwide sales through September 2010, per Cisco's own figures</span>
+</div>
+</div>
+
+## The feature that made all of this permanent: sharing
+
+Every product on that chart lost a hardware race, but the deeper thing they lost was a distribution race. A camera, a GPS unit, or an MP3 player was a closed loop — whatever it captured or calculated stayed on the device until you plugged it into a computer. What made the smartphone different wasn't just that it combined those features; it's that whatever it captured could be online, in front of other people, in seconds. That only mattered because, starting almost exactly when the iPhone did, hundreds of millions of people suddenly had somewhere to put it.
+
+<div class="cam-chart-wrap">
+<canvas id="social-chart" height="380"></canvas>
+</div>
+<p class="cam-note">
+Monthly active users (or the closest comparable figure — see note). Facebook and Instagram figures are the companies' own disclosed milestones (SEC filings and press releases), interpolated between announced numbers where a platform didn't report every year. MySpace figures are far less reliable: the company reported registered accounts, unique monthly visitors, and "active users" inconsistently and sometimes simultaneously (contemporary press cited anywhere from 76 million to over 200 million for the same period); the line here uses the comScore-style monthly-unique-visitor estimates most comparable to how Facebook counted MAUs, and should be read as order-of-magnitude, not exact. Friendster's numbers are even messier — heavily front-loaded with now-inactive accounts and later dominated by a pivot to Southeast Asia — and aren't charted for that reason.
+</p>
+
+<div class="stat-grid">
+<div class="stat-card">
+<span class="lbl">MySpace peak, 2008</span>
+<span class="val">~76M</span>
+<span class="note">Monthly unique visitors — the same year Facebook's own user base passed 100 million and never looked back</span>
+</div>
+<div class="stat-card">
+<span class="lbl">Facebook, 2007 → 2012</span>
+<span class="val">58M → 1.06B</span>
+<span class="note">Crossed a billion monthly active users five years after MySpace's peak</span>
+</div>
+<div class="stat-card">
+<span class="lbl">Instagram to 100M users</span>
+<span class="val">~28 months</span>
+<span class="note">Launched Oct. 2010, mobile-only from day one, acquired by Facebook at 30M users in 2012</span>
+</div>
+<div class="stat-card">
+<span class="lbl">Facebook photo uploads, 2007</span>
+<span class="val">14M/day</span>
+<span class="note">Already the web's largest photo-sharing service before Instagram existed, per comScore</span>
+</div>
+</div>
+
+<script>
+(function() {
+  var YEARS2 = [2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025];
+
+  var FACEBOOK  = [1,5.5,12,58,145,350,608,845,1060,1230,1390,1590,1860,2130,2320,2500,2800,2910,2960,3050,3070,3070];
+  var MYSPACE   = [5,25,45,65,76,60,40,25,15,8,null,null,null,null,null,null,null,null,null,null,null,null];
+  var INSTAGRAM = [null,null,null,null,null,null,1,15,90,150,300,400,600,800,1000,1000,1160,2000,2000,2000,2000,2000];
+
+  var ctx2 = document.getElementById('social-chart').getContext('2d');
+  new Chart(ctx2, {
+    type: 'line',
+    data: {
+      labels: YEARS2,
+      datasets: [
+        {
+          label: 'Facebook MAU',
+          data: FACEBOOK,
+          borderColor: '#60a5fa', backgroundColor: '#60a5fa15',
+          borderWidth: 2.5, tension: 0.3, fill: true,
+          pointRadius: 2.5, pointHoverRadius: 5,
+          pointBackgroundColor: '#60a5fa', pointBorderColor: '#60a5fa'
+        },
+        {
+          label: 'Instagram MAU',
+          data: INSTAGRAM,
+          borderColor: '#c084fc', backgroundColor: '#c084fc10',
+          borderWidth: 2.25, tension: 0.3,
+          pointRadius: 2.5, pointHoverRadius: 5,
+          pointBackgroundColor: '#c084fc', pointBorderColor: '#c084fc'
+        },
+        {
+          label: 'MySpace (est. monthly uniques)',
+          data: MYSPACE,
+          borderColor: '#f87171', backgroundColor: '#f8717110',
+          borderWidth: 2, tension: 0.3, borderDash: [4,2],
+          pointRadius: 2, pointHoverRadius: 4,
+          pointBackgroundColor: '#f87171', pointBorderColor: '#f87171'
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        legend: {
+          display: true, position: 'bottom',
+          labels: { color: '#94a3b8', font: { size: 11 }, padding: 12, boxWidth: 16 }
+        },
+        tooltip: {
+          backgroundColor: '#060c1a', borderColor: '#1e2d45', borderWidth: 1,
+          titleColor: '#64748b', bodyColor: '#e2e8f0', padding: 10,
+          callbacks: {
+            label: function(c) {
+              if (c.parsed.y === null) return null;
+              return ' ' + c.dataset.label + ': ' + c.parsed.y.toFixed(0) + 'M';
+            }
+          }
+        }
+      },
+      scales: {
+        x: { grid:{color:'#111d30'}, ticks:{color:'#4a6080',font:{size:11}} },
+        y: { grid:{color:'#111d30'},
+             ticks:{color:'#4a6080',font:{size:11},callback:function(v){return v+'M';}},
+             title:{display:true,text:'Monthly active users (millions)',color:'#4a6080',font:{size:11}} }
+      }
+    }
+  });
+})();
+</script>
+
+## Back to BlackBerry, one more time
+
+This is the piece that makes the BlackBerry story make sense as more than a punchline. BlackBerry added a camera in 2006, a full two years before Instagram existed and before Facebook had cracked 100 million users — the camera was, for a while, ahead of anywhere good to put the photos. By the time Instagram launched in October 2010, BlackBerry's own App World was over a year old, chronically thin on quality apps, and its browser couldn't render most of the mobile web properly. RIM had the hardware pattern right in 2006 and the distribution pattern wrong for the rest of the decade — which, across every device on the chart above, turns out to be the difference that mattered.
+
+---
+
+**Sources:** Camera & Imaging Products Association (CIPA); International Data Corporation (IDC) Worldwide Quarterly Mobile Phone Tracker; Garmin Ltd. SEC filings (Forms 8-K) and Statista's tracked global PND shipment series; Apple Inc. fiscal-year unit sales disclosures; Cisco Systems and contemporaneous press coverage (PetaPixel, SlashGear, CBC) on the Flip Video camcorder; Facebook/Meta SEC filings (Form 10-K) and press disclosures; Instagram/Meta press disclosures; MySpace user figures as reported by Hootsuite, comScore-derived estimates, and contemporaneous press (Forbes, CBS News, Strixus) — flagged above as the least reliable series on this page.
