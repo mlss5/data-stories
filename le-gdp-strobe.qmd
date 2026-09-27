@@ -1,0 +1,390 @@
+---
+title: "Life Expectancy and National Income: A Cross-Sectional and Time-Series Correlation Analysis"
+subtitle: "Reported following the STROBE framework for observational studies"
+---
+
+<span class="kicker">Machine Learning for Social Science &nbsp;·&nbsp; Boston, MA</span>
+
+::: {.lead}
+This post treats a familiar relationship &mdash; life expectancy and income &mdash;
+as a small observational study, reported in the structure epidemiologists use
+for cross-sectional and cohort research (the STROBE guidelines). The aim is not
+the epidemiology; it is to use a rigorous reporting frame to ask a question this
+whole series has been circling: does a correlation observed **across units at one
+point in time** describe the same relationship as a correlation observed
+**within one unit over time**?
+:::
+
+## Abstract
+
+**Design.** Observational, correlational study combining a cross-sectional
+comparison across countries with a longitudinal time series within a single
+country. **Objective.** To estimate the Pearson correlation between life
+expectancy and GDP per capita (i) across 175 countries at one point in time
+(2023&ndash;2024) and (ii) within the United States annually from 1960 to 2024,
+and to compare the two. **Methods.** Publicly available national statistics;
+Pearson correlation coefficients computed on both untransformed and
+log-transformed income. **Results.** Both designs show a strong positive
+association: r = 0.86 (log income) in the cross-section (n = 175, p &lt; 10<sup>&minus;50</sup>)
+and r = 0.97 (log income) in the US time series (n = 65, p &lt; 10<sup>&minus;39</sup>).
+**Conclusion.** The correlation is strong and positive under both designs, but a
+correlation coefficient alone cannot distinguish a direct effect of income from
+a shared trend or common cause &mdash; a limitation addressed further in the
+discussion.
+
+## Introduction
+
+### Background and rationale
+
+The association between national income and population health is one of the
+best-documented empirical regularities in economic demography, generally
+credited to Samuel Preston's 1975 cross-national comparison of life expectancy
+and GDP per capita (the "Preston curve"). The relationship is concave: a given
+increase in income buys much more life expectancy in a poor country than in a
+rich one. It is also, definitionally, a **cross-sectional** finding &mdash;
+different countries compared at a single point in time.
+
+A separate and logically independent question is whether the same association
+holds **within** a country as it develops over time. This distinction matters
+because a relationship that is real and strong in a cross-section need not
+describe what happens to any single unit as it moves through time &mdash; a
+problem long recognized in the social sciences as the ecological fallacy
+(Robinson, 1950) and, in this specific empirical setting, documented directly by
+Preston himself: national time series of income growth explain only a modest
+share of a country's own gains in life expectancy over the twentieth century,
+with the cross-sectional curve itself shifting upward decade by decade. This
+series has now checked that same cross-section/time-series distinction for
+three different pairs of variables (women's labor force participation and
+income; urbanization and income; and here, life expectancy and income), because
+it is a general methodological question, not one specific to any variable pair.
+
+### Objectives
+
+1. To estimate the Pearson correlation between life expectancy and GDP per
+   capita across countries at one point in time (a cross-sectional design).
+2. To estimate the Pearson correlation between the same two variables within a
+   single country (the United States) across a 65-year period (a time-series
+   design).
+3. To compare the two estimates and consider what a simple correlation
+   coefficient can, and cannot, establish about the relationship in each design.
+
+## Methods
+
+### Study design
+
+Two designs are reported side by side: (i) a cross-sectional design, in which
+each country contributes a single observation at approximately the same point
+in time; and (ii) a time-series design, in which a single country (the United
+States) contributes one observation per year over 65 consecutive years. No
+intervention, treatment assignment, or manipulation of any kind was involved in
+either design; both are purely observational.
+
+### Setting
+
+The cross-sectional design covers all countries for which both variables were
+available in the sources described below, observed in the most recent year
+each source publishes (GDP per capita: 2023; life expectancy: most recent
+CIA World Factbook estimate, referenced 2024). The time-series design covers
+the United States, annually, from 1960 (the first year both source series
+report) to 2024.
+
+### Participants (units of analysis)
+
+**Cross-section:** All sovereign states and territories for which a numeric
+value was available for both life expectancy and GDP per capita in the sources
+below, matched by country name (with manual reconciliation of naming
+differences, e.g., "South Korea" vs. "Korea, Rep."). Of 229 countries and
+territories with a life expectancy figure, 175 (76%) had a matching GDP per
+capita figure and were included; the remainder lacked a GDP estimate in the
+source used (chiefly small territories and countries without recent World Bank
+national accounts data, e.g., North Korea, Cuba, Eritrea) and were excluded.
+
+**Time series:** All calendar years 1960&ndash;2024 for the United States for
+which both series report a value. No years were missing; n = 65.
+
+### Variables
+
+**Outcome (both designs):** Life expectancy at birth, in years &mdash; the
+average number of years a newborn would live if age-specific mortality rates
+at the time of observation stayed constant over its lifetime.
+
+**Exposure (both designs):** GDP per capita &mdash; gross domestic product
+divided by population. Cross-sectional GDP per capita is expressed in current
+US dollars; time-series GDP per capita is expressed in constant 2010 US
+dollars (to remove the effect of US inflation over the 65-year window, which a
+current-dollar figure would otherwise confound with real income growth).
+
+### Data sources and measurement
+
+| Design | Variable | Source | URL |
+|---|---|---|---|
+| Cross-section | Life expectancy, ~2024 | CIA World Factbook, via Bamwor World Encyclopedia | <https://bamwor.com/en/countries-by-life-expectancy> |
+| Cross-section | GDP per capita, 2023 | World Bank Open Data, via Lumistats | <https://lumistats.com/rankings/gdp/> |
+| Time series | Life expectancy, 1960&ndash;2024 (US) | World Bank World Development Indicators, series SPDYNLE00INUSA, via FRED (Federal Reserve Bank of St. Louis) | <https://fred.stlouisfed.org/data/SPDYNLE00INUSA> |
+| Time series | GDP per capita, 1960&ndash;2024 (US), constant 2010 US$ | World Bank World Development Indicators, series NYGDPPCAPKDUSA, via FRED | <https://fred.stlouisfed.org/data/NYGDPPCAPKDUSA> |
+
+### Bias
+
+Three sources of potential bias are noted. First, the cross-section combines
+life expectancy from one producer (CIA World Factbook) and GDP per capita from
+another (World Bank), reported in different years (~2024 and 2023
+respectively) and compiled by different aggregator sites; this is a
+comparability concern rather than a random-error concern, since it could shift
+the estimated correlation in either direction depending on how each source's
+methodology and reference year diverge. Second, both cross-sectional
+variables, and both time-series variables, come from a single World Bank
+lineage in the time-series case, reducing (but not eliminating) that specific
+concern for the within-country design. Third, and most importantly for
+interpretation: no adjustment was made, in either design, for variables that
+plausibly affect both life expectancy and income at once (education, disease
+environment, war, and &mdash; specific to the time-series design &mdash; the
+passage of calendar time itself, during which medical technology improved
+independently of any single country's income growth). This is addressed
+further under Limitations.
+
+### Study size
+
+Study size was determined by data availability rather than by a power
+calculation: all countries with matched data in the cross-section (n = 175),
+and all years with matched data in the US time series (n = 65).
+
+### Quantitative variables
+
+GDP per capita was analyzed in two forms in both designs: untransformed
+(dollars) and natural-log-transformed. The log transform was included because
+the Preston curve is a well-documented **concave** relationship &mdash; equal
+dollar increases in income are associated with larger life-expectancy gains at
+low income than at high income &mdash; and a linear (Pearson) correlation on
+untransformed income will understate the strength of a genuinely monotonic but
+curved association. Life expectancy was analyzed untransformed (years) in both
+designs.
+
+### Statistical methods
+
+All associations are reported as the Pearson product-moment correlation
+coefficient, computed the same way in both designs &mdash; the only difference
+is what the index runs over:
+
+**Cross-section** (country *i* = 1...*n*):
+
+r = &Sigma;<sub>i</sub>(x<sub>i</sub> &minus; x&#772;)(y<sub>i</sub> &minus; y&#772;) / &radic;[&Sigma;<sub>i</sub>(x<sub>i</sub> &minus; x&#772;)&sup2; &middot; &Sigma;<sub>i</sub>(y<sub>i</sub> &minus; y&#772;)&sup2;]
+
+**Time series** (year *t* = 1...*T*, single country):
+
+r = &Sigma;<sub>t</sub>(x<sub>t</sub> &minus; x&#772;)(y<sub>t</sub> &minus; y&#772;) / &radic;[&Sigma;<sub>t</sub>(x<sub>t</sub> &minus; x&#772;)&sup2; &middot; &Sigma;<sub>t</sub>(y<sub>t</sub> &minus; y&#772;)&sup2;]
+
+No regression model was fit in either design; only the correlation coefficient,
+its two-sided p-value (against the null of r = 0), and sample size are
+reported. This choice is deliberate and is returned to in the Discussion.
+
+**Why a correlation coefficient is a valid tool here, and where it stops being
+one.** A Pearson correlation is a valid summary of the strength and direction
+of a *linear* (or, after transformation, monotonic) association between two
+variables, and its significance test is valid whenever observations are
+independent and the usual regularity conditions hold. It becomes an
+**unreliable guide to the underlying relationship** in at least three
+situations relevant here. First, when the association is driven by a **third
+variable** that independently moves both x and y &mdash; classically, a
+confounder. Second, when the data are **aggregated units** rather than the
+individual-level units the relationship is really about (the ecological
+fallacy): a correlation between country-level averages can differ in sign or
+magnitude from the correlation that would be observed within any single
+country, and vice versa. Third, in time series specifically, when both
+variables share a **common trend** &mdash; two unrelated series that both rise
+steadily over decades will correlate strongly even absent any causal link
+between them, because "time" itself is the omitted third variable. All three
+concerns are directly relevant to interpreting the results below, and are
+addressed in the Discussion.
+
+**Why life expectancy and GDP per capita are a good pair for illustrating
+this.** The relationship is real, large, well-replicated, and has a plausible
+direct mechanism (income buys nutrition, sanitation, and medical care) &mdash;
+so it is not a spurious or trivial example. But it is simultaneously a textbook
+case for every one of the three correlation pitfalls above: countries differ on
+many confounders correlated with income (education, governance, disease
+burden); the cross-sectional relationship is explicitly known, from Preston's
+own work, to have shifted over historical time in a way that a single
+correlation coefficient cannot reveal; and the US time series in particular
+spans a period (1960&ndash;2024) of dramatic medical progress that plausibly
+drove much of the life-expectancy gain independent of income growth. It is,
+in other words, a relationship where "the correlation is strong" is true and
+also nowhere near the end of the story.
+
+## Results
+
+### Participants
+
+175 of 229 countries and territories with a life expectancy estimate (76%)
+had a matching GDP per capita estimate and were included in the cross-section.
+All 65 years from 1960 to 2024 were included in the US time series (100% of
+the available window).
+
+### Descriptive statistics
+
+<div style="overflow-x:auto;">
+| Design | Variable | n | Mean | Median | SD | Min | Max |
+|---|---|---|---|---|---|---|---|
+| Cross-section (countries, 2023&ndash;24) | Life expectancy (years) | 175 | 74.4 | 75.6 | 7.0 | 54.4 | 89.8 |
+| Cross-section (countries, 2023&ndash;24) | GDP per capita (current US$) | 175 | 20,883 | 7,133 | 33,282 | 251 | 256,800 |
+| Time series (US, 1960&ndash;2024) | Life expectancy (years) | 65 | 75.0 | 75.4 | 3.0 | 69.8 | 78.9 |
+| Time series (US, 1960&ndash;2024) | GDP per capita (constant 2010 US$) | 65 | 40,950 | 39,448 | 13,780 | 18,992 | 66,857 |
+</div>
+
+The cross-sectional GDP per capita distribution is heavily right-skewed (mean
+more than 2.9 times the median), consistent with the well-known long right
+tail of the global income distribution; the US time-series GDP per capita is
+comparatively symmetric (mean close to median) over its narrower 3.5-fold
+range.
+
+### The data
+
+**Cross-section**, 175 countries, GDP per capita (log scale) vs. life
+expectancy:
+
+<div style="position:relative; height:380px; margin: 1.5rem 0;">
+<canvas id="crossPlot"></canvas>
+</div>
+
+**Time series**, United States, 1960&ndash;2024, one point per year:
+
+<div style="position:relative; height:380px; margin: 1.5rem 0;">
+<canvas id="tsPlot"></canvas>
+</div>
+
+### Main results
+
+<div style="overflow-x:auto;">
+| Design | GDP form | r | p | n |
+|---|---|---|---|---|
+| Cross-section (countries) | Untransformed | 0.62 | &lt; 10<sup>&minus;19</sup> | 175 |
+| Cross-section (countries) | Log-transformed | **0.86** | &lt; 10<sup>&minus;52</sup> | 175 |
+| Time series (US, 1960&ndash;2024) | Untransformed | 0.95 | &lt; 10<sup>&minus;31</sup> | 65 |
+| Time series (US, 1960&ndash;2024) | Log-transformed | **0.97** | &lt; 10<sup>&minus;39</sup> | 65 |
+</div>
+
+In both designs, the log-transformed correlation is stronger than the
+untransformed one, consistent with the expected concave (diminishing-returns)
+shape of the relationship. No other analyses (subgroup, sensitivity, or
+adjusted) were conducted; only the unadjusted correlation coefficients
+specified in advance are reported.
+
+## Discussion
+
+### Key results
+
+Both the cross-sectional and the time-series design show a strong, positive,
+statistically significant correlation between life expectancy and GDP per
+capita, and in both designs the relationship strengthens under a log
+transform of income. Taken at face value, the two designs agree: countries
+with higher income tend to have higher life expectancy, and the United States'
+own life expectancy has risen closely alongside its own income over 65 years.
+
+### Limitations
+
+This is a correlational analysis of unadjusted, aggregated national statistics,
+and its limitations follow directly from the three concerns raised in Methods.
+No confounders were controlled for, so neither r cannot separate a direct
+income&rarr;health effect from confounding by education, governance, disease
+environment, or (in the time series) simple calendar time, during which
+antibiotics, vaccination, and neonatal care advanced independent of any single
+country's income growth. The cross-section mixes two data producers observed
+in different years, a comparability limitation noted above. And a single
+Pearson r, by construction, reports only the strength of the association at
+the level analyzed &mdash; it says nothing about whether the *same*
+relationship (the same slope, the same curve) holds across the two designs,
+only that a relationship of some strength holds in each. A companion piece in
+this series (the "Preston curve" post on the Goldin data pattern) shows
+directly, by plotting the US time path against the cross-sectional curve, that
+the two need not coincide even when both correlations are strong.
+
+### Interpretation
+
+A cautious reading of these results is that income and life expectancy move
+together, strongly, both across countries and within the United States over
+time &mdash; but a correlation coefficient alone cannot say whether income is
+doing the causal work, in either design, or how much of each estimate reflects
+a genuine income effect versus a shared trend or common cause. The very high
+time-series correlation (r = 0.97 on log income) is exactly the pattern one
+would also expect to see if life expectancy and income were both simply rising
+over the same 65 years for largely unrelated reasons (medical technology
+improving on its own trajectory; income growing on its own) &mdash; the
+correlation coefficient, by design, cannot distinguish these two stories from
+each other.
+
+### Generalizability
+
+The cross-sectional estimate describes the relationship across the specific
+set of 175 countries included here at one point in time and should not be
+assumed to describe the relationship *within* any individual country as it
+develops; the time-series estimate describes the United States specifically
+and should not be assumed to generalize to other countries, which may follow a
+different path (as this series has already shown directly for female labor
+force participation, where three of four countries with long-run data showed
+no U-shape at all despite a robust cross-sectional U).
+
+## Conclusion and next steps
+
+Both designs here return a strong, statistically significant, unadjusted
+correlation between income and life expectancy, and the log-income version is
+stronger than the linear one in each case &mdash; a first, purely descriptive
+answer to whether "the correlation holds" across designs. What an unadjusted
+correlation coefficient cannot deliver is a quantified relationship one could
+use to predict, compare magnitudes across the two designs on a common scale,
+or begin separating a shared time trend from a direct association. The next
+post in this series will fit an unadjusted ordinary least squares (OLS)
+regression to both the cross-sectional and time-series data, which will add:
+an explicit slope (years of life expectancy per log-dollar of income) directly
+comparable between the two designs; an R&sup2; describing how much of the
+variance in life expectancy each design's income measure accounts for; and
+residual plots that can start to reveal *where* the two designs' relationships
+diverge, rather than only *whether* a correlation exists in each. That step
+remains, deliberately, still unadjusted for confounders &mdash; a fully
+adjusted model is a further step beyond it.
+
+### Funding
+
+None.
+
+### Conflicts of interest
+
+None declared.
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+(function() {
+  var crossSection = [{"x": 256800.0, "y": 89.8}, {"x": 85412.0, "y": 86.7}, {"x": 67216.0, "y": 85.3}, {"x": 33836.0, "y": 85.2}, {"x": 54220.0, "y": 84.2}, {"x": 59880.0, "y": 84.2}, {"x": 50562.0, "y": 84.0}, {"x": 82139.0, "y": 84.0}, {"x": 100624.0, "y": 83.9}, {"x": 46812.0, "y": 83.8}, {"x": 40906.0, "y": 83.6}, {"x": 65058.0, "y": 83.5}, {"x": 35674.0, "y": 83.4}, {"x": 133231.0, "y": 83.4}, {"x": 52004.0, "y": 83.1}, {"x": 33493.0, "y": 83.0}, {"x": 206781.0, "y": 83.0}, {"x": 39277.0, "y": 83.0}, {"x": 87497.0, "y": 82.9}, {"x": 49076.0, "y": 82.9}, {"x": 54950.0, "y": 82.9}, {"x": 56580.0, "y": 82.7}, {"x": 44700.0, "y": 82.6}, {"x": 55291.0, "y": 82.3}, {"x": 49944.0, "y": 82.2}, {"x": 52834.0, "y": 82.2}, {"x": 32660.0, "y": 82.2}, {"x": 68044.0, "y": 82.1}, {"x": 106819.0, "y": 82.0}, {"x": 63516.0, "y": 81.9}, {"x": 27635.0, "y": 81.9}, {"x": 23344.0, "y": 81.9}, {"x": 54777.0, "y": 81.9}, {"x": 81032.0, "y": 80.9}, {"x": 29290.0, "y": 80.4}, {"x": 16942.0, "y": 80.3}, {"x": 81817.0, "y": 80.3}, {"x": 17067.0, "y": 80.3}, {"x": 36624.0, "y": 80.2}, {"x": 9731.0, "y": 79.9}, {"x": 49851.0, "y": 79.9}, {"x": 34076.0, "y": 79.6}, {"x": 18797.0, "y": 79.2}, {"x": 3478.0, "y": 79.2}, {"x": 25584.0, "y": 79.0}, {"x": 23019.0, "y": 78.9}, {"x": 32891.0, "y": 78.9}, {"x": 14262.0, "y": 78.8}, {"x": 6300.0, "y": 78.8}, {"x": 12951.0, "y": 78.7}, {"x": 31762.0, "y": 78.6}, {"x": 8663.0, "y": 78.5}, {"x": 30264.0, "y": 78.4}, {"x": 21495.0, "y": 78.3}, {"x": 12260.0, "y": 78.2}, {"x": 7195.0, "y": 78.2}, {"x": 5370.0, "y": 77.9}, {"x": 6027.0, "y": 77.7}, {"x": 22184.0, "y": 77.7}, {"x": 12588.0, "y": 77.4}, {"x": 21028.0, "y": 77.4}, {"x": 3951.0, "y": 77.3}, {"x": 8674.0, "y": 77.3}, {"x": 36157.0, "y": 77.2}, {"x": 24615.0, "y": 77.2}, {"x": 18244.0, "y": 76.9}, {"x": 3799.0, "y": 76.8}, {"x": 22145.0, "y": 76.7}, {"x": 38232.0, "y": 76.7}, {"x": 13375.0, "y": 76.7}, {"x": 8159.0, "y": 76.7}, {"x": 11386.0, "y": 76.6}, {"x": 4466.0, "y": 76.5}, {"x": 18308.0, "y": 76.5}, {"x": 22710.0, "y": 76.4}, {"x": 10378.0, "y": 76.3}, {"x": 11414.0, "y": 76.3}, {"x": 7542.0, "y": 76.3}, {"x": 2879.0, "y": 76.2}, {"x": 4323.0, "y": 76.1}, {"x": 27786.0, "y": 76.1}, {"x": 15853.0, "y": 76.1}, {"x": 22231.0, "y": 76.0}, {"x": 5365.0, "y": 75.9}, {"x": 7133.0, "y": 75.9}, {"x": 4823.0, "y": 75.7}, {"x": 3483.0, "y": 75.7}, {"x": 5049.0, "y": 75.6}, {"x": 11270.0, "y": 75.4}, {"x": 12282.0, "y": 75.3}, {"x": 15611.0, "y": 75.2}, {"x": 2551.0, "y": 75.2}, {"x": 6793.0, "y": 75.2}, {"x": 3457.0, "y": 75.0}, {"x": 6738.0, "y": 74.9}, {"x": 7001.0, "y": 74.9}, {"x": 5926.0, "y": 74.8}, {"x": 2609.0, "y": 74.7}, {"x": 7897.0, "y": 74.7}, {"x": 13861.0, "y": 74.6}, {"x": 3617.0, "y": 74.5}, {"x": 4795.0, "y": 74.3}, {"x": 7425.0, "y": 74.3}, {"x": 3814.0, "y": 74.2}, {"x": 5965.0, "y": 73.7}, {"x": 3831.0, "y": 73.7}, {"x": 4876.0, "y": 73.6}, {"x": 5758.0, "y": 73.5}, {"x": 12879.0, "y": 73.3}, {"x": 3227.0, "y": 73.1}, {"x": 633.0, "y": 73.0}, {"x": 1382.0, "y": 73.0}, {"x": 2138.0, "y": 72.9}, {"x": 8284.0, "y": 72.8}, {"x": 5522.0, "y": 72.7}, {"x": 4275.0, "y": 72.5}, {"x": 6232.0, "y": 72.4}, {"x": 20474.0, "y": 72.4}, {"x": 14159.0, "y": 72.3}, {"x": 1055.0, "y": 72.1}, {"x": 1178.0, "y": 71.9}, {"x": 6034.0, "y": 71.9}, {"x": 5839.0, "y": 71.9}, {"x": 2430.0, "y": 71.4}, {"x": 1224.0, "y": 70.8}, {"x": 3804.0, "y": 70.8}, {"x": 1698.0, "y": 70.6}, {"x": 5140.0, "y": 70.5}, {"x": 1502.0, "y": 70.5}, {"x": 1943.0, "y": 70.4}, {"x": 7803.0, "y": 70.4}, {"x": 1360.0, "y": 70.3}, {"x": 6800.0, "y": 70.1}, {"x": 2384.0, "y": 70.1}, {"x": 2966.0, "y": 70.1}, {"x": 1002.0, "y": 69.7}, {"x": 2067.0, "y": 69.0}, {"x": 7888.0, "y": 68.9}, {"x": 509.0, "y": 68.8}, {"x": 2530.0, "y": 68.2}, {"x": 251.0, "y": 68.1}, {"x": 1560.0, "y": 67.8}, {"x": 797.0, "y": 67.8}, {"x": 2991.0, "y": 67.7}, {"x": 1056.0, "y": 67.7}, {"x": 2195.0, "y": 67.2}, {"x": 1331.0, "y": 66.9}, {"x": 1027.0, "y": 66.6}, {"x": 7826.0, "y": 66.4}, {"x": 3381.0, "y": 65.9}, {"x": 4188.0, "y": 65.9}, {"x": 2136.0, "y": 65.9}, {"x": 1706.0, "y": 65.6}, {"x": 1555.0, "y": 64.6}, {"x": 988.0, "y": 64.5}, {"x": 1720.0, "y": 64.2}, {"x": 873.0, "y": 64.2}, {"x": 6678.0, "y": 63.9}, {"x": 2592.0, "y": 63.2}, {"x": 1044.0, "y": 63.2}, {"x": 1394.0, "y": 63.0}, {"x": 2916.0, "y": 62.9}, {"x": 660.0, "y": 62.6}, {"x": 2139.0, "y": 62.2}, {"x": 799.0, "y": 61.6}, {"x": 638.0, "y": 60.9}, {"x": 3756.0, "y": 60.7}, {"x": 916.0, "y": 60.2}, {"x": 949.0, "y": 60.0}, {"x": 758.0, "y": 59.4}, {"x": 622.0, "y": 58.3}, {"x": 597.0, "y": 56.5}, {"x": 496.0, "y": 56.4}, {"x": 414.0, "y": 54.4}, {"x": 2478.0, "y": 72.9}];
+  var us = [{"x": 18991.5445998554, "y": 69.7707317073171, "year": 1960}, {"x": 19108.9353618196, "y": 70.2707317073171, "year": 1961}, {"x": 19965.1435740168, "y": 70.119512195122, "year": 1962}, {"x": 20545.7842448928, "y": 69.9170731707317, "year": 1963}, {"x": 21437.5840707345, "y": 70.1658536585366, "year": 1964}, {"x": 22526.2055153932, "y": 70.2146341463415, "year": 1965}, {"x": 23714.9390303358, "y": 70.2121951219512, "year": 1966}, {"x": 24044.5651288028, "y": 70.5609756097561, "year": 1967}, {"x": 24948.3569003897, "y": 69.9512195121951, "year": 1968}, {"x": 25471.6161794352, "y": 70.5073170731708, "year": 1969}, {"x": 25231.1271587521, "y": 70.8073170731707, "year": 1970}, {"x": 25734.4828317751, "y": 71.1073170731707, "year": 1971}, {"x": 26798.5336106847, "y": 71.1560975609756, "year": 1972}, {"x": 28042.5519181903, "y": 71.3560975609756, "year": 1973}, {"x": 27637.2997756103, "y": 71.9560975609756, "year": 1974}, {"x": 27309.8688183059, "y": 72.6048780487805, "year": 1975}, {"x": 28509.1430593189, "y": 72.8560975609756, "year": 1976}, {"x": 29528.9663682275, "y": 73.2560975609756, "year": 1977}, {"x": 30834.9992322862, "y": 73.3560975609756, "year": 1978}, {"x": 31462.1003882108, "y": 73.8048780487805, "year": 1979}, {"x": 31081.6216322106, "y": 73.609756097561, "year": 1980}, {"x": 31559.1293376105, "y": 74.009756097561, "year": 1981}, {"x": 30696.0834382608, "y": 74.3609756097561, "year": 1982}, {"x": 31810.9216076638, "y": 74.4634146341463, "year": 1983}, {"x": 33818.823551545, "y": 74.5634146341464, "year": 1984}, {"x": 34918.1302039172, "y": 74.5634146341464, "year": 1985}, {"x": 35794.8877746784, "y": 74.6146341463415, "year": 1986}, {"x": 36701.9453874612, "y": 74.7658536585366, "year": 1987}, {"x": 37889.3773459827, "y": 74.7658536585366, "year": 1988}, {"x": 38911.5418959959, "y": 75.0170731707317, "year": 1989}, {"x": 39200.0658091762, "y": 75.2146341463415, "year": 1990}, {"x": 38637.8398179104, "y": 75.3658536585366, "year": 1991}, {"x": 39447.9472850606, "y": 75.6170731707317, "year": 1992}, {"x": 40002.4762253198, "y": 75.419512195122, "year": 1993}, {"x": 41106.9881833481, "y": 75.619512195122, "year": 1994}, {"x": 41710.8207256668, "y": 75.6219512195122, "year": 1995}, {"x": 42783.8165724095, "y": 76.0268292682927, "year": 1996}, {"x": 44151.6860410035, "y": 76.4292682926829, "year": 1997}, {"x": 45596.4306879224, "y": 76.5804878048781, "year": 1998}, {"x": 47234.2455290381, "y": 76.5829268292683, "year": 1999}, {"x": 48616.2546282435, "y": 76.6365853658537, "year": 2000}, {"x": 48597.4246124122, "y": 76.8365853658537, "year": 2001}, {"x": 48967.3661217576, "y": 76.9365853658537, "year": 2002}, {"x": 49905.5233080788, "y": 77.0365853658537, "year": 2003}, {"x": 51348.3473386025, "y": 77.4878048780488, "year": 2004}, {"x": 52649.5713060461, "y": 77.4878048780488, "year": 2005}, {"x": 53596.315236412, "y": 77.6878048780488, "year": 2006}, {"x": 54152.8292673551, "y": 77.9878048780488, "year": 2007}, {"x": 53703.962897927, "y": 78.0390243902439, "year": 2008}, {"x": 51863.6183416558, "y": 78.390243902439, "year": 2009}, {"x": 52812.6829869279, "y": 78.5414634146342, "year": 2010}, {"x": 53215.5362314388, "y": 78.6414634146341, "year": 2011}, {"x": 54000.8410778217, "y": 78.7414634146342, "year": 2012}, {"x": 54728.860179812, "y": 78.7414634146342, "year": 2013}, {"x": 55665.2411187802, "y": 78.8414634146341, "year": 2014}, {"x": 56849.4697923159, "y": 78.690243902439, "year": 2015}, {"x": 57430.8499298804, "y": 78.5390243902439, "year": 2016}, {"x": 58435.9707535619, "y": 78.5390243902439, "year": 2017}, {"x": 59817.6556798612, "y": 78.6390243902439, "year": 2018}, {"x": 61047.9648238812, "y": 78.7878048780488, "year": 2019}, {"x": 59533.609024416, "y": 76.9804878048781, "year": 2020}, {"x": 63096.7856149746, "y": 76.3292682926829, "year": 2021}, {"x": 64322.2332819139, "y": 77.4341463414634, "year": 2022}, {"x": 65667.281580468, "y": 78.3853658536585, "year": 2023}, {"x": 66856.5131698371, "y": 78.890243902439, "year": 2024}];
+
+  new Chart(document.getElementById('crossPlot'), {
+    type: 'scatter',
+    data: { datasets: [{ label: 'Country', data: crossSection, backgroundColor: 'rgba(96,165,250,0.55)', pointRadius: 4 }] },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      scales: {
+        x: { type: 'logarithmic', title: { display: true, text: 'GDP per capita (current US$, log scale)', color: '#94a3b8' }, ticks: { color: '#94a3b8' }, grid: { color: '#1e2d45' } },
+        y: { title: { display: true, text: 'Life expectancy (years)', color: '#94a3b8' }, ticks: { color: '#94a3b8' }, grid: { color: '#1e2d45' } }
+      },
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: { label: function(ctx) { var d = ctx.raw; return '$' + Math.round(d.x).toLocaleString() + ', ' + d.y + ' yrs'; } } }
+      }
+    }
+  });
+
+  new Chart(document.getElementById('tsPlot'), {
+    type: 'scatter',
+    data: { datasets: [{ label: 'United States, year', data: us, backgroundColor: 'rgba(245,158,11,0.75)', pointRadius: 4 }] },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      scales: {
+        x: { type: 'linear', title: { display: true, text: 'GDP per capita (constant 2010 US$)', color: '#94a3b8' }, ticks: { color: '#94a3b8' }, grid: { color: '#1e2d45' } },
+        y: { title: { display: true, text: 'Life expectancy (years)', color: '#94a3b8' }, ticks: { color: '#94a3b8' }, grid: { color: '#1e2d45' } }
+      },
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: { label: function(ctx) { var d = ctx.raw; return d.year + ': $' + Math.round(d.x).toLocaleString() + ', ' + d.y.toFixed(1) + ' yrs'; } } }
+      }
+    }
+  });
+})();
+</script>
