@@ -1,0 +1,5635 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Life Expectancy and National Income: Cross-Sectional and Within-Country Correlations – Data Stories in Social Science</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b85bc7c33db8c58e0ec93c3465666fed.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-d76b89148f2051d413c67903796ad183.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-0416ace45b97ad2342a5b267ca1286b4.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-d76b89148f2051d413c67903796ad183.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-fixed quarto-dark"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = true;
+    const darkModeDefault = authorPrefersDark;
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">Data Stories in Social Science</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-posts" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Posts</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-posts">    
+        <li>
+    <a class="dropdown-item" href="./oda-trends.html">
+ <span class="dropdown-text">The Rise and Fall of Foreign Aid</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./oda-deep-dive.html">
+ <span class="dropdown-text">Aid in Depth</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./nato-vs-oda.html">
+ <span class="dropdown-text">Guns vs.&nbsp;Butter</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./philanthropy.html">
+ <span class="dropdown-text">Billionaires &amp; Foundations</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./boston-weather.html">
+ <span class="dropdown-text">Boston’s Rising Temperatures</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./boston-wind.html">
+ <span class="dropdown-text">Boston’s Windiest Year</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./camera-shipments.html">
+ <span class="dropdown-text">Cameras After the Smartphone</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./smartphones-vs-cameras.html">
+ <span class="dropdown-text">The Camera in Everyone’s Pocket</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./smartphone-graveyard.html">
+ <span class="dropdown-text">The Rest of What the Smartphone Killed</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./fear-and-sentiment.html">
+ <span class="dropdown-text">Fear Gauges and Headlines</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./le-gdp-strobe.html">
+ <span class="dropdown-text">Life Expectancy and National Income</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/mlss5/data-stories"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#abstract" id="toc-abstract" class="nav-link active" data-scroll-target="#abstract">Abstract</a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a>
+  <ul class="collapse">
+  <li><a href="#background-and-rationale" id="toc-background-and-rationale" class="nav-link" data-scroll-target="#background-and-rationale">Background and rationale</a></li>
+  <li><a href="#objectives" id="toc-objectives" class="nav-link" data-scroll-target="#objectives">Objectives</a></li>
+  </ul></li>
+  <li><a href="#methods" id="toc-methods" class="nav-link" data-scroll-target="#methods">Methods</a>
+  <ul class="collapse">
+  <li><a href="#study-design" id="toc-study-design" class="nav-link" data-scroll-target="#study-design">Study design</a></li>
+  <li><a href="#setting" id="toc-setting" class="nav-link" data-scroll-target="#setting">Setting</a></li>
+  <li><a href="#participants-units-of-analysis" id="toc-participants-units-of-analysis" class="nav-link" data-scroll-target="#participants-units-of-analysis">Participants (units of analysis)</a></li>
+  <li><a href="#variables" id="toc-variables" class="nav-link" data-scroll-target="#variables">Variables</a></li>
+  <li><a href="#data-sources-and-measurement" id="toc-data-sources-and-measurement" class="nav-link" data-scroll-target="#data-sources-and-measurement">Data sources and measurement</a></li>
+  <li><a href="#bias" id="toc-bias" class="nav-link" data-scroll-target="#bias">Bias</a></li>
+  <li><a href="#study-size" id="toc-study-size" class="nav-link" data-scroll-target="#study-size">Study size</a></li>
+  <li><a href="#quantitative-variables" id="toc-quantitative-variables" class="nav-link" data-scroll-target="#quantitative-variables">Quantitative variables</a></li>
+  <li><a href="#statistical-methods" id="toc-statistical-methods" class="nav-link" data-scroll-target="#statistical-methods">Statistical methods</a></li>
+  </ul></li>
+  <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results">Results</a>
+  <ul class="collapse">
+  <li><a href="#participants" id="toc-participants" class="nav-link" data-scroll-target="#participants">Participants</a></li>
+  <li><a href="#descriptive-statistics" id="toc-descriptive-statistics" class="nav-link" data-scroll-target="#descriptive-statistics">Descriptive statistics</a></li>
+  <li><a href="#cross-section-and-united-states-time-series" id="toc-cross-section-and-united-states-time-series" class="nav-link" data-scroll-target="#cross-section-and-united-states-time-series">Cross-section and United States time series</a></li>
+  <li><a href="#within-country-correlations-across-203-countries" id="toc-within-country-correlations-across-203-countries" class="nav-link" data-scroll-target="#within-country-correlations-across-203-countries">Within-country correlations across 203 countries</a></li>
+  </ul></li>
+  <li><a href="#discussion" id="toc-discussion" class="nav-link" data-scroll-target="#discussion">Discussion</a>
+  <ul class="collapse">
+  <li><a href="#key-results" id="toc-key-results" class="nav-link" data-scroll-target="#key-results">Key results</a></li>
+  <li><a href="#can-health-improve-without-income-growth" id="toc-can-health-improve-without-income-growth" class="nav-link" data-scroll-target="#can-health-improve-without-income-growth">Can health improve without income growth?</a></li>
+  <li><a href="#limitations" id="toc-limitations" class="nav-link" data-scroll-target="#limitations">Limitations</a></li>
+  <li><a href="#interpretation" id="toc-interpretation" class="nav-link" data-scroll-target="#interpretation">Interpretation</a></li>
+  <li><a href="#generalizability" id="toc-generalizability" class="nav-link" data-scroll-target="#generalizability">Generalizability</a></li>
+  </ul></li>
+  <li><a href="#conclusion-and-next-steps" id="toc-conclusion-and-next-steps" class="nav-link" data-scroll-target="#conclusion-and-next-steps">Conclusion and next steps</a>
+  <ul class="collapse">
+  <li><a href="#funding" id="toc-funding" class="nav-link" data-scroll-target="#funding">Funding</a></li>
+  <li><a href="#conflicts-of-interest" id="toc-conflicts-of-interest" class="nav-link" data-scroll-target="#conflicts-of-interest">Conflicts of interest</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul></li>
+  <li><a href="#appendix-a.-within-country-correlations-by-country" id="toc-appendix-a.-within-country-correlations-by-country" class="nav-link" data-scroll-target="#appendix-a.-within-country-correlations-by-country">Appendix A. Within-country correlations by country</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Life Expectancy and National Income: Cross-Sectional and Within-Country Correlations</h1>
+<p class="subtitle lead">An observational study reported following the STROBE guidelines</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p><span class="kicker">Machine Learning for Social Science &nbsp;·&nbsp; Boston, MA</span></p>
+<div class="lead">
+<p>This post treats a familiar relationship, life expectancy and income, as a small observational study, reported in the structure epidemiologists use for cross-sectional and cohort research (the STROBE guidelines). The question is methodological: does a correlation observed <strong>across countries at one point in time</strong> describe the same relationship as a correlation observed <strong>within a country over time</strong>?</p>
+</div>
+<section id="abstract" class="level2">
+<h2 class="anchored" data-anchor-id="abstract">Abstract</h2>
+<p><strong>Design.</strong> Observational correlational study with three components: a cross-section of countries, a single-country time series, and within-country time series for every country with sufficient data. <strong>Objective.</strong> To estimate and compare the correlation between life expectancy and GDP per capita across countries and within countries over time. <strong>Methods.</strong> Publicly available national statistics; Pearson correlation coefficients on untransformed and log-transformed income, and on year-over-year changes. <strong>Results.</strong> Across 175 countries in 2023–2024, r = 0.86 (log income; p = 8.6×10<sup>−53</sup>). Within the United States, 1960–2024, r = 0.97 (log income; p = 2.5×10<sup>−40</sup>). Across 203 countries, the median within-country correlation was 0.87, but 19 countries had significant <em>negative</em> correlations, several of them low-income countries where life expectancy rose by more than 20 years while GDP per capita fell. Correlations of year-over-year changes were close to zero in most countries (median r = 0.10). <strong>Conclusion.</strong> The strong level correlations largely reflect shared long-run trends. Large health gains occurred in some countries without income growth, which is consistent with, but does not establish, a role for health improvements that do not depend on GDP growth.</p>
+</section>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<section id="background-and-rationale" class="level3">
+<h3 class="anchored" data-anchor-id="background-and-rationale">Background and rationale</h3>
+<p>The association between national income and population health is one of the best-documented regularities in economic demography. Preston (1975) showed that across countries, life expectancy rises steeply with income at low incomes and flattens at high incomes. That finding, the Preston curve, is <strong>cross-sectional</strong>: different countries compared at one point in time.</p>
+<p>Whether the same association holds <strong>within</strong> a country as it develops over time is a separate question. A relationship that is strong across units need not describe the path of any single unit, a problem known as the ecological fallacy (Robinson, 1950). Preston himself found that the cross-sectional curve shifted upward over the twentieth century, so that most of the gain in life expectancy over that period could not be attributed to income growth along a fixed curve.</p>
+<p>Correlation is the simplest tool for asking whether two variables move together, and it can be applied in both dimensions: across units at a point in time, and within a unit across time. This study applies the same statistic in both dimensions to the same pair of variables, so that differences in the results can be attributed to the design rather than to the method.</p>
+</section>
+<section id="objectives" class="level3">
+<h3 class="anchored" data-anchor-id="objectives">Objectives</h3>
+<ol type="1">
+<li>To estimate the correlation between life expectancy and GDP per capita across countries at one point in time (cross-sectional design).</li>
+<li>To estimate the same correlation within the United States over 65 years (single-country time-series design).</li>
+<li>To estimate the within-country time-series correlation for every country with sufficient data, and to describe how it varies across countries and regions.</li>
+<li>To consider what a correlation coefficient can and cannot establish in each design.</li>
+</ol>
+</section>
+</section>
+<section id="methods" class="level2">
+<h2 class="anchored" data-anchor-id="methods">Methods</h2>
+<section id="study-design" class="level3">
+<h3 class="anchored" data-anchor-id="study-design">Study design</h3>
+<p>Three designs are reported. (i) <strong>Cross-section:</strong> each country contributes one observation at approximately the same point in time. (ii) <strong>Single-country time series:</strong> the United States contributes one observation per year from 1960 to 2024. (iii) <strong>Multi-country time series:</strong> for each country, a separate correlation is computed across that country’s own years, producing one correlation coefficient per country. All designs are purely observational.</p>
+</section>
+<section id="setting" class="level3">
+<h3 class="anchored" data-anchor-id="setting">Setting</h3>
+<p>The cross-section uses the most recent year available in each source (GDP per capita: 2023; life expectancy: most recent CIA World Factbook estimate, referenced 2024). Both time-series designs cover 1960 to 2024, the full span of the World Development Indicators (WDI) series.</p>
+</section>
+<section id="participants-units-of-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="participants-units-of-analysis">Participants (units of analysis)</h3>
+<p><strong>Cross-section:</strong> all countries and territories with both a life expectancy and a GDP per capita value in the sources below, matched by name with manual reconciliation of naming differences. Of 229 countries and territories with a life expectancy estimate, 175 (76%) had a matching GDP figure and were included.</p>
+<p><strong>United States time series:</strong> all 65 years from 1960 to 2024; none missing.</p>
+<p><strong>Multi-country time series:</strong> all World Bank economies in the WDI files, excluding regional and income-group aggregates, with at least 20 years in which both series were reported. 203 economies met this criterion. The median number of years per country was 65 (range 20–65). Countries were grouped by the World Bank region listed in the WDI country metadata, used as published (which places Afghanistan, Pakistan and Malta in Middle East &amp; North Africa, and Greenland in Europe &amp; Central Asia).</p>
+</section>
+<section id="variables" class="level3">
+<h3 class="anchored" data-anchor-id="variables">Variables</h3>
+<p><strong>Outcome:</strong> life expectancy at birth, in years: the average number of years a newborn would live if the age-specific mortality rates of that year persisted throughout its life.</p>
+<p><strong>Exposure:</strong> GDP per capita. In the cross-section, current US dollars. In both time-series designs, constant 2015 US dollars, which removes inflation so that changes over time reflect real income.</p>
+</section>
+<section id="data-sources-and-measurement" class="level3">
+<h3 class="anchored" data-anchor-id="data-sources-and-measurement">Data sources and measurement</h3>
+<div style="overflow-x:auto;">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Design</th>
+<th>Variable</th>
+<th>Source</th>
+<th>URL</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Cross-section</td>
+<td>Life expectancy, ~2024</td>
+<td>CIA World Factbook, via Bamwor World Encyclopedia</td>
+<td><a href="https://bamwor.com/en/countries-by-life-expectancy" class="uri">https://bamwor.com/en/countries-by-life-expectancy</a></td>
+</tr>
+<tr class="even">
+<td>Cross-section</td>
+<td>GDP per capita, 2023 (current US dollars)</td>
+<td>World Bank Open Data, via Lumistats</td>
+<td><a href="https://lumistats.com/rankings/gdp/" class="uri">https://lumistats.com/rankings/gdp/</a></td>
+</tr>
+<tr class="odd">
+<td>US time series</td>
+<td>Life expectancy, 1960–2024</td>
+<td>World Bank WDI, series SP.DYN.LE00.IN, via FRED (series SPDYNLE00INUSA)</td>
+<td><a href="https://fred.stlouisfed.org/data/SPDYNLE00INUSA" class="uri">https://fred.stlouisfed.org/data/SPDYNLE00INUSA</a></td>
+</tr>
+<tr class="even">
+<td>US time series</td>
+<td>GDP per capita, 1960–2024 (constant 2015 US dollars)</td>
+<td>World Bank WDI, series NY.GDP.PCAP.KD, via FRED (series NYGDPPCAPKDUSA)</td>
+<td><a href="https://fred.stlouisfed.org/data/NYGDPPCAPKDUSA" class="uri">https://fred.stlouisfed.org/data/NYGDPPCAPKDUSA</a></td>
+</tr>
+<tr class="odd">
+<td>Multi-country time series</td>
+<td>Life expectancy at birth, total (years), 1960–2024</td>
+<td>World Bank WDI, SP.DYN.LE00.IN (last updated 13 July 2026)</td>
+<td><a href="https://data.worldbank.org/indicator/SP.DYN.LE00.IN" class="uri">https://data.worldbank.org/indicator/SP.DYN.LE00.IN</a></td>
+</tr>
+<tr class="even">
+<td>Multi-country time series</td>
+<td>GDP per capita (constant 2015 US dollars), 1960–2024</td>
+<td>World Bank WDI, NY.GDP.PCAP.KD (last updated 13 July 2026)</td>
+<td><a href="https://data.worldbank.org/indicator/NY.GDP.PCAP.KD" class="uri">https://data.worldbank.org/indicator/NY.GDP.PCAP.KD</a></td>
+</tr>
+<tr class="odd">
+<td>Multi-country time series</td>
+<td>Region classification</td>
+<td>WDI country metadata files distributed with the two series above</td>
+<td>(as above)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="bias" class="level3">
+<h3 class="anchored" data-anchor-id="bias">Bias</h3>
+<p>Four sources of bias are noted. First, the cross-section combines life expectancy and GDP from different producers and reference years. Second, WDI life expectancy for many low- and middle-income countries is modeled by the UN Population Division rather than measured annually from vital registration; modeled series are smooth, which mechanically weakens correlations of year-over-year changes. Third, no adjustment was made for variables that affect both income and health (education, disease environment, conflict, governance). Fourth, in the time-series designs, calendar time itself is a common driver: medical and public health technology improved throughout the period regardless of any one country’s income.</p>
+</section>
+<section id="study-size" class="level3">
+<h3 class="anchored" data-anchor-id="study-size">Study size</h3>
+<p>Study size was determined by data availability: 175 countries in the cross-section, 65 years for the United States, and 203 countries (median 65 years each) in the multi-country time series. No power calculation was performed.</p>
+</section>
+<section id="quantitative-variables" class="level3">
+<h3 class="anchored" data-anchor-id="quantitative-variables">Quantitative variables</h3>
+<p>GDP per capita was analyzed untransformed and natural-log transformed. The log transform was included because the relationship is known to be concave, and a Pearson correlation on untransformed income understates a strong but curved association. Life expectancy was analyzed in years.</p>
+</section>
+<section id="statistical-methods" class="level3">
+<h3 class="anchored" data-anchor-id="statistical-methods">Statistical methods</h3>
+<p>All associations are Pearson product-moment correlation coefficients. The formula is the same in every design; only the index changes.</p>
+<p><strong>Cross-section</strong>, across countries <em>i</em> = 1, …, <em>n</em>:</p>
+<p><span class="math display">\[
+r_{\text{CS}} = \frac{\sum_{i=1}^{n}(x_i-\bar{x})(y_i-\bar{y})}{\sqrt{\sum_{i=1}^{n}(x_i-\bar{x})^2\;\sum_{i=1}^{n}(y_i-\bar{y})^2}}
+\]</span></p>
+<p><strong>Time series</strong> for country <em>c</em>, across years <em>t</em> = 1, …, <em>T</em><sub>c</sub>:</p>
+<p><span class="math display">\[
+r_{c} = \frac{\sum_{t=1}^{T_c}(x_{ct}-\bar{x}_c)(y_{ct}-\bar{y}_c)}{\sqrt{\sum_{t=1}^{T_c}(x_{ct}-\bar{x}_c)^2\;\sum_{t=1}^{T_c}(y_{ct}-\bar{y}_c)^2}}
+\]</span></p>
+<p>where <em>x</em> is GDP per capita (or its natural log) and <em>y</em> is life expectancy.</p>
+<p><strong>Significance.</strong> Each coefficient is tested against the null hypothesis of no correlation using</p>
+<p><span class="math display">\[
+t = r\sqrt{\frac{n-2}{1-r^2}}, \qquad p = 2\,\Pr\left(T_{n-2} &gt; |t|\right),
+\]</span></p>
+<p>with <em>n</em> the number of countries (cross-section) or years (time series). Because <em>t</em> grows with both <em>r</em> and <em>n</em>, strong correlations in long series produce extremely small p-values. The test assumes independent observations.</p>
+<p><strong>Year-over-year changes.</strong> To separate co-movement from shared trends, the within-country correlation was also computed on annual changes, using consecutive years only:</p>
+<p><span class="math display">\[
+\Delta y_{ct} = y_{ct} - y_{c,t-1}, \qquad \Delta x_{ct} = \ln X_{ct} - \ln X_{c,t-1},
+\]</span></p>
+<p>where Δ<em>x</em> is approximately the annual growth rate of GDP per capita. If life expectancy and income are linked year to year, Δ<em>x</em> and Δ<em>y</em> should be correlated. If they merely trend together over decades, the level correlation will be high while the change correlation is near zero.</p>
+<p>No regression model was fit. This choice is deliberate and is returned to in the Conclusion.</p>
+<p><strong>When a correlation is a valid tool, and when it is not.</strong> A Pearson correlation validly summarizes the strength and direction of a linear (or, after transformation, monotonic) association, and its significance test is valid when observations are independent. It becomes an unreliable guide to the underlying relationship in three situations relevant here. First, when a <strong>third variable</strong> moves both <em>x</em> and <em>y</em> (confounding). Second, when the data are <strong>aggregates</strong>: a correlation across country averages can differ in sign or size from the correlation within any country, and vice versa (the ecological fallacy). Third, in time series, when both variables share a <strong>common trend</strong>: two unrelated series that both rise for decades will correlate strongly, with time as the omitted third variable (Yule, 1926; Granger and Newbold, 1974). In that case consecutive observations are also strongly autocorrelated, so the effective sample size is far smaller than the number of years and the p-values above are too small.</p>
+<p><strong>Why life expectancy and GDP per capita are a good test case.</strong> The relationship is real, large and well replicated, with plausible mechanisms (income buys nutrition, sanitation and medical care), so it is not a trivial example. It also displays all three pitfalls: income is correlated with many confounders across countries; the cross-sectional curve is known to have shifted over time; and life expectancy rose almost everywhere after 1960 through medical and public health advances that were partly independent of national income.</p>
+</section>
+</section>
+<section id="results" class="level2">
+<h2 class="anchored" data-anchor-id="results">Results</h2>
+<section id="participants" class="level3">
+<h3 class="anchored" data-anchor-id="participants">Participants</h3>
+<p>The cross-section included 175 of 229 countries and territories (76%). The US time series included all 65 years. The multi-country analysis included 203 economies; 105 contributed all 65 years.</p>
+</section>
+<section id="descriptive-statistics" class="level3">
+<h3 class="anchored" data-anchor-id="descriptive-statistics">Descriptive statistics</h3>
+<div style="overflow-x:auto;">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Design</th>
+<th>Variable</th>
+<th>n</th>
+<th>Mean</th>
+<th>Median</th>
+<th>SD</th>
+<th>Min</th>
+<th>Max</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Cross-section (countries, 2023–24)</td>
+<td>Life expectancy (years)</td>
+<td>175</td>
+<td>74.4</td>
+<td>75.6</td>
+<td>7.0</td>
+<td>54.4</td>
+<td>89.8</td>
+</tr>
+<tr class="even">
+<td>Cross-section (countries, 2023–24)</td>
+<td>GDP per capita (current US dollars)</td>
+<td>175</td>
+<td>20,883</td>
+<td>7,133</td>
+<td>33,282</td>
+<td>251</td>
+<td>256,800</td>
+</tr>
+<tr class="odd">
+<td>Time series (US, 1960–2024)</td>
+<td>Life expectancy (years)</td>
+<td>65</td>
+<td>75.0</td>
+<td>75.4</td>
+<td>3.0</td>
+<td>69.8</td>
+<td>78.9</td>
+</tr>
+<tr class="even">
+<td>Time series (US, 1960–2024)</td>
+<td>GDP per capita (constant 2015 US dollars)</td>
+<td>65</td>
+<td>40,950</td>
+<td>39,448</td>
+<td>13,780</td>
+<td>18,992</td>
+<td>66,857</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The cross-sectional GDP distribution is heavily right-skewed (mean almost three times the median). The US series is close to symmetric over its narrower 3.5-fold range. Descriptive statistics for each of the 203 countries are in Appendix A.</p>
+</section>
+<section id="cross-section-and-united-states-time-series" class="level3">
+<h3 class="anchored" data-anchor-id="cross-section-and-united-states-time-series">Cross-section and United States time series</h3>
+<p><strong>Figure 1.</strong> Cross-section, 175 countries: GDP per capita (log scale) and life expectancy.</p>
+<div style="position:relative; height:380px; margin: 1.5rem 0;">
+<canvas id="crossPlot">
+</canvas>
+</div>
+<p><strong>Figure 2.</strong> United States, 1960–2024, one point per year.</p>
+<div style="position:relative; height:380px; margin: 1.5rem 0;">
+<canvas id="tsPlot">
+</canvas>
+</div>
+<p><strong>Table 1.</strong> Correlation between life expectancy and GDP per capita.</p>
+<div style="overflow-x:auto;">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Design</th>
+<th>GDP form</th>
+<th>r</th>
+<th>p</th>
+<th>n</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Cross-section (countries)</td>
+<td>Untransformed</td>
+<td>0.62</td>
+<td>1.0×10<sup>−19</sup></td>
+<td>175</td>
+</tr>
+<tr class="even">
+<td>Cross-section (countries)</td>
+<td>Log-transformed</td>
+<td><strong>0.86</strong></td>
+<td>8.6×10<sup>−53</sup></td>
+<td>175</td>
+</tr>
+<tr class="odd">
+<td>Time series (US)</td>
+<td>Untransformed</td>
+<td>0.95</td>
+<td>1.3×10<sup>−32</sup></td>
+<td>65</td>
+</tr>
+<tr class="even">
+<td>Time series (US)</td>
+<td>Log-transformed</td>
+<td><strong>0.97</strong></td>
+<td>2.5×10<sup>−40</sup></td>
+<td>65</td>
+</tr>
+<tr class="odd">
+<td>Time series (US)</td>
+<td>Year-over-year changes</td>
+<td>−0.03</td>
+<td>0.806</td>
+<td>64</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Both designs show a strong positive correlation in levels, stronger with log income, as expected for a concave relationship. In the United States, however, the correlation of annual changes is essentially zero: years of faster income growth were not years of faster gains in life expectancy.</p>
+</section>
+<section id="within-country-correlations-across-203-countries" class="level3">
+<h3 class="anchored" data-anchor-id="within-country-correlations-across-203-countries">Within-country correlations across 203 countries</h3>
+<p><strong>Figure 3.</strong> Each point is one country. The horizontal axis is the country’s average GDP per capita over its years of data (constant 2015 US dollars, log scale); the vertical axis is that country’s own correlation between life expectancy and GDP per capita over time. Use the buttons to switch between correlations in levels and in year-over-year changes, hover over a point for the country name, and tap a region in the legend to hide or show it.</p>
+<div style="display:flex; gap:8px; margin:1rem 0 0.5rem; flex-wrap:wrap;">
+<button id="btnLevels" onclick="setRegionMode('a')" style="padding:6px 12px; border-radius:6px; border:1px solid #1e2d45; cursor:pointer; font-size:0.8rem;">
+Levels (ln GDP)
+</button>
+<button id="btnChanges" onclick="setRegionMode('b')" style="padding:6px 12px; border-radius:6px; border:1px solid #1e2d45; cursor:pointer; font-size:0.8rem;">
+Year-over-year changes
+</button>
+</div>
+<div id="regionLegend" style="display:flex; flex-wrap:wrap; gap:12px; margin-bottom:8px; font-size:0.75rem; color:#94a3b8;">
+
+</div>
+<div style="position:relative; height:420px; margin-bottom: 1.5rem;">
+<canvas id="regionPlot">
+</canvas>
+</div>
+<p><strong>Table 2.</strong> Within-country correlations by World Bank region. “Positive” and “negative” count countries whose level correlation (log GDP) is significant at p &lt; 0.05 in that direction.</p>
+<div style="overflow-x:auto;">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Region</th>
+<th>Countries</th>
+<th>Median r (levels)</th>
+<th>Positive</th>
+<th>Negative</th>
+<th>Not significant</th>
+<th>Median r (changes)</th>
+<th>Changes positive, p &lt; 0.05</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Sub-Saharan Africa</td>
+<td>47</td>
+<td>0.55</td>
+<td>33</td>
+<td>5</td>
+<td>9</td>
+<td>0.06</td>
+<td>11</td>
+</tr>
+<tr class="even">
+<td>Middle East &amp; North Africa</td>
+<td>22</td>
+<td>0.74</td>
+<td>16</td>
+<td>3</td>
+<td>3</td>
+<td>0.14</td>
+<td>5</td>
+</tr>
+<tr class="odd">
+<td>South Asia</td>
+<td>6</td>
+<td>0.97</td>
+<td>6</td>
+<td>0</td>
+<td>0</td>
+<td>0.09</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>East Asia &amp; Pacific</td>
+<td>35</td>
+<td>0.87</td>
+<td>28</td>
+<td>5</td>
+<td>2</td>
+<td>0.06</td>
+<td>4</td>
+</tr>
+<tr class="odd">
+<td>Latin America &amp; Caribbean</td>
+<td>37</td>
+<td>0.87</td>
+<td>31</td>
+<td>5</td>
+<td>1</td>
+<td>0.08</td>
+<td>9</td>
+</tr>
+<tr class="even">
+<td>Europe &amp; Central Asia</td>
+<td>53</td>
+<td>0.93</td>
+<td>51</td>
+<td>1</td>
+<td>1</td>
+<td>0.18</td>
+<td>15</td>
+</tr>
+<tr class="odd">
+<td>North America</td>
+<td>3</td>
+<td>0.97</td>
+<td>3</td>
+<td>0</td>
+<td>0</td>
+<td>0.05</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td><strong>All countries</strong></td>
+<td><strong>203</strong></td>
+<td><strong>0.87</strong></td>
+<td><strong>168</strong></td>
+<td><strong>19</strong></td>
+<td><strong>16</strong></td>
+<td><strong>0.10</strong></td>
+<td><strong>44</strong></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Levels.</strong> Most countries look like the United States. The median within-country correlation was 0.87, and 168 of 203 countries (83%) had a significant positive correlation. But the United States is not typical of the whole distribution: 48 countries had a correlation below 0.5, 27 had a negative correlation, and 19 of those were significantly negative. Correlations were weakest in Sub-Saharan Africa (median 0.55, with 9 countries not significant and 5 significantly negative) and strongest in Europe &amp; Central Asia, North America and South Asia (medians of 0.93 or above).</p>
+<p>The significantly negative countries fall into three groups. The first is low-income countries where GDP per capita stagnated or fell for decades, including Madagascar, the Democratic Republic of the Congo, Haiti, Liberia, Niger and Burundi. The second is oil-rich economies whose GDP per capita declined from very high levels as populations grew and oil revenues fell, including Brunei, the United Arab Emirates, Kuwait and Saudi Arabia, along with Venezuela. The third is small, high-income island territories such as Curaçao, French Polynesia, Nauru, the US Virgin Islands and the Northern Mariana Islands. In every group, life expectancy rose while income did not, so the two trends ran in opposite directions.</p>
+<p><strong>Table 3.</strong> Selected countries: change in life expectancy and GDP per capita over the observation period, with the United States for comparison.</p>
+<div style="overflow-x:auto;">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Country</th>
+<th>Period</th>
+<th>Life expectancy (years)</th>
+<th>GDP per capita (constant 2015 US dollars)</th>
+<th>r (levels, ln GDP)</th>
+<th>r (changes)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Liberia</td>
+<td>1960–2024</td>
+<td>38.1 → 62.3 (+24.3)</td>
+<td>2,444 → 665 (−73%)</td>
+<td>−0.63</td>
+<td>0.59</td>
+</tr>
+<tr class="even">
+<td>Niger</td>
+<td>1960–2024</td>
+<td>36.2 → 61.4 (+25.2)</td>
+<td>742 → 589 (−21%)</td>
+<td>−0.59</td>
+<td>0.13</td>
+</tr>
+<tr class="odd">
+<td>Congo, Dem. Rep.</td>
+<td>1960–2024</td>
+<td>40.8 → 62.1 (+21.3)</td>
+<td>1,303 → 554 (−57%)</td>
+<td>−0.81</td>
+<td>0.14</td>
+</tr>
+<tr class="even">
+<td>Haiti</td>
+<td>1960–2024</td>
+<td>43.4 → 65.1 (+21.7)</td>
+<td>1,735 → 1,155 (−33%)</td>
+<td>−0.69</td>
+<td>0.26</td>
+</tr>
+<tr class="odd">
+<td>Madagascar</td>
+<td>1960–2024</td>
+<td>43.3 → 63.8 (+20.5)</td>
+<td>812 → 454 (−44%)</td>
+<td>−0.88</td>
+<td>0.28</td>
+</tr>
+<tr class="even">
+<td>Burundi</td>
+<td>1960–2024</td>
+<td>43.3 → 63.8 (+20.6)</td>
+<td>252 → 269 (+6%)</td>
+<td>−0.36</td>
+<td>0.15</td>
+</tr>
+<tr class="odd">
+<td>United States</td>
+<td>1960–2024</td>
+<td>69.8 → 78.9 (+9.1)</td>
+<td>18,992 → 66,857 (+252%)</td>
+<td>0.97</td>
+<td>−0.03</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>In these low-income countries life expectancy rose by roughly 20 to 25 years, about two to three times the US gain, while real GDP per capita fell by between a fifth and nearly three quarters (Burundi was roughly flat).</p>
+<p><strong>Year-over-year changes.</strong> Once trends are removed, the correlation largely disappears. The median correlation of annual changes was 0.10. Only 44 countries (22%) showed a significant positive correlation and 4 a significant negative one; the remaining 155 (76%) were not significant. The largest positive change correlations occurred in countries with episodes in which a crisis hit income and mortality in the same years, such as Rwanda (r = 0.86) and Liberia (r = 0.59). Notably, several countries with negative level correlations have positive change correlations: a war or collapse lowers both income and life expectancy at the same time, even though over the longer run the two trends diverge.</p>
+</section>
+</section>
+<section id="discussion" class="level2">
+<h2 class="anchored" data-anchor-id="discussion">Discussion</h2>
+<section id="key-results" class="level3">
+<h3 class="anchored" data-anchor-id="key-results">Key results</h3>
+<p>The cross-section and the US time series both show a strong positive correlation in levels. Extending the time-series design to 203 countries shows that the US result is common but not universal: about one in four countries has a level correlation below 0.5, and 19 have significant negative correlations. In nearly all countries, the correlation of year-over-year changes is close to zero.</p>
+</section>
+<section id="can-health-improve-without-income-growth" class="level3">
+<h3 class="anchored" data-anchor-id="can-health-improve-without-income-growth">Can health improve without income growth?</h3>
+<p>The countries in Table 3 are the most direct evidence in this study on that question. Liberia, Niger, the Democratic Republic of the Congo, Haiti and Madagascar each gained more than 20 years of life expectancy over a period in which their real GDP per capita fell. Whatever drove those gains, it was not domestic income growth. This is consistent with a long literature arguing that mortality can fall substantially at low income: Caldwell (1986) on “routes to low mortality in poor countries,” Riley (2008) on low-income countries with high longevity, and Cutler, Deaton and Lleras-Muney (2006), who argue that the spread of knowledge and technology, such as vaccination, oral rehydration, antibiotics and malaria control, explains more of the mortality decline than income does. Much of this was delivered through public programs and international health financing rather than private spending, which points toward a policy case that health investment need not wait for growth.</p>
+<p>Four cautions apply before drawing that conclusion from these data:</p>
+<ul>
+<li><strong>The counterfactual is unknown.</strong> A correlation cannot say whether these countries would have gained even more with income growth. Gains without growth are not evidence that growth does not matter.</li>
+<li><strong>The drivers are not measured here.</strong> No policy variable was observed. The pattern is consistent with health policy, imported medical technology, external aid and falling fertility, but this study does not distinguish among them.</li>
+<li><strong>Not all negative correlations reflect health policy.</strong> In the oil economies and small island territories, GDP per capita fell from already high levels while life expectancy continued to rise. These cases reflect commodity prices and population growth rather than health gains achieved in poverty.</li>
+<li><strong>Measurement.</strong> Life expectancy in many low-income countries is modeled rather than measured each year, which makes the series smoother than the underlying reality.</li>
+</ul>
+<p>The appropriate conclusion is that the data are consistent with large health gains without income growth, and that this hypothesis merits a design that can test it: for example, relating within-country changes in life expectancy to measured health interventions such as vaccination coverage or public health spending.</p>
+</section>
+<section id="limitations" class="level3">
+<h3 class="anchored" data-anchor-id="limitations">Limitations</h3>
+<p>This is a correlational analysis of unadjusted, aggregated national statistics. No confounders were controlled for. In both time-series designs the level correlations are dominated by shared trends, and because consecutive years are strongly autocorrelated, the reported level p-values overstate statistical significance; the effective number of independent observations is far smaller than the number of years. The cross-section combines two data producers and two reference years. Finally, a single Pearson r reports the strength of an association but not its slope, so it cannot show whether the cross-sectional and within-country relationships have the same shape.</p>
+</section>
+<section id="interpretation" class="level3">
+<h3 class="anchored" data-anchor-id="interpretation">Interpretation</h3>
+<p>Life expectancy and income are strongly correlated across countries and, in levels, within most countries over time. The within-country level correlation mainly reflects the fact that life expectancy rose almost everywhere after 1960: where income also rose, the correlation is strongly positive; where income fell, it is strongly negative; and year-to-year changes are only weakly related in either case. A correlation coefficient cannot distinguish a direct effect of income from a common trend, and the multi-country results suggest the common trend accounts for much of what the single-country US correlation appears to show.</p>
+</section>
+<section id="generalizability" class="level3">
+<h3 class="anchored" data-anchor-id="generalizability">Generalizability</h3>
+<p>The cross-sectional estimate describes the 175 included countries at one point in time and should not be read as describing the path of any single country. The US time series describes the United States only. The multi-country results show directly that within-country relationships vary widely, and that the United States is an example of the most common pattern rather than a representative case.</p>
+</section>
+</section>
+<section id="conclusion-and-next-steps" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion-and-next-steps">Conclusion and next steps</h2>
+<p>All three designs return strong correlations in levels, but the multi-country analysis shows that the within-country correlation can be strong and positive, near zero, or strong and negative, and that it largely disappears in year-over-year changes. The next post in this series will fit unadjusted ordinary least squares (OLS) regressions to the same data. That adds what a correlation cannot provide: an explicit slope (years of life expectancy per unit of log income) that can be compared directly between the cross-section and the within-country series; an R² for each design; and residual plots showing where countries depart from the fitted relationship. Regression will remain unadjusted for confounders, and the trend problem identified here will carry over to it, which motivates later steps such as models in differences and models with country and year effects.</p>
+<section id="funding" class="level3">
+<h3 class="anchored" data-anchor-id="funding">Funding</h3>
+<p>None.</p>
+</section>
+<section id="conflicts-of-interest" class="level3">
+<h3 class="anchored" data-anchor-id="conflicts-of-interest">Conflicts of interest</h3>
+<p>None declared.</p>
+</section>
+<section id="references" class="level3">
+<h3 class="anchored" data-anchor-id="references">References</h3>
+<ul>
+<li>Caldwell, J. C. (1986). Routes to low mortality in poor countries. <em>Population and Development Review</em>, 12(2), 171–220.</li>
+<li>Cutler, D., Deaton, A., &amp; Lleras-Muney, A. (2006). The determinants of mortality. <em>Journal of Economic Perspectives</em>, 20(3), 97–120.</li>
+<li>Granger, C. W. J., &amp; Newbold, P. (1974). Spurious regressions in econometrics. <em>Journal of Econometrics</em>, 2(2), 111–120.</li>
+<li>Preston, S. H. (1975). The changing relation between mortality and level of economic development. <em>Population Studies</em>, 29(2), 231–248.</li>
+<li>Riley, J. C. (2008). <em>Low Income, Social Growth, and Good Health: A History of Twelve Countries</em>. University of California Press.</li>
+<li>Robinson, W. S. (1950). Ecological correlations and the behavior of individuals. <em>American Sociological Review</em>, 15(3), 351–357.</li>
+<li>Yule, G. U. (1926). Why do we sometimes get nonsense-correlations between time-series? <em>Journal of the Royal Statistical Society</em>, 89(1), 1–63.</li>
+</ul>
+</section>
+</section>
+<section id="appendix-a.-within-country-correlations-by-country" class="level2">
+<h2 class="anchored" data-anchor-id="appendix-a.-within-country-correlations-by-country">Appendix A. Within-country correlations by country</h2>
+<p>Each row is one country, 1960–2024 or the years for which both series are available (minimum 20). LE is life expectancy at birth (years); GDP is GDP per capita in constant 2015 US dollars. r and p are Pearson correlations and two-sided p-values for GDP untransformed, GDP in natural logs, and year-over-year changes (Δ). Level p-values assume independent observations and are overstated (see Limitations). Region codes: EAP East Asia &amp; Pacific; ECA Europe &amp; Central Asia; LAC Latin America &amp; Caribbean; MNA Middle East &amp; North Africa; NAM North America; SAS South Asia; SSA Sub-Saharan Africa. Source: World Bank WDI, last updated 13 July 2026.</p>
+<div style="overflow-x:auto; font-size:0.8rem;">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Country</th>
+<th>Region</th>
+<th>Years</th>
+<th>n</th>
+<th>LE mean</th>
+<th>LE SD</th>
+<th>LE min</th>
+<th>LE max</th>
+<th>GDP mean</th>
+<th>GDP SD</th>
+<th>GDP min</th>
+<th>GDP max</th>
+<th>r</th>
+<th>p</th>
+<th>r (ln)</th>
+<th>p (ln)</th>
+<th>r (Δ)</th>
+<th>p (Δ)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Afghanistan</td>
+<td>MNA</td>
+<td>2000–2024</td>
+<td>25</td>
+<td>60.7</td>
+<td>3.0</td>
+<td>55.0</td>
+<td>66.3</td>
+<td>453</td>
+<td>102</td>
+<td>277</td>
+<td>581</td>
+<td>0.51</td>
+<td>0.008</td>
+<td>0.54</td>
+<td>0.005</td>
+<td>0.08</td>
+<td>0.700</td>
+</tr>
+<tr class="even">
+<td>Albania</td>
+<td>ECA</td>
+<td>1980–2024</td>
+<td>45</td>
+<td>75.4</td>
+<td>3.0</td>
+<td>69.9</td>
+<td>79.8</td>
+<td>2,927</td>
+<td>1,493</td>
+<td>1,138</td>
+<td>6,549</td>
+<td>0.83</td>
+<td>1.7×10<sup>−12</sup></td>
+<td>0.85</td>
+<td>1.9×10<sup>−13</sup></td>
+<td>0.16</td>
+<td>0.291</td>
+</tr>
+<tr class="odd">
+<td>Algeria</td>
+<td>MNA</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>62.3</td>
+<td>12.9</td>
+<td>39.5</td>
+<td>76.5</td>
+<td>3,632</td>
+<td>807</td>
+<td>1,604</td>
+<td>4,769</td>
+<td>0.87</td>
+<td>1.2×10<sup>−20</sup></td>
+<td>0.86</td>
+<td>7.5×10<sup>−20</sup></td>
+<td>0.46</td>
+<td>1.5×10<sup>−4</sup></td>
+</tr>
+<tr class="even">
+<td>American Samoa</td>
+<td>EAP</td>
+<td>2002–2022</td>
+<td>21</td>
+<td>72.4</td>
+<td>0.5</td>
+<td>70.8</td>
+<td>72.8</td>
+<td>12,732</td>
+<td>502</td>
+<td>11,872</td>
+<td>13,709</td>
+<td>−0.15</td>
+<td>0.520</td>
+<td>−0.15</td>
+<td>0.507</td>
+<td>0.17</td>
+<td>0.484</td>
+</tr>
+<tr class="odd">
+<td>Andorra</td>
+<td>ECA</td>
+<td>1970–2024</td>
+<td>55</td>
+<td>80.5</td>
+<td>3.3</td>
+<td>74.5</td>
+<td>84.5</td>
+<td>35,726</td>
+<td>4,712</td>
+<td>26,518</td>
+<td>43,006</td>
+<td>0.11</td>
+<td>0.409</td>
+<td>0.13</td>
+<td>0.349</td>
+<td>0.50</td>
+<td>1.3×10<sup>−4</sup></td>
+</tr>
+<tr class="even">
+<td>Angola</td>
+<td>SSA</td>
+<td>1980–2024</td>
+<td>45</td>
+<td>51.2</td>
+<td>8.4</td>
+<td>40.8</td>
+<td>64.8</td>
+<td>2,845</td>
+<td>544</td>
+<td>1,720</td>
+<td>3,747</td>
+<td>0.54</td>
+<td>1.2×10<sup>−4</sup></td>
+<td>0.53</td>
+<td>2.1×10<sup>−4</sup></td>
+<td>0.34</td>
+<td>0.026</td>
+</tr>
+<tr class="odd">
+<td>Antigua and Barbuda</td>
+<td>LAC</td>
+<td>1977–2024</td>
+<td>48</td>
+<td>75.1</td>
+<td>1.7</td>
+<td>72.1</td>
+<td>77.8</td>
+<td>14,150</td>
+<td>3,842</td>
+<td>6,062</td>
+<td>20,770</td>
+<td>0.78</td>
+<td>7.7×10<sup>−11</sup></td>
+<td>0.76</td>
+<td>5.6×10<sup>−10</sup></td>
+<td>−0.10</td>
+<td>0.504</td>
+</tr>
+<tr class="even">
+<td>Argentina</td>
+<td>LAC</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>71.3</td>
+<td>4.3</td>
+<td>64.2</td>
+<td>77.5</td>
+<td>10,448</td>
+<td>1,935</td>
+<td>6,968</td>
+<td>14,041</td>
+<td>0.82</td>
+<td>3.7×10<sup>−17</sup></td>
+<td>0.83</td>
+<td>1.8×10<sup>−17</sup></td>
+<td>−0.03</td>
+<td>0.818</td>
+</tr>
+<tr class="odd">
+<td>Armenia</td>
+<td>ECA</td>
+<td>1990–2024</td>
+<td>35</td>
+<td>72.5</td>
+<td>2.9</td>
+<td>67.5</td>
+<td>78.3</td>
+<td>2,591</td>
+<td>1,370</td>
+<td>793</td>
+<td>5,378</td>
+<td>0.86</td>
+<td>4.8×10<sup>−11</sup></td>
+<td>0.87</td>
+<td>8.6×10<sup>−12</sup></td>
+<td>0.18</td>
+<td>0.314</td>
+</tr>
+<tr class="even">
+<td>Aruba</td>
+<td>LAC</td>
+<td>1986–2024</td>
+<td>39</td>
+<td>73.9</td>
+<td>1.3</td>
+<td>71.8</td>
+<td>76.5</td>
+<td>26,856</td>
+<td>3,163</td>
+<td>16,151</td>
+<td>33,939</td>
+<td>0.53</td>
+<td>4.7×10<sup>−4</sup></td>
+<td>0.51</td>
+<td>8.8×10<sup>−4</sup></td>
+<td>0.15</td>
+<td>0.365</td>
+</tr>
+<tr class="odd">
+<td>Australia</td>
+<td>EAP</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>77.1</td>
+<td>4.4</td>
+<td>70.8</td>
+<td>83.3</td>
+<td>39,964</td>
+<td>13,243</td>
+<td>19,820</td>
+<td>61,869</td>
+<td>0.98</td>
+<td>2.5×10<sup>−48</sup></td>
+<td>0.99</td>
+<td>1.0×10<sup>−50</sup></td>
+<td>−0.09</td>
+<td>0.493</td>
+</tr>
+<tr class="even">
+<td>Austria</td>
+<td>ECA</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>75.8</td>
+<td>4.4</td>
+<td>68.6</td>
+<td>82.0</td>
+<td>31,525</td>
+<td>11,190</td>
+<td>11,895</td>
+<td>47,332</td>
+<td>0.99</td>
+<td>1.8×10<sup>−59</sup></td>
+<td>0.96</td>
+<td>1.3×10<sup>−37</sup></td>
+<td>0.32</td>
+<td>0.011</td>
+</tr>
+<tr class="odd">
+<td>Azerbaijan</td>
+<td>ECA</td>
+<td>1990–2024</td>
+<td>35</td>
+<td>68.1</td>
+<td>4.4</td>
+<td>60.3</td>
+<td>74.6</td>
+<td>3,631</td>
+<td>1,808</td>
+<td>1,120</td>
+<td>5,876</td>
+<td>0.90</td>
+<td>9.9×10<sup>−14</sup></td>
+<td>0.88</td>
+<td>3.3×10<sup>−12</sup></td>
+<td>0.34</td>
+<td>0.052</td>
+</tr>
+<tr class="even">
+<td>Bahamas, The</td>
+<td>LAC</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>70.3</td>
+<td>3.4</td>
+<td>62.5</td>
+<td>74.7</td>
+<td>28,019</td>
+<td>4,391</td>
+<td>17,106</td>
+<td>33,968</td>
+<td>0.77</td>
+<td>7.6×10<sup>−14</sup></td>
+<td>0.74</td>
+<td>1.2×10<sup>−12</sup></td>
+<td>−0.13</td>
+<td>0.304</td>
+</tr>
+<tr class="odd">
+<td>Bahrain</td>
+<td>MNA</td>
+<td>1970–2024</td>
+<td>55</td>
+<td>74.4</td>
+<td>4.5</td>
+<td>64.4</td>
+<td>81.4</td>
+<td>22,154</td>
+<td>2,606</td>
+<td>17,091</td>
+<td>25,886</td>
+<td>0.70</td>
+<td>3.4×10<sup>−9</sup></td>
+<td>0.69</td>
+<td>5.3×10<sup>−9</sup></td>
+<td>0.16</td>
+<td>0.252</td>
+</tr>
+<tr class="even">
+<td>Bangladesh</td>
+<td>SAS</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>58.1</td>
+<td>10.0</td>
+<td>26.5</td>
+<td>74.9</td>
+<td>720</td>
+<td>426</td>
+<td>373</td>
+<td>1,941</td>
+<td>0.82</td>
+<td>5.8×10<sup>−17</sup></td>
+<td>0.87</td>
+<td>1.7×10<sup>−21</sup></td>
+<td>−0.29</td>
+<td>0.020</td>
+</tr>
+<tr class="odd">
+<td>Barbados</td>
+<td>LAC</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>72.7</td>
+<td>3.3</td>
+<td>64.1</td>
+<td>76.6</td>
+<td>18,159</td>
+<td>4,088</td>
+<td>8,457</td>
+<td>24,605</td>
+<td>0.92</td>
+<td>1.1×10<sup>−27</sup></td>
+<td>0.93</td>
+<td>1.0×10<sup>−28</sup></td>
+<td>−0.04</td>
+<td>0.776</td>
+</tr>
+<tr class="even">
+<td>Belarus</td>
+<td>ECA</td>
+<td>1990–2024</td>
+<td>35</td>
+<td>70.8</td>
+<td>2.2</td>
+<td>67.9</td>
+<td>74.4</td>
+<td>4,404</td>
+<td>1,734</td>
+<td>1,885</td>
+<td>6,814</td>
+<td>0.87</td>
+<td>8.0×10<sup>−12</sup></td>
+<td>0.84</td>
+<td>2.5×10<sup>−10</sup></td>
+<td>0.19</td>
+<td>0.291</td>
+</tr>
+<tr class="odd">
+<td>Belgium</td>
+<td>ECA</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>76.1</td>
+<td>4.0</td>
+<td>69.7</td>
+<td>82.4</td>
+<td>29,791</td>
+<td>10,039</td>
+<td>11,716</td>
+<td>45,020</td>
+<td>0.99</td>
+<td>3.3×10<sup>−56</sup></td>
+<td>0.96</td>
+<td>2.2×10<sup>−37</sup></td>
+<td>0.35</td>
+<td>0.004</td>
+</tr>
+<tr class="even">
+<td>Belize</td>
+<td>LAC</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>67.7</td>
+<td>4.3</td>
+<td>52.9</td>
+<td>73.7</td>
+<td>4,181</td>
+<td>1,750</td>
+<td>1,557</td>
+<td>6,466</td>
+<td>0.87</td>
+<td>1.2×10<sup>−20</sup></td>
+<td>0.92</td>
+<td>5.1×10<sup>−27</sup></td>
+<td>0.05</td>
+<td>0.673</td>
+</tr>
+<tr class="odd">
+<td>Benin</td>
+<td>SSA</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>51.9</td>
+<td>7.0</td>
+<td>38.8</td>
+<td>61.0</td>
+<td>838</td>
+<td>161</td>
+<td>631</td>
+<td>1,325</td>
+<td>0.82</td>
+<td>5.8×10<sup>−17</sup></td>
+<td>0.86</td>
+<td>5.3×10<sup>−20</sup></td>
+<td>−0.15</td>
+<td>0.245</td>
+</tr>
+<tr class="even">
+<td>Bermuda</td>
+<td>NAM</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>75.0</td>
+<td>4.8</td>
+<td>66.5</td>
+<td>82.5</td>
+<td>88,534</td>
+<td>24,957</td>
+<td>39,906</td>
+<td>132,595</td>
+<td>0.93</td>
+<td>4.0×10<sup>−29</sup></td>
+<td>0.92</td>
+<td>1.4×10<sup>−27</sup></td>
+<td>0.05</td>
+<td>0.714</td>
+</tr>
+<tr class="odd">
+<td>Bhutan</td>
+<td>SAS</td>
+<td>1970–2024</td>
+<td>55</td>
+<td>59.5</td>
+<td>10.2</td>
+<td>41.2</td>
+<td>73.3</td>
+<td>1,497</td>
+<td>1,084</td>
+<td>370</td>
+<td>3,717</td>
+<td>0.92</td>
+<td>3.5×10<sup>−23</sup></td>
+<td>0.99</td>
+<td>4.0×10<sup>−44</sup></td>
+<td>0.18</td>
+<td>0.181</td>
+</tr>
+<tr class="even">
+<td>Bolivia</td>
+<td>LAC</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>57.1</td>
+<td>8.1</td>
+<td>43.3</td>
+<td>68.7</td>
+<td>2,100</td>
+<td>536</td>
+<td>1,277</td>
+<td>3,207</td>
+<td>0.79</td>
+<td>2.7×10<sup>−15</sup></td>
+<td>0.81</td>
+<td>2.4×10<sup>−16</sup></td>
+<td>0.36</td>
+<td>0.004</td>
+</tr>
+<tr class="odd">
+<td>Bosnia and Herzegovina</td>
+<td>ECA</td>
+<td>1990–2024</td>
+<td>35</td>
+<td>74.2</td>
+<td>6.2</td>
+<td>50.9</td>
+<td>78.0</td>
+<td>3,502</td>
+<td>1,795</td>
+<td>705</td>
+<td>6,747</td>
+<td>0.63</td>
+<td>4.9×10<sup>−5</sup></td>
+<td>0.76</td>
+<td>1.5×10<sup>−7</sup></td>
+<td>0.35</td>
+<td>0.044</td>
+</tr>
+<tr class="even">
+<td>Botswana</td>
+<td>SSA</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>58.9</td>
+<td>4.9</td>
+<td>51.2</td>
+<td>69.3</td>
+<td>3,741</td>
+<td>2,274</td>
+<td>394</td>
+<td>7,269</td>
+<td>0.40</td>
+<td>0.001</td>
+<td>0.43</td>
+<td>3.5×10<sup>−4</sup></td>
+<td>−0.06</td>
+<td>0.618</td>
+</tr>
+<tr class="odd">
+<td>Brazil</td>
+<td>LAC</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>66.1</td>
+<td>7.2</td>
+<td>53.2</td>
+<td>76.0</td>
+<td>6,367</td>
+<td>2,043</td>
+<td>2,604</td>
+<td>9,567</td>
+<td>0.97</td>
+<td>5.9×10<sup>−40</sup></td>
+<td>0.94</td>
+<td>9.2×10<sup>−32</sup></td>
+<td>0.16</td>
+<td>0.197</td>
+</tr>
+<tr class="even">
+<td>Brunei Darussalam</td>
+<td>EAP</td>
+<td>1974–2024</td>
+<td>51</td>
+<td>72.6</td>
+<td>2.6</td>
+<td>66.4</td>
+<td>75.5</td>
+<td>44,233</td>
+<td>16,320</td>
+<td>28,549</td>
+<td>96,517</td>
+<td>−0.90</td>
+<td>2.4×10<sup>−19</sup></td>
+<td>−0.93</td>
+<td>1.2×10<sup>−22</sup></td>
+<td>0.06</td>
+<td>0.655</td>
+</tr>
+<tr class="odd">
+<td>Bulgaria</td>
+<td>ECA</td>
+<td>1980–2024</td>
+<td>45</td>
+<td>72.6</td>
+<td>1.5</td>
+<td>70.4</td>
+<td>75.8</td>
+<td>5,579</td>
+<td>1,991</td>
+<td>3,427</td>
+<td>10,127</td>
+<td>0.85</td>
+<td>9.9×10<sup>−14</sup></td>
+<td>0.87</td>
+<td>9.7×10<sup>−15</sup></td>
+<td>0.11</td>
+<td>0.488</td>
+</tr>
+<tr class="even">
+<td>Burkina Faso</td>
+<td>SSA</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>49.2</td>
+<td>7.5</td>
+<td>36.1</td>
+<td>61.3</td>
+<td>423</td>
+<td>157</td>
+<td>244</td>
+<td>764</td>
+<td>0.93</td>
+<td>6.2×10<sup>−29</sup></td>
+<td>0.96</td>
+<td>7.1×10<sup>−37</sup></td>
+<td>0.04</td>
+<td>0.759</td>
+</tr>
+<tr class="odd">
+<td>Burundi</td>
+<td>SSA</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>49.1</td>
+<td>7.9</td>
+<td>25.8</td>
+<td>63.8</td>
+<td>287</td>
+<td>42</td>
+<td>212</td>
+<td>384</td>
+<td>−0.37</td>
+<td>0.003</td>
+<td>−0.36</td>
+<td>0.003</td>
+<td>0.15</td>
+<td>0.242</td>
+</tr>
+<tr class="even">
+<td>Cabo Verde</td>
+<td>SSA</td>
+<td>1980–2024</td>
+<td>45</td>
+<td>68.7</td>
+<td>5.1</td>
+<td>61.0</td>
+<td>76.2</td>
+<td>2,208</td>
+<td>1,254</td>
+<td>582</td>
+<td>4,438</td>
+<td>0.99</td>
+<td>2.1×10<sup>−38</sup></td>
+<td>0.99</td>
+<td>2.5×10<sup>−35</sup></td>
+<td>0.55</td>
+<td>1.0×10<sup>−4</sup></td>
+</tr>
+<tr class="odd">
+<td>Cambodia</td>
+<td>EAP</td>
+<td>1975–2024</td>
+<td>50</td>
+<td>56.8</td>
+<td>15.4</td>
+<td>11.3</td>
+<td>70.8</td>
+<td>1,031</td>
+<td>495</td>
+<td>497</td>
+<td>2,184</td>
+<td>0.50</td>
+<td>2.0×10<sup>−4</sup></td>
+<td>0.47</td>
+<td>5.0×10<sup>−4</sup></td>
+<td>−0.21</td>
+<td>0.145</td>
+</tr>
+<tr class="even">
+<td>Cameroon</td>
+<td>SSA</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>53.0</td>
+<td>6.0</td>
+<td>34.7</td>
+<td>64.0</td>
+<td>1,248</td>
+<td>243</td>
+<td>860</td>
+<td>1,843</td>
+<td>0.64</td>
+<td>9.7×10<sup>−9</sup></td>
+<td>0.68</td>
+<td>3.4×10<sup>−10</sup></td>
+<td>0.06</td>
+<td>0.634</td>
+</tr>
+<tr class="odd">
+<td>Canada</td>
+<td>NAM</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>77.3</td>
+<td>3.6</td>
+<td>71.1</td>
+<td>82.2</td>
+<td>32,372</td>
+<td>9,277</td>
+<td>15,432</td>
+<td>45,883</td>
+<td>0.99</td>
+<td>5.9×10<sup>−55</sup></td>
+<td>0.98</td>
+<td>4.1×10<sup>−47</sup></td>
+<td>0.05</td>
+<td>0.672</td>
+</tr>
+<tr class="even">
+<td>Central African Republic</td>
+<td>SSA</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>46.5</td>
+<td>6.8</td>
+<td>14.7</td>
+<td>57.7</td>
+<td>494</td>
+<td>73</td>
+<td>350</td>
+<td>603</td>
+<td>0.02</td>
+<td>0.872</td>
+<td>0.02</td>
+<td>0.894</td>
+<td>−0.01</td>
+<td>0.909</td>
+</tr>
+<tr class="odd">
+<td>Chad</td>
+<td>SSA</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>46.4</td>
+<td>4.4</td>
+<td>39.2</td>
+<td>55.2</td>
+<td>727</td>
+<td>156</td>
+<td>480</td>
+<td>1,016</td>
+<td>0.48</td>
+<td>6.0×10<sup>−5</sup></td>
+<td>0.44</td>
+<td>2.5×10<sup>−4</sup></td>
+<td>0.26</td>
+<td>0.039</td>
+</tr>
+<tr class="even">
+<td>Chile</td>
+<td>LAC</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>72.3</td>
+<td>7.4</td>
+<td>57.2</td>
+<td>81.4</td>
+<td>7,539</td>
+<td>3,918</td>
+<td>3,223</td>
+<td>14,617</td>
+<td>0.85</td>
+<td>1.6×10<sup>−19</sup></td>
+<td>0.91</td>
+<td>4.3×10<sup>−25</sup></td>
+<td>−0.09</td>
+<td>0.495</td>
+</tr>
+<tr class="odd">
+<td>China</td>
+<td>EAP</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>67.2</td>
+<td>9.7</td>
+<td>33.4</td>
+<td>78.2</td>
+<td>3,095</td>
+<td>3,771</td>
+<td>166</td>
+<td>13,119</td>
+<td>0.71</td>
+<td>3.9×10<sup>−11</sup></td>
+<td>0.90</td>
+<td>2.1×10<sup>−24</sup></td>
+<td>−0.58</td>
+<td>4.3×10<sup>−7</sup></td>
+</tr>
+<tr class="even">
+<td>Colombia</td>
+<td>LAC</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>68.8</td>
+<td>5.9</td>
+<td>56.6</td>
+<td>77.9</td>
+<td>4,017</td>
+<td>1,448</td>
+<td>1,961</td>
+<td>6,865</td>
+<td>0.95</td>
+<td>8.1×10<sup>−33</sup></td>
+<td>0.98</td>
+<td>2.5×10<sup>−48</sup></td>
+<td>0.24</td>
+<td>0.055</td>
+</tr>
+<tr class="odd">
+<td>Comoros</td>
+<td>SSA</td>
+<td>1980–2024</td>
+<td>45</td>
+<td>59.7</td>
+<td>4.8</td>
+<td>50.7</td>
+<td>67.0</td>
+<td>1,256</td>
+<td>76</td>
+<td>1,147</td>
+<td>1,403</td>
+<td>0.77</td>
+<td>5.1×10<sup>−10</sup></td>
+<td>0.77</td>
+<td>7.5×10<sup>−10</sup></td>
+<td>0.14</td>
+<td>0.367</td>
+</tr>
+<tr class="even">
+<td>Congo, Dem. Rep.</td>
+<td>SSA</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>49.9</td>
+<td>6.5</td>
+<td>40.1</td>
+<td>62.1</td>
+<td>795</td>
+<td>391</td>
+<td>322</td>
+<td>1,415</td>
+<td>−0.84</td>
+<td>1.2×10<sup>−18</sup></td>
+<td>−0.81</td>
+<td>1.9×10<sup>−16</sup></td>
+<td>0.14</td>
+<td>0.279</td>
+</tr>
+<tr class="odd">
+<td>Congo, Rep.</td>
+<td>SSA</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>57.2</td>
+<td>4.6</td>
+<td>47.6</td>
+<td>66.0</td>
+<td>1,947</td>
+<td>454</td>
+<td>1,193</td>
+<td>2,894</td>
+<td>0.47</td>
+<td>8.5×10<sup>−5</sup></td>
+<td>0.51</td>
+<td>1.2×10<sup>−5</sup></td>
+<td>0.08</td>
+<td>0.522</td>
+</tr>
+<tr class="even">
+<td>Costa Rica</td>
+<td>LAC</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>74.5</td>
+<td>5.4</td>
+<td>63.5</td>
+<td>81.0</td>
+<td>7,583</td>
+<td>3,106</td>
+<td>3,549</td>
+<td>15,053</td>
+<td>0.83</td>
+<td>6.1×10<sup>−18</sup></td>
+<td>0.91</td>
+<td>7.1×10<sup>−26</sup></td>
+<td>−0.03</td>
+<td>0.839</td>
+</tr>
+<tr class="odd">
+<td>Cote d’Ivoire</td>
+<td>SSA</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>51.3</td>
+<td>6.2</td>
+<td>37.2</td>
+<td>62.1</td>
+<td>1,970</td>
+<td>419</td>
+<td>1,420</td>
+<td>3,056</td>
+<td>−0.01</td>
+<td>0.915</td>
+<td>−0.00</td>
+<td>0.970</td>
+<td>0.41</td>
+<td>7.2×10<sup>−4</sup></td>
+</tr>
+<tr class="even">
+<td>Croatia</td>
+<td>ECA</td>
+<td>1990–2024</td>
+<td>35</td>
+<td>75.3</td>
+<td>2.4</td>
+<td>71.2</td>
+<td>78.9</td>
+<td>11,360</td>
+<td>2,974</td>
+<td>6,491</td>
+<td>17,854</td>
+<td>0.91</td>
+<td>5.0×10<sup>−14</sup></td>
+<td>0.93</td>
+<td>5.6×10<sup>−16</sup></td>
+<td>0.20</td>
+<td>0.252</td>
+</tr>
+<tr class="odd">
+<td>Cuba</td>
+<td>LAC</td>
+<td>1970–2024</td>
+<td>55</td>
+<td>74.8</td>
+<td>2.9</td>
+<td>67.9</td>
+<td>78.3</td>
+<td>5,133</td>
+<td>1,703</td>
+<td>2,620</td>
+<td>8,125</td>
+<td>0.77</td>
+<td>7.2×10<sup>−12</sup></td>
+<td>0.80</td>
+<td>1.6×10<sup>−13</sup></td>
+<td>0.08</td>
+<td>0.568</td>
+</tr>
+<tr class="even">
+<td>Curacao</td>
+<td>LAC</td>
+<td>2000–2024</td>
+<td>25</td>
+<td>75.3</td>
+<td>1.3</td>
+<td>73.3</td>
+<td>77.0</td>
+<td>19,654</td>
+<td>2,024</td>
+<td>14,850</td>
+<td>22,232</td>
+<td>−0.80</td>
+<td>1.9×10<sup>−6</sup></td>
+<td>−0.77</td>
+<td>8.1×10<sup>−6</sup></td>
+<td>0.11</td>
+<td>0.596</td>
+</tr>
+<tr class="odd">
+<td>Cyprus</td>
+<td>ECA</td>
+<td>1975–2024</td>
+<td>50</td>
+<td>77.5</td>
+<td>3.4</td>
+<td>70.3</td>
+<td>81.8</td>
+<td>20,247</td>
+<td>6,972</td>
+<td>6,173</td>
+<td>32,758</td>
+<td>0.95</td>
+<td>4.9×10<sup>−26</sup></td>
+<td>0.96</td>
+<td>2.1×10<sup>−27</sup></td>
+<td>0.06</td>
+<td>0.684</td>
+</tr>
+<tr class="even">
+<td>Czechia</td>
+<td>ECA</td>
+<td>1990–2024</td>
+<td>35</td>
+<td>76.3</td>
+<td>2.5</td>
+<td>71.4</td>
+<td>80.0</td>
+<td>15,496</td>
+<td>3,428</td>
+<td>10,475</td>
+<td>20,627</td>
+<td>0.94</td>
+<td>2.4×10<sup>−17</sup></td>
+<td>0.95</td>
+<td>1.2×10<sup>−18</sup></td>
+<td>−0.04</td>
+<td>0.813</td>
+</tr>
+<tr class="odd">
+<td>Denmark</td>
+<td>ECA</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>76.2</td>
+<td>3.0</td>
+<td>72.2</td>
+<td>82.3</td>
+<td>40,474</td>
+<td>12,612</td>
+<td>17,521</td>
+<td>60,773</td>
+<td>0.94</td>
+<td>1.5×10<sup>−30</sup></td>
+<td>0.89</td>
+<td>1.3×10<sup>−23</sup></td>
+<td>−0.12</td>
+<td>0.351</td>
+</tr>
+<tr class="even">
+<td>Dominica</td>
+<td>LAC</td>
+<td>1977–2024</td>
+<td>48</td>
+<td>71.2</td>
+<td>0.8</td>
+<td>68.6</td>
+<td>72.0</td>
+<td>6,545</td>
+<td>1,862</td>
+<td>2,886</td>
+<td>9,173</td>
+<td>0.19</td>
+<td>0.189</td>
+<td>0.22</td>
+<td>0.137</td>
+<td>0.40</td>
+<td>0.005</td>
+</tr>
+<tr class="odd">
+<td>Dominican Republic</td>
+<td>LAC</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>66.2</td>
+<td>6.5</td>
+<td>51.7</td>
+<td>74.2</td>
+<td>3,916</td>
+<td>2,177</td>
+<td>1,302</td>
+<td>9,168</td>
+<td>0.83</td>
+<td>7.7×10<sup>−18</sup></td>
+<td>0.94</td>
+<td>6.2×10<sup>−31</sup></td>
+<td>0.33</td>
+<td>0.008</td>
+</tr>
+<tr class="even">
+<td>Ecuador</td>
+<td>LAC</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>67.8</td>
+<td>7.3</td>
+<td>53.4</td>
+<td>77.6</td>
+<td>4,150</td>
+<td>1,135</td>
+<td>2,392</td>
+<td>6,165</td>
+<td>0.92</td>
+<td>8.7×10<sup>−27</sup></td>
+<td>0.94</td>
+<td>5.5×10<sup>−31</sup></td>
+<td>0.47</td>
+<td>1.1×10<sup>−4</sup></td>
+</tr>
+<tr class="odd">
+<td>Egypt, Arab Rep.</td>
+<td>MNA</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>60.9</td>
+<td>8.8</td>
+<td>44.4</td>
+<td>71.8</td>
+<td>2,127</td>
+<td>1,009</td>
+<td>755</td>
+<td>4,138</td>
+<td>0.94</td>
+<td>2.5×10<sup>−30</sup></td>
+<td>0.99</td>
+<td>2.3×10<sup>−50</sup></td>
+<td>0.27</td>
+<td>0.034</td>
+</tr>
+<tr class="even">
+<td>El Salvador</td>
+<td>LAC</td>
+<td>1965–2024</td>
+<td>60</td>
+<td>62.6</td>
+<td>8.0</td>
+<td>48.6</td>
+<td>72.3</td>
+<td>3,119</td>
+<td>600</td>
+<td>2,283</td>
+<td>4,577</td>
+<td>0.58</td>
+<td>1.2×10<sup>−6</sup></td>
+<td>0.57</td>
+<td>2.5×10<sup>−6</sup></td>
+<td>0.38</td>
+<td>0.003</td>
+</tr>
+<tr class="odd">
+<td>Equatorial Guinea</td>
+<td>SSA</td>
+<td>1980–2024</td>
+<td>45</td>
+<td>55.5</td>
+<td>4.7</td>
+<td>48.8</td>
+<td>63.9</td>
+<td>5,014</td>
+<td>4,339</td>
+<td>349</td>
+<td>13,048</td>
+<td>0.68</td>
+<td>2.5×10<sup>−7</sup></td>
+<td>0.79</td>
+<td>1.3×10<sup>−10</sup></td>
+<td>−0.07</td>
+<td>0.648</td>
+</tr>
+<tr class="even">
+<td>Eritrea</td>
+<td>SSA</td>
+<td>1992–2011</td>
+<td>20</td>
+<td>57.6</td>
+<td>5.1</td>
+<td>44.5</td>
+<td>64.2</td>
+<td>800</td>
+<td>78</td>
+<td>642</td>
+<td>899</td>
+<td>−0.37</td>
+<td>0.106</td>
+<td>−0.35</td>
+<td>0.130</td>
+<td>−0.08</td>
+<td>0.744</td>
+</tr>
+<tr class="odd">
+<td>Estonia</td>
+<td>ECA</td>
+<td>1990–2024</td>
+<td>35</td>
+<td>73.5</td>
+<td>4.0</td>
+<td>66.5</td>
+<td>79.3</td>
+<td>14,207</td>
+<td>4,887</td>
+<td>6,707</td>
+<td>21,571</td>
+<td>0.95</td>
+<td>2.1×10<sup>−18</sup></td>
+<td>0.94</td>
+<td>3.2×10<sup>−17</sup></td>
+<td>0.05</td>
+<td>0.770</td>
+</tr>
+<tr class="even">
+<td>Eswatini</td>
+<td>SSA</td>
+<td>1970–2024</td>
+<td>55</td>
+<td>54.6</td>
+<td>5.9</td>
+<td>43.9</td>
+<td>64.3</td>
+<td>2,273</td>
+<td>938</td>
+<td>905</td>
+<td>3,866</td>
+<td>−0.07</td>
+<td>0.587</td>
+<td>−0.13</td>
+<td>0.346</td>
+<td>−0.01</td>
+<td>0.960</td>
+</tr>
+<tr class="odd">
+<td>Ethiopia</td>
+<td>SSA</td>
+<td>1961–2024</td>
+<td>64</td>
+<td>49.7</td>
+<td>9.6</td>
+<td>36.3</td>
+<td>67.6</td>
+<td>361</td>
+<td>183</td>
+<td>208</td>
+<td>883</td>
+<td>0.83</td>
+<td>1.0×10<sup>−17</sup></td>
+<td>0.84</td>
+<td>1.9×10<sup>−18</sup></td>
+<td>0.06</td>
+<td>0.620</td>
+</tr>
+<tr class="even">
+<td>Fiji</td>
+<td>EAP</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>64.3</td>
+<td>2.4</td>
+<td>58.6</td>
+<td>67.5</td>
+<td>3,722</td>
+<td>987</td>
+<td>2,068</td>
+<td>5,935</td>
+<td>0.84</td>
+<td>1.1×10<sup>−18</sup></td>
+<td>0.87</td>
+<td>8.8×10<sup>−21</sup></td>
+<td>0.11</td>
+<td>0.392</td>
+</tr>
+<tr class="odd">
+<td>Finland</td>
+<td>ECA</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>75.7</td>
+<td>4.4</td>
+<td>68.6</td>
+<td>82.3</td>
+<td>30,706</td>
+<td>11,620</td>
+<td>11,154</td>
+<td>46,360</td>
+<td>0.98</td>
+<td>1.5×10<sup>−48</sup></td>
+<td>0.97</td>
+<td>1.6×10<sup>−40</sup></td>
+<td>−0.01</td>
+<td>0.915</td>
+</tr>
+<tr class="even">
+<td>France</td>
+<td>ECA</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>76.9</td>
+<td>4.3</td>
+<td>69.9</td>
+<td>83.0</td>
+<td>27,411</td>
+<td>8,656</td>
+<td>10,776</td>
+<td>39,683</td>
+<td>0.99</td>
+<td>1.2×10<sup>−54</sup></td>
+<td>0.96</td>
+<td>4.4×10<sup>−36</sup></td>
+<td>0.32</td>
+<td>0.009</td>
+</tr>
+<tr class="odd">
+<td>French Polynesia</td>
+<td>EAP</td>
+<td>1965–2024</td>
+<td>60</td>
+<td>74.2</td>
+<td>7.6</td>
+<td>61.1</td>
+<td>84.2</td>
+<td>23,016</td>
+<td>2,620</td>
+<td>18,928</td>
+<td>27,814</td>
+<td>−0.68</td>
+<td>2.7×10<sup>−9</sup></td>
+<td>−0.69</td>
+<td>1.3×10<sup>−9</sup></td>
+<td>0.06</td>
+<td>0.673</td>
+</tr>
+<tr class="even">
+<td>Gabon</td>
+<td>SSA</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>59.7</td>
+<td>5.9</td>
+<td>46.4</td>
+<td>68.5</td>
+<td>7,363</td>
+<td>1,992</td>
+<td>3,311</td>
+<td>14,824</td>
+<td>0.26</td>
+<td>0.038</td>
+<td>0.41</td>
+<td>8.0×10<sup>−4</sup></td>
+<td>0.30</td>
+<td>0.016</td>
+</tr>
+<tr class="odd">
+<td>Gambia, The</td>
+<td>SSA</td>
+<td>1966–2024</td>
+<td>59</td>
+<td>53.1</td>
+<td>8.8</td>
+<td>37.6</td>
+<td>66.1</td>
+<td>644</td>
+<td>47</td>
+<td>526</td>
+<td>759</td>
+<td>0.50</td>
+<td>4.6×10<sup>−5</sup></td>
+<td>0.51</td>
+<td>3.0×10<sup>−5</sup></td>
+<td>−0.13</td>
+<td>0.349</td>
+</tr>
+<tr class="even">
+<td>Georgia</td>
+<td>ECA</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>68.9</td>
+<td>3.5</td>
+<td>61.3</td>
+<td>74.7</td>
+<td>3,042</td>
+<td>1,369</td>
+<td>966</td>
+<td>6,606</td>
+<td>0.58</td>
+<td>3.3×10<sup>−7</sup></td>
+<td>0.53</td>
+<td>6.0×10<sup>−6</sup></td>
+<td>0.25</td>
+<td>0.051</td>
+</tr>
+<tr class="odd">
+<td>Germany</td>
+<td>ECA</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>75.7</td>
+<td>4.0</td>
+<td>69.1</td>
+<td>81.3</td>
+<td>29,749</td>
+<td>9,977</td>
+<td>12,607</td>
+<td>44,817</td>
+<td>0.99</td>
+<td>2.5×10<sup>−58</sup></td>
+<td>0.97</td>
+<td>4.6×10<sup>−42</sup></td>
+<td>0.18</td>
+<td>0.154</td>
+</tr>
+<tr class="even">
+<td>Ghana</td>
+<td>SSA</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>55.5</td>
+<td>6.0</td>
+<td>46.9</td>
+<td>65.7</td>
+<td>1,195</td>
+<td>391</td>
+<td>700</td>
+<td>2,173</td>
+<td>0.70</td>
+<td>7.8×10<sup>−11</sup></td>
+<td>0.67</td>
+<td>1.2×10<sup>−9</sup></td>
+<td>0.12</td>
+<td>0.335</td>
+</tr>
+<tr class="odd">
+<td>Greece</td>
+<td>ECA</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>76.7</td>
+<td>3.6</td>
+<td>70.2</td>
+<td>81.8</td>
+<td>15,605</td>
+<td>4,712</td>
+<td>4,986</td>
+<td>23,974</td>
+<td>0.90</td>
+<td>1.9×10<sup>−24</sup></td>
+<td>0.88</td>
+<td>3.3×10<sup>−22</sup></td>
+<td>0.04</td>
+<td>0.761</td>
+</tr>
+<tr class="even">
+<td>Greenland</td>
+<td>ECA</td>
+<td>1970–2023</td>
+<td>54</td>
+<td>66.3</td>
+<td>3.1</td>
+<td>61.8</td>
+<td>71.4</td>
+<td>32,385</td>
+<td>10,105</td>
+<td>15,375</td>
+<td>49,930</td>
+<td>0.96</td>
+<td>3.8×10<sup>−31</sup></td>
+<td>0.94</td>
+<td>1.4×10<sup>−25</sup></td>
+<td>−0.05</td>
+<td>0.731</td>
+</tr>
+<tr class="odd">
+<td>Grenada</td>
+<td>LAC</td>
+<td>1977–2024</td>
+<td>48</td>
+<td>72.3</td>
+<td>2.7</td>
+<td>64.3</td>
+<td>75.4</td>
+<td>6,473</td>
+<td>2,118</td>
+<td>3,040</td>
+<td>10,043</td>
+<td>0.92</td>
+<td>1.3×10<sup>−20</sup></td>
+<td>0.95</td>
+<td>3.5×10<sup>−24</sup></td>
+<td>0.06</td>
+<td>0.670</td>
+</tr>
+<tr class="even">
+<td>Guam</td>
+<td>EAP</td>
+<td>2002–2022</td>
+<td>21</td>
+<td>76.2</td>
+<td>0.4</td>
+<td>75.4</td>
+<td>77.1</td>
+<td>33,192</td>
+<td>2,002</td>
+<td>29,576</td>
+<td>36,830</td>
+<td>0.57</td>
+<td>0.007</td>
+<td>0.57</td>
+<td>0.008</td>
+<td>0.66</td>
+<td>0.001</td>
+</tr>
+<tr class="odd">
+<td>Guatemala</td>
+<td>LAC</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>60.9</td>
+<td>9.0</td>
+<td>45.8</td>
+<td>72.7</td>
+<td>3,086</td>
+<td>656</td>
+<td>1,885</td>
+<td>4,564</td>
+<td>0.85</td>
+<td>1.5×10<sup>−19</sup></td>
+<td>0.87</td>
+<td>6.8×10<sup>−21</sup></td>
+<td>0.02</td>
+<td>0.890</td>
+</tr>
+<tr class="even">
+<td>Guinea</td>
+<td>SSA</td>
+<td>1970–2024</td>
+<td>55</td>
+<td>50.4</td>
+<td>6.8</td>
+<td>39.1</td>
+<td>60.9</td>
+<td>637</td>
+<td>158</td>
+<td>454</td>
+<td>1,046</td>
+<td>0.89</td>
+<td>1.2×10<sup>−19</sup></td>
+<td>0.93</td>
+<td>8.5×10<sup>−25</sup></td>
+<td>−0.11</td>
+<td>0.440</td>
+</tr>
+<tr class="odd">
+<td>Guinea-Bissau</td>
+<td>SSA</td>
+<td>1970–2024</td>
+<td>55</td>
+<td>50.5</td>
+<td>7.7</td>
+<td>37.3</td>
+<td>64.3</td>
+<td>585</td>
+<td>81</td>
+<td>411</td>
+<td>786</td>
+<td>0.86</td>
+<td>2.8×10<sup>−17</sup></td>
+<td>0.85</td>
+<td>1.8×10<sup>−16</sup></td>
+<td>0.03</td>
+<td>0.838</td>
+</tr>
+<tr class="even">
+<td>Guyana</td>
+<td>LAC</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>63.1</td>
+<td>3.3</td>
+<td>57.5</td>
+<td>70.3</td>
+<td>4,770</td>
+<td>4,832</td>
+<td>2,374</td>
+<td>33,035</td>
+<td>0.63</td>
+<td>2.0×10<sup>−8</sup></td>
+<td>0.81</td>
+<td>4.2×10<sup>−16</sup></td>
+<td>0.26</td>
+<td>0.036</td>
+</tr>
+<tr class="odd">
+<td>Haiti</td>
+<td>LAC</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>54.4</td>
+<td>6.8</td>
+<td>42.7</td>
+<td>65.1</td>
+<td>1,541</td>
+<td>237</td>
+<td>1,155</td>
+<td>2,146</td>
+<td>−0.67</td>
+<td>7.4×10<sup>−10</sup></td>
+<td>−0.69</td>
+<td>1.3×10<sup>−10</sup></td>
+<td>0.26</td>
+<td>0.035</td>
+</tr>
+<tr class="even">
+<td>Honduras</td>
+<td>LAC</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>63.4</td>
+<td>7.6</td>
+<td>47.1</td>
+<td>73.0</td>
+<td>1,109</td>
+<td>918</td>
+<td>180</td>
+<td>2,575</td>
+<td>0.85</td>
+<td>2.8×10<sup>−19</sup></td>
+<td>0.92</td>
+<td>1.3×10<sup>−26</sup></td>
+<td>−0.02</td>
+<td>0.881</td>
+</tr>
+<tr class="odd">
+<td>Hong Kong SAR, China</td>
+<td>EAP</td>
+<td>1961–2024</td>
+<td>64</td>
+<td>77.8</td>
+<td>5.6</td>
+<td>66.4</td>
+<td>85.5</td>
+<td>23,385</td>
+<td>13,836</td>
+<td>3,956</td>
+<td>45,280</td>
+<td>0.97</td>
+<td>2.4×10<sup>−40</sup></td>
+<td>0.99</td>
+<td>8.8×10<sup>−54</sup></td>
+<td>0.10</td>
+<td>0.418</td>
+</tr>
+<tr class="even">
+<td>Hungary</td>
+<td>ECA</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>71.3</td>
+<td>2.7</td>
+<td>67.9</td>
+<td>76.7</td>
+<td>8,756</td>
+<td>3,746</td>
+<td>2,084</td>
+<td>16,543</td>
+<td>0.89</td>
+<td>1.6×10<sup>−23</sup></td>
+<td>0.78</td>
+<td>2.2×10<sup>−14</sup></td>
+<td>−0.05</td>
+<td>0.712</td>
+</tr>
+<tr class="odd">
+<td>Iceland</td>
+<td>ECA</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>78.5</td>
+<td>3.3</td>
+<td>73.0</td>
+<td>83.2</td>
+<td>37,637</td>
+<td>13,807</td>
+<td>13,936</td>
+<td>59,952</td>
+<td>0.98</td>
+<td>1.3×10<sup>−44</sup></td>
+<td>0.96</td>
+<td>4.1×10<sup>−37</sup></td>
+<td>−0.12</td>
+<td>0.331</td>
+</tr>
+<tr class="even">
+<td>India</td>
+<td>SAS</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>58.9</td>
+<td>8.4</td>
+<td>45.6</td>
+<td>72.2</td>
+<td>817</td>
+<td>572</td>
+<td>313</td>
+<td>2,367</td>
+<td>0.88</td>
+<td>1.2×10<sup>−21</sup></td>
+<td>0.96</td>
+<td>2.4×10<sup>−36</sup></td>
+<td>0.10</td>
+<td>0.446</td>
+</tr>
+<tr class="odd">
+<td>Indonesia</td>
+<td>EAP</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>61.8</td>
+<td>7.4</td>
+<td>42.8</td>
+<td>71.3</td>
+<td>1,814</td>
+<td>1,100</td>
+<td>569</td>
+<td>4,368</td>
+<td>0.86</td>
+<td>3.6×10<sup>−20</sup></td>
+<td>0.96</td>
+<td>5.5×10<sup>−36</sup></td>
+<td>0.09</td>
+<td>0.489</td>
+</tr>
+<tr class="even">
+<td>Iran, Islamic Rep.</td>
+<td>MNA</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>63.7</td>
+<td>10.8</td>
+<td>43.3</td>
+<td>77.9</td>
+<td>4,456</td>
+<td>1,170</td>
+<td>2,345</td>
+<td>7,422</td>
+<td>0.26</td>
+<td>0.033</td>
+<td>0.35</td>
+<td>0.005</td>
+<td>0.07</td>
+<td>0.565</td>
+</tr>
+<tr class="odd">
+<td>Iraq</td>
+<td>MNA</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>63.3</td>
+<td>5.1</td>
+<td>51.5</td>
+<td>72.4</td>
+<td>2,749</td>
+<td>1,249</td>
+<td>998</td>
+<td>4,933</td>
+<td>0.80</td>
+<td>6.9×10<sup>−16</sup></td>
+<td>0.80</td>
+<td>2.0×10<sup>−15</sup></td>
+<td>−0.21</td>
+<td>0.101</td>
+</tr>
+<tr class="even">
+<td>Ireland</td>
+<td>ECA</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>75.8</td>
+<td>4.3</td>
+<td>69.7</td>
+<td>83.0</td>
+<td>34,599</td>
+<td>24,712</td>
+<td>8,524</td>
+<td>97,794</td>
+<td>0.94</td>
+<td>1.2×10<sup>−31</sup></td>
+<td>0.98</td>
+<td>3.5×10<sup>−46</sup></td>
+<td>−0.12</td>
+<td>0.339</td>
+</tr>
+<tr class="odd">
+<td>Isle of Man</td>
+<td>ECA</td>
+<td>1984–2023</td>
+<td>40</td>
+<td>76.3</td>
+<td>3.8</td>
+<td>69.8</td>
+<td>81.0</td>
+<td>55,745</td>
+<td>25,715</td>
+<td>18,303</td>
+<td>95,110</td>
+<td>0.98</td>
+<td>2.2×10<sup>−28</sup></td>
+<td>0.99</td>
+<td>1.9×10<sup>−34</sup></td>
+<td>0.26</td>
+<td>0.109</td>
+</tr>
+<tr class="even">
+<td>Israel</td>
+<td>MNA</td>
+<td>1961–2024</td>
+<td>61</td>
+<td>77.2</td>
+<td>4.1</td>
+<td>71.0</td>
+<td>83.2</td>
+<td>25,643</td>
+<td>9,033</td>
+<td>9,459</td>
+<td>42,539</td>
+<td>0.97</td>
+<td>5.0×10<sup>−38</sup></td>
+<td>0.95</td>
+<td>1.2×10<sup>−31</sup></td>
+<td>−0.27</td>
+<td>0.042</td>
+</tr>
+<tr class="odd">
+<td>Italy</td>
+<td>ECA</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>77.1</td>
+<td>4.6</td>
+<td>69.1</td>
+<td>84.0</td>
+<td>25,304</td>
+<td>7,694</td>
+<td>9,731</td>
+<td>34,508</td>
+<td>0.96</td>
+<td>5.3×10<sup>−36</sup></td>
+<td>0.93</td>
+<td>8.5×10<sup>−30</sup></td>
+<td>0.30</td>
+<td>0.016</td>
+</tr>
+<tr class="even">
+<td>Jamaica</td>
+<td>LAC</td>
+<td>1966–2024</td>
+<td>59</td>
+<td>70.3</td>
+<td>1.9</td>
+<td>65.9</td>
+<td>72.4</td>
+<td>5,068</td>
+<td>605</td>
+<td>3,887</td>
+<td>6,128</td>
+<td>0.47</td>
+<td>1.5×10<sup>−4</sup></td>
+<td>0.48</td>
+<td>1.4×10<sup>−4</sup></td>
+<td>0.02</td>
+<td>0.878</td>
+</tr>
+<tr class="odd">
+<td>Japan</td>
+<td>EAP</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>78.3</td>
+<td>4.9</td>
+<td>67.7</td>
+<td>84.6</td>
+<td>25,606</td>
+<td>9,575</td>
+<td>6,481</td>
+<td>37,977</td>
+<td>0.99</td>
+<td>8.0×10<sup>−56</sup></td>
+<td>0.97</td>
+<td>8.8×10<sup>−43</sup></td>
+<td>0.30</td>
+<td>0.017</td>
+</tr>
+<tr class="even">
+<td>Jordan</td>
+<td>MNA</td>
+<td>1976–2024</td>
+<td>49</td>
+<td>71.7</td>
+<td>3.4</td>
+<td>64.7</td>
+<td>78.0</td>
+<td>4,279</td>
+<td>592</td>
+<td>3,195</td>
+<td>5,394</td>
+<td>0.19</td>
+<td>0.202</td>
+<td>0.22</td>
+<td>0.130</td>
+<td>0.06</td>
+<td>0.700</td>
+</tr>
+<tr class="odd">
+<td>Kazakhstan</td>
+<td>ECA</td>
+<td>1990–2024</td>
+<td>35</td>
+<td>67.8</td>
+<td>3.9</td>
+<td>63.3</td>
+<td>74.5</td>
+<td>7,498</td>
+<td>2,872</td>
+<td>3,499</td>
+<td>11,873</td>
+<td>0.95</td>
+<td>7.1×10<sup>−19</sup></td>
+<td>0.92</td>
+<td>8.4×10<sup>−15</sup></td>
+<td>0.35</td>
+<td>0.042</td>
+</tr>
+<tr class="even">
+<td>Kenya</td>
+<td>SSA</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>57.9</td>
+<td>3.8</td>
+<td>48.5</td>
+<td>63.8</td>
+<td>1,229</td>
+<td>258</td>
+<td>705</td>
+<td>1,859</td>
+<td>0.91</td>
+<td>4.1×10<sup>−26</sup></td>
+<td>0.93</td>
+<td>2.6×10<sup>−28</sup></td>
+<td>0.13</td>
+<td>0.318</td>
+</tr>
+<tr class="odd">
+<td>Kiribati</td>
+<td>EAP</td>
+<td>1970–2024</td>
+<td>55</td>
+<td>62.1</td>
+<td>4.0</td>
+<td>54.4</td>
+<td>66.6</td>
+<td>1,646</td>
+<td>301</td>
+<td>1,283</td>
+<td>2,816</td>
+<td>−0.35</td>
+<td>0.010</td>
+<td>−0.34</td>
+<td>0.011</td>
+<td>0.03</td>
+<td>0.827</td>
+</tr>
+<tr class="even">
+<td>Korea, Rep.</td>
+<td>EAP</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>71.4</td>
+<td>9.0</td>
+<td>53.8</td>
+<td>83.6</td>
+<td>14,321</td>
+<td>11,906</td>
+<td>1,038</td>
+<td>37,048</td>
+<td>0.94</td>
+<td>1.0×10<sup>−30</sup></td>
+<td>0.99</td>
+<td>3.7×10<sup>−60</sup></td>
+<td>0.05</td>
+<td>0.695</td>
+</tr>
+<tr class="odd">
+<td>Kuwait</td>
+<td>MNA</td>
+<td>1970–2024</td>
+<td>55</td>
+<td>75.5</td>
+<td>3.8</td>
+<td>68.2</td>
+<td>84.6</td>
+<td>32,377</td>
+<td>11,962</td>
+<td>14,813</td>
+<td>68,673</td>
+<td>−0.46</td>
+<td>4.6×10<sup>−4</sup></td>
+<td>−0.34</td>
+<td>0.010</td>
+<td>0.11</td>
+<td>0.447</td>
+</tr>
+<tr class="even">
+<td>Kyrgyz Republic</td>
+<td>ECA</td>
+<td>1986–2024</td>
+<td>39</td>
+<td>68.8</td>
+<td>2.1</td>
+<td>64.4</td>
+<td>72.4</td>
+<td>965</td>
+<td>211</td>
+<td>587</td>
+<td>1,424</td>
+<td>0.62</td>
+<td>2.5×10<sup>−5</sup></td>
+<td>0.61</td>
+<td>4.1×10<sup>−5</sup></td>
+<td>0.39</td>
+<td>0.017</td>
+</tr>
+<tr class="odd">
+<td>Lao PDR</td>
+<td>EAP</td>
+<td>1984–2024</td>
+<td>41</td>
+<td>60.6</td>
+<td>5.7</td>
+<td>51.0</td>
+<td>69.2</td>
+<td>1,369</td>
+<td>742</td>
+<td>551</td>
+<td>2,721</td>
+<td>0.96</td>
+<td>3.1×10<sup>−24</sup></td>
+<td>0.99</td>
+<td>1.2×10<sup>−38</sup></td>
+<td>0.18</td>
+<td>0.262</td>
+</tr>
+<tr class="even">
+<td>Latvia</td>
+<td>ECA</td>
+<td>1990–2024</td>
+<td>35</td>
+<td>71.8</td>
+<td>2.8</td>
+<td>65.7</td>
+<td>76.4</td>
+<td>10,295</td>
+<td>4,075</td>
+<td>4,465</td>
+<td>16,421</td>
+<td>0.91</td>
+<td>2.7×10<sup>−14</sup></td>
+<td>0.93</td>
+<td>9.6×10<sup>−16</sup></td>
+<td>0.04</td>
+<td>0.815</td>
+</tr>
+<tr class="odd">
+<td>Lebanon</td>
+<td>MNA</td>
+<td>1988–2024</td>
+<td>37</td>
+<td>74.7</td>
+<td>3.9</td>
+<td>62.9</td>
+<td>78.3</td>
+<td>6,447</td>
+<td>1,657</td>
+<td>2,219</td>
+<td>8,956</td>
+<td>0.86</td>
+<td>9.8×10<sup>−12</sup></td>
+<td>0.88</td>
+<td>5.7×10<sup>−13</sup></td>
+<td>0.26</td>
+<td>0.132</td>
+</tr>
+<tr class="even">
+<td>Lesotho</td>
+<td>SSA</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>52.7</td>
+<td>4.7</td>
+<td>43.2</td>
+<td>59.6</td>
+<td>645</td>
+<td>284</td>
+<td>260</td>
+<td>1,148</td>
+<td>−0.27</td>
+<td>0.033</td>
+<td>−0.21</td>
+<td>0.099</td>
+<td>−0.09</td>
+<td>0.491</td>
+</tr>
+<tr class="odd">
+<td>Liberia</td>
+<td>SSA</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>48.7</td>
+<td>8.5</td>
+<td>37.6</td>
+<td>62.3</td>
+<td>1,522</td>
+<td>1,062</td>
+<td>216</td>
+<td>3,181</td>
+<td>−0.71</td>
+<td>2.3×10<sup>−11</sup></td>
+<td>−0.63</td>
+<td>2.4×10<sup>−8</sup></td>
+<td>0.59</td>
+<td>3.6×10<sup>−7</sup></td>
+</tr>
+<tr class="even">
+<td>Libya</td>
+<td>MNA</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>65.5</td>
+<td>8.6</td>
+<td>40.8</td>
+<td>74.5</td>
+<td>11,478</td>
+<td>3,925</td>
+<td>2,818</td>
+<td>20,078</td>
+<td>0.16</td>
+<td>0.217</td>
+<td>0.34</td>
+<td>0.006</td>
+<td>0.46</td>
+<td>1.5×10<sup>−4</sup></td>
+</tr>
+<tr class="odd">
+<td>Lithuania</td>
+<td>ECA</td>
+<td>1990–2024</td>
+<td>35</td>
+<td>72.7</td>
+<td>2.3</td>
+<td>68.5</td>
+<td>77.3</td>
+<td>11,057</td>
+<td>4,700</td>
+<td>4,731</td>
+<td>19,205</td>
+<td>0.92</td>
+<td>1.3×10<sup>−14</sup></td>
+<td>0.90</td>
+<td>9.3×10<sup>−14</sup></td>
+<td>0.15</td>
+<td>0.389</td>
+</tr>
+<tr class="even">
+<td>Luxembourg</td>
+<td>ECA</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>75.6</td>
+<td>4.9</td>
+<td>68.4</td>
+<td>83.3</td>
+<td>70,151</td>
+<td>30,742</td>
+<td>27,863</td>
+<td>112,422</td>
+<td>0.98</td>
+<td>1.7×10<sup>−45</sup></td>
+<td>0.97</td>
+<td>5.4×10<sup>−41</sup></td>
+<td>0.13</td>
+<td>0.318</td>
+</tr>
+<tr class="odd">
+<td>Macao SAR, China</td>
+<td>EAP</td>
+<td>1982–2024</td>
+<td>43</td>
+<td>79.8</td>
+<td>3.4</td>
+<td>73.8</td>
+<td>84.1</td>
+<td>47,612</td>
+<td>22,107</td>
+<td>23,030</td>
+<td>99,054</td>
+<td>0.75</td>
+<td>9.0×10<sup>−9</sup></td>
+<td>0.82</td>
+<td>2.5×10<sup>−11</sup></td>
+<td>−0.04</td>
+<td>0.811</td>
+</tr>
+<tr class="even">
+<td>Madagascar</td>
+<td>SSA</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>54.6</td>
+<td>6.6</td>
+<td>43.3</td>
+<td>63.8</td>
+<td>570</td>
+<td>145</td>
+<td>407</td>
+<td>844</td>
+<td>−0.87</td>
+<td>1.4×10<sup>−20</sup></td>
+<td>−0.88</td>
+<td>2.8×10<sup>−22</sup></td>
+<td>0.28</td>
+<td>0.025</td>
+</tr>
+<tr class="odd">
+<td>Malawi</td>
+<td>SSA</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>47.7</td>
+<td>10.0</td>
+<td>35.0</td>
+<td>67.6</td>
+<td>414</td>
+<td>87</td>
+<td>259</td>
+<td>570</td>
+<td>0.93</td>
+<td>1.5×10<sup>−29</sup></td>
+<td>0.90</td>
+<td>4.7×10<sup>−25</sup></td>
+<td>0.06</td>
+<td>0.617</td>
+</tr>
+<tr class="even">
+<td>Malaysia</td>
+<td>EAP</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>70.0</td>
+<td>5.4</td>
+<td>57.2</td>
+<td>76.8</td>
+<td>5,392</td>
+<td>3,180</td>
+<td>1,266</td>
+<td>11,884</td>
+<td>0.90</td>
+<td>1.9×10<sup>−24</sup></td>
+<td>0.98</td>
+<td>5.1×10<sup>−46</sup></td>
+<td>0.17</td>
+<td>0.180</td>
+</tr>
+<tr class="odd">
+<td>Maldives</td>
+<td>SAS</td>
+<td>1970–2024</td>
+<td>55</td>
+<td>66.6</td>
+<td>11.2</td>
+<td>44.5</td>
+<td>81.3</td>
+<td>5,956</td>
+<td>3,324</td>
+<td>1,365</td>
+<td>11,799</td>
+<td>0.97</td>
+<td>8.1×10<sup>−34</sup></td>
+<td>0.99</td>
+<td>3.2×10<sup>−42</sup></td>
+<td>0.11</td>
+<td>0.446</td>
+</tr>
+<tr class="even">
+<td>Mali</td>
+<td>SSA</td>
+<td>1967–2024</td>
+<td>58</td>
+<td>48.0</td>
+<td>8.7</td>
+<td>32.2</td>
+<td>60.7</td>
+<td>703</td>
+<td>121</td>
+<td>514</td>
+<td>910</td>
+<td>0.91</td>
+<td>1.1×10<sup>−22</sup></td>
+<td>0.91</td>
+<td>5.4×10<sup>−23</sup></td>
+<td>0.03</td>
+<td>0.796</td>
+</tr>
+<tr class="odd">
+<td>Malta</td>
+<td>MNA</td>
+<td>1970–2024</td>
+<td>55</td>
+<td>77.2</td>
+<td>4.0</td>
+<td>70.1</td>
+<td>83.4</td>
+<td>15,263</td>
+<td>8,900</td>
+<td>3,133</td>
+<td>34,502</td>
+<td>0.95</td>
+<td>1.3×10<sup>−29</sup></td>
+<td>0.98</td>
+<td>4.7×10<sup>−38</sup></td>
+<td>0.13</td>
+<td>0.359</td>
+</tr>
+<tr class="even">
+<td>Marshall Islands</td>
+<td>EAP</td>
+<td>1970–2024</td>
+<td>55</td>
+<td>63.0</td>
+<td>2.1</td>
+<td>58.8</td>
+<td>67.1</td>
+<td>3,369</td>
+<td>882</td>
+<td>1,980</td>
+<td>5,833</td>
+<td>0.85</td>
+<td>3.8×10<sup>−16</sup></td>
+<td>0.88</td>
+<td>1.1×10<sup>−18</sup></td>
+<td>0.10</td>
+<td>0.479</td>
+</tr>
+<tr class="odd">
+<td>Mauritania</td>
+<td>SSA</td>
+<td>1961–2024</td>
+<td>64</td>
+<td>58.2</td>
+<td>7.0</td>
+<td>44.3</td>
+<td>68.7</td>
+<td>1,519</td>
+<td>144</td>
+<td>1,180</td>
+<td>1,843</td>
+<td>−0.11</td>
+<td>0.380</td>
+<td>−0.08</td>
+<td>0.519</td>
+<td>0.20</td>
+<td>0.110</td>
+</tr>
+<tr class="even">
+<td>Mauritius</td>
+<td>SSA</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>68.9</td>
+<td>4.5</td>
+<td>58.5</td>
+<td>74.5</td>
+<td>5,032</td>
+<td>3,209</td>
+<td>1,419</td>
+<td>11,919</td>
+<td>0.88</td>
+<td>9.4×10<sup>−22</sup></td>
+<td>0.95</td>
+<td>2.1×10<sup>−34</sup></td>
+<td>−0.02</td>
+<td>0.887</td>
+</tr>
+<tr class="odd">
+<td>Mexico</td>
+<td>LAC</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>67.5</td>
+<td>6.6</td>
+<td>53.6</td>
+<td>75.3</td>
+<td>8,072</td>
+<td>1,807</td>
+<td>4,146</td>
+<td>10,297</td>
+<td>0.97</td>
+<td>8.6×10<sup>−40</sup></td>
+<td>0.96</td>
+<td>8.5×10<sup>−37</sup></td>
+<td>0.34</td>
+<td>0.006</td>
+</tr>
+<tr class="even">
+<td>Micronesia, Fed. Sts.</td>
+<td>EAP</td>
+<td>1970–2024</td>
+<td>55</td>
+<td>64.0</td>
+<td>1.7</td>
+<td>59.8</td>
+<td>67.4</td>
+<td>2,579</td>
+<td>359</td>
+<td>1,662</td>
+<td>3,043</td>
+<td>0.90</td>
+<td>3.3×10<sup>−21</sup></td>
+<td>0.89</td>
+<td>5.0×10<sup>−20</sup></td>
+<td>0.08</td>
+<td>0.542</td>
+</tr>
+<tr class="odd">
+<td>Moldova</td>
+<td>ECA</td>
+<td>1990–2024</td>
+<td>35</td>
+<td>68.7</td>
+<td>1.6</td>
+<td>66.2</td>
+<td>71.5</td>
+<td>2,400</td>
+<td>821</td>
+<td>1,316</td>
+<td>3,856</td>
+<td>0.74</td>
+<td>4.5×10<sup>−7</sup></td>
+<td>0.76</td>
+<td>1.1×10<sup>−7</sup></td>
+<td>0.19</td>
+<td>0.270</td>
+</tr>
+<tr class="even">
+<td>Monaco</td>
+<td>ECA</td>
+<td>1970–2024</td>
+<td>55</td>
+<td>80.6</td>
+<td>4.5</td>
+<td>73.3</td>
+<td>86.5</td>
+<td>125,842</td>
+<td>40,171</td>
+<td>72,838</td>
+<td>247,170</td>
+<td>0.86</td>
+<td>3.8×10<sup>−17</sup></td>
+<td>0.92</td>
+<td>2.1×10<sup>−23</sup></td>
+<td>−0.36</td>
+<td>0.008</td>
+</tr>
+<tr class="odd">
+<td>Mongolia</td>
+<td>EAP</td>
+<td>1981–2024</td>
+<td>44</td>
+<td>64.3</td>
+<td>5.6</td>
+<td>55.4</td>
+<td>72.4</td>
+<td>2,473</td>
+<td>1,089</td>
+<td>1,418</td>
+<td>4,627</td>
+<td>0.89</td>
+<td>1.1×10<sup>−15</sup></td>
+<td>0.90</td>
+<td>7.9×10<sup>−17</sup></td>
+<td>−0.02</td>
+<td>0.904</td>
+</tr>
+<tr class="even">
+<td>Montenegro</td>
+<td>ECA</td>
+<td>1997–2024</td>
+<td>28</td>
+<td>75.3</td>
+<td>1.5</td>
+<td>73.1</td>
+<td>77.9</td>
+<td>5,969</td>
+<td>1,231</td>
+<td>4,252</td>
+<td>8,540</td>
+<td>0.85</td>
+<td>1.4×10<sup>−8</sup></td>
+<td>0.86</td>
+<td>5.7×10<sup>−9</sup></td>
+<td>0.13</td>
+<td>0.504</td>
+</tr>
+<tr class="odd">
+<td>Morocco</td>
+<td>MNA</td>
+<td>1966–2024</td>
+<td>59</td>
+<td>63.0</td>
+<td>8.9</td>
+<td>46.5</td>
+<td>75.5</td>
+<td>2,016</td>
+<td>809</td>
+<td>844</td>
+<td>3,516</td>
+<td>0.95</td>
+<td>7.7×10<sup>−30</sup></td>
+<td>0.98</td>
+<td>4.0×10<sup>−44</sup></td>
+<td>0.24</td>
+<td>0.072</td>
+</tr>
+<tr class="even">
+<td>Mozambique</td>
+<td>SSA</td>
+<td>1980–2024</td>
+<td>45</td>
+<td>51.0</td>
+<td>7.4</td>
+<td>38.9</td>
+<td>63.8</td>
+<td>379</td>
+<td>166</td>
+<td>170</td>
+<td>621</td>
+<td>0.97</td>
+<td>5.1×10<sup>−27</sup></td>
+<td>0.97</td>
+<td>3.3×10<sup>−27</sup></td>
+<td>0.27</td>
+<td>0.072</td>
+</tr>
+<tr class="odd">
+<td>Myanmar</td>
+<td>EAP</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>57.4</td>
+<td>6.4</td>
+<td>44.1</td>
+<td>67.1</td>
+<td>449</td>
+<td>419</td>
+<td>123</td>
+<td>1,441</td>
+<td>0.82</td>
+<td>8.7×10<sup>−17</sup></td>
+<td>0.89</td>
+<td>3.0×10<sup>−23</sup></td>
+<td>0.04</td>
+<td>0.745</td>
+</tr>
+<tr class="even">
+<td>Namibia</td>
+<td>SSA</td>
+<td>1980–2024</td>
+<td>45</td>
+<td>58.1</td>
+<td>3.9</td>
+<td>51.9</td>
+<td>67.5</td>
+<td>3,606</td>
+<td>587</td>
+<td>2,857</td>
+<td>4,774</td>
+<td>0.29</td>
+<td>0.052</td>
+<td>0.28</td>
+<td>0.058</td>
+<td>−0.01</td>
+<td>0.960</td>
+</tr>
+<tr class="odd">
+<td>Naoero</td>
+<td>EAP</td>
+<td>1970–2024</td>
+<td>55</td>
+<td>59.6</td>
+<td>1.1</td>
+<td>58.1</td>
+<td>62.3</td>
+<td>17,435</td>
+<td>13,836</td>
+<td>4,200</td>
+<td>43,774</td>
+<td>−0.75</td>
+<td>3.5×10<sup>−11</sup></td>
+<td>−0.70</td>
+<td>2.0×10<sup>−9</sup></td>
+<td>0.09</td>
+<td>0.535</td>
+</tr>
+<tr class="even">
+<td>Nepal</td>
+<td>SAS</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>55.9</td>
+<td>10.6</td>
+<td>38.7</td>
+<td>70.6</td>
+<td>545</td>
+<td>252</td>
+<td>323</td>
+<td>1,180</td>
+<td>0.86</td>
+<td>3.1×10<sup>−20</sup></td>
+<td>0.93</td>
+<td>9.0×10<sup>−29</sup></td>
+<td>0.02</td>
+<td>0.869</td>
+</tr>
+<tr class="odd">
+<td>Netherlands</td>
+<td>ECA</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>77.4</td>
+<td>2.9</td>
+<td>73.3</td>
+<td>82.1</td>
+<td>33,363</td>
+<td>11,240</td>
+<td>14,224</td>
+<td>51,778</td>
+<td>0.98</td>
+<td>4.6×10<sup>−44</sup></td>
+<td>0.95</td>
+<td>8.4×10<sup>−34</sup></td>
+<td>0.06</td>
+<td>0.651</td>
+</tr>
+<tr class="even">
+<td>New Zealand</td>
+<td>EAP</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>76.3</td>
+<td>4.0</td>
+<td>71.0</td>
+<td>82.3</td>
+<td>28,967</td>
+<td>7,348</td>
+<td>17,771</td>
+<td>42,716</td>
+<td>0.97</td>
+<td>6.4×10<sup>−42</sup></td>
+<td>0.97</td>
+<td>2.4×10<sup>−42</sup></td>
+<td>−0.08</td>
+<td>0.516</td>
+</tr>
+<tr class="odd">
+<td>Nicaragua</td>
+<td>LAC</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>62.4</td>
+<td>8.7</td>
+<td>46.4</td>
+<td>75.1</td>
+<td>1,879</td>
+<td>439</td>
+<td>1,176</td>
+<td>2,837</td>
+<td>−0.29</td>
+<td>0.021</td>
+<td>−0.26</td>
+<td>0.035</td>
+<td>0.24</td>
+<td>0.059</td>
+</tr>
+<tr class="even">
+<td>Niger</td>
+<td>SSA</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>46.2</td>
+<td>9.2</td>
+<td>35.3</td>
+<td>61.4</td>
+<td>549</td>
+<td>140</td>
+<td>393</td>
+<td>868</td>
+<td>−0.60</td>
+<td>1.5×10<sup>−7</sup></td>
+<td>−0.59</td>
+<td>2.6×10<sup>−7</sup></td>
+<td>0.13</td>
+<td>0.314</td>
+</tr>
+<tr class="odd">
+<td>Nigeria</td>
+<td>SSA</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>46.3</td>
+<td>5.0</td>
+<td>37.2</td>
+<td>54.6</td>
+<td>1,846</td>
+<td>408</td>
+<td>1,218</td>
+<td>2,586</td>
+<td>0.62</td>
+<td>3.0×10<sup>−8</sup></td>
+<td>0.61</td>
+<td>6.1×10<sup>−8</sup></td>
+<td>0.42</td>
+<td>6.0×10<sup>−4</sup></td>
+</tr>
+<tr class="even">
+<td>North Macedonia</td>
+<td>ECA</td>
+<td>1990–2024</td>
+<td>35</td>
+<td>73.9</td>
+<td>1.6</td>
+<td>71.1</td>
+<td>76.6</td>
+<td>4,303</td>
+<td>1,209</td>
+<td>2,876</td>
+<td>6,629</td>
+<td>0.82</td>
+<td>1.1×10<sup>−9</sup></td>
+<td>0.85</td>
+<td>1.6×10<sup>−10</sup></td>
+<td>0.17</td>
+<td>0.343</td>
+</tr>
+<tr class="odd">
+<td>Northern Mariana Islands</td>
+<td>EAP</td>
+<td>2002–2022</td>
+<td>21</td>
+<td>77.5</td>
+<td>0.6</td>
+<td>75.9</td>
+<td>78.5</td>
+<td>19,828</td>
+<td>3,952</td>
+<td>15,226</td>
+<td>28,989</td>
+<td>−0.52</td>
+<td>0.016</td>
+<td>−0.51</td>
+<td>0.017</td>
+<td>−0.10</td>
+<td>0.689</td>
+</tr>
+<tr class="even">
+<td>Norway</td>
+<td>ECA</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>77.8</td>
+<td>3.2</td>
+<td>73.1</td>
+<td>83.2</td>
+<td>53,602</td>
+<td>21,214</td>
+<td>19,185</td>
+<td>83,757</td>
+<td>0.97</td>
+<td>8.2×10<sup>−42</sup></td>
+<td>0.93</td>
+<td>8.6×10<sup>−30</sup></td>
+<td>−0.18</td>
+<td>0.154</td>
+</tr>
+<tr class="odd">
+<td>Oman</td>
+<td>MNA</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>64.8</td>
+<td>13.9</td>
+<td>35.4</td>
+<td>80.2</td>
+<td>15,246</td>
+<td>5,723</td>
+<td>2,340</td>
+<td>22,819</td>
+<td>0.94</td>
+<td>5.4×10<sup>−32</sup></td>
+<td>0.89</td>
+<td>1.3×10<sup>−22</sup></td>
+<td>0.21</td>
+<td>0.102</td>
+</tr>
+<tr class="even">
+<td>Pakistan</td>
+<td>MNA</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>59.0</td>
+<td>6.2</td>
+<td>44.1</td>
+<td>67.8</td>
+<td>976</td>
+<td>353</td>
+<td>414</td>
+<td>1,642</td>
+<td>0.94</td>
+<td>3.3×10<sup>−32</sup></td>
+<td>0.98</td>
+<td>1.5×10<sup>−47</sup></td>
+<td>0.16</td>
+<td>0.217</td>
+</tr>
+<tr class="odd">
+<td>Palau</td>
+<td>EAP</td>
+<td>1970–2024</td>
+<td>55</td>
+<td>64.6</td>
+<td>3.4</td>
+<td>57.7</td>
+<td>69.4</td>
+<td>13,213</td>
+<td>1,243</td>
+<td>11,331</td>
+<td>16,179</td>
+<td>0.72</td>
+<td>6.5×10<sup>−10</sup></td>
+<td>0.72</td>
+<td>5.2×10<sup>−10</sup></td>
+<td>0.03</td>
+<td>0.809</td>
+</tr>
+<tr class="even">
+<td>Panama</td>
+<td>LAC</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>71.2</td>
+<td>5.4</td>
+<td>60.3</td>
+<td>79.8</td>
+<td>7,432</td>
+<td>4,168</td>
+<td>2,543</td>
+<td>17,123</td>
+<td>0.87</td>
+<td>2.8×10<sup>−21</sup></td>
+<td>0.95</td>
+<td>2.5×10<sup>−33</sup></td>
+<td>0.54</td>
+<td>3.7×10<sup>−6</sup></td>
+</tr>
+<tr class="odd">
+<td>Papua New Guinea</td>
+<td>EAP</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>58.7</td>
+<td>5.5</td>
+<td>45.8</td>
+<td>66.3</td>
+<td>2,083</td>
+<td>309</td>
+<td>1,313</td>
+<td>2,585</td>
+<td>0.74</td>
+<td>1.6×10<sup>−12</sup></td>
+<td>0.76</td>
+<td>2.5×10<sup>−13</sup></td>
+<td>0.33</td>
+<td>0.008</td>
+</tr>
+<tr class="even">
+<td>Paraguay</td>
+<td>LAC</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>67.6</td>
+<td>4.4</td>
+<td>60.2</td>
+<td>74.0</td>
+<td>3,896</td>
+<td>1,497</td>
+<td>1,508</td>
+<td>6,671</td>
+<td>0.94</td>
+<td>1.0×10<sup>−30</sup></td>
+<td>0.93</td>
+<td>5.0×10<sup>−30</sup></td>
+<td>−0.06</td>
+<td>0.637</td>
+</tr>
+<tr class="odd">
+<td>Peru</td>
+<td>LAC</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>65.1</td>
+<td>8.3</td>
+<td>47.7</td>
+<td>77.9</td>
+<td>4,089</td>
+<td>1,263</td>
+<td>2,640</td>
+<td>6,732</td>
+<td>0.71</td>
+<td>2.4×10<sup>−11</sup></td>
+<td>0.70</td>
+<td>6.0×10<sup>−11</sup></td>
+<td>0.05</td>
+<td>0.688</td>
+</tr>
+<tr class="even">
+<td>Philippines</td>
+<td>EAP</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>65.0</td>
+<td>3.7</td>
+<td>59.2</td>
+<td>70.1</td>
+<td>1,990</td>
+<td>711</td>
+<td>1,124</td>
+<td>3,926</td>
+<td>0.79</td>
+<td>4.5×10<sup>−15</sup></td>
+<td>0.84</td>
+<td>1.8×10<sup>−18</sup></td>
+<td>−0.05</td>
+<td>0.711</td>
+</tr>
+<tr class="odd">
+<td>Poland</td>
+<td>ECA</td>
+<td>1990–2024</td>
+<td>35</td>
+<td>75.0</td>
+<td>2.4</td>
+<td>70.6</td>
+<td>78.4</td>
+<td>10,125</td>
+<td>4,022</td>
+<td>4,736</td>
+<td>18,001</td>
+<td>0.90</td>
+<td>1.9×10<sup>−13</sup></td>
+<td>0.95</td>
+<td>2.8×10<sup>−18</sup></td>
+<td>0.14</td>
+<td>0.420</td>
+</tr>
+<tr class="even">
+<td>Portugal</td>
+<td>ECA</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>74.0</td>
+<td>5.7</td>
+<td>62.7</td>
+<td>82.4</td>
+<td>14,183</td>
+<td>5,599</td>
+<td>4,067</td>
+<td>22,664</td>
+<td>0.98</td>
+<td>2.8×10<sup>−43</sup></td>
+<td>0.96</td>
+<td>4.8×10<sup>−36</sup></td>
+<td>0.10</td>
+<td>0.414</td>
+</tr>
+<tr class="odd">
+<td>Puerto Rico (US)</td>
+<td>LAC</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>74.7</td>
+<td>3.9</td>
+<td>68.2</td>
+<td>81.9</td>
+<td>20,400</td>
+<td>7,941</td>
+<td>6,307</td>
+<td>30,979</td>
+<td>0.95</td>
+<td>8.1×10<sup>−33</sup></td>
+<td>0.91</td>
+<td>2.8×10<sup>−26</sup></td>
+<td>−0.02</td>
+<td>0.851</td>
+</tr>
+<tr class="even">
+<td>Qatar</td>
+<td>MNA</td>
+<td>1970–2024</td>
+<td>55</td>
+<td>75.0</td>
+<td>5.2</td>
+<td>64.9</td>
+<td>82.9</td>
+<td>59,439</td>
+<td>12,955</td>
+<td>40,169</td>
+<td>83,533</td>
+<td>0.11</td>
+<td>0.433</td>
+<td>0.14</td>
+<td>0.321</td>
+<td>0.17</td>
+<td>0.214</td>
+</tr>
+<tr class="odd">
+<td>Romania</td>
+<td>ECA</td>
+<td>1990–2024</td>
+<td>35</td>
+<td>72.5</td>
+<td>2.4</td>
+<td>69.0</td>
+<td>76.5</td>
+<td>7,377</td>
+<td>2,751</td>
+<td>4,059</td>
+<td>12,460</td>
+<td>0.92</td>
+<td>1.2×10<sup>−14</sup></td>
+<td>0.94</td>
+<td>1.4×10<sup>−16</sup></td>
+<td>0.01</td>
+<td>0.953</td>
+</tr>
+<tr class="even">
+<td>Russian Federation</td>
+<td>ECA</td>
+<td>1989–2024</td>
+<td>36</td>
+<td>68.5</td>
+<td>2.9</td>
+<td>64.5</td>
+<td>73.4</td>
+<td>7,814</td>
+<td>2,006</td>
+<td>4,516</td>
+<td>11,093</td>
+<td>0.88</td>
+<td>9.1×10<sup>−13</sup></td>
+<td>0.85</td>
+<td>5.3×10<sup>−11</sup></td>
+<td>0.26</td>
+<td>0.137</td>
+</tr>
+<tr class="odd">
+<td>Rwanda</td>
+<td>SSA</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>52.2</td>
+<td>9.7</td>
+<td>12.2</td>
+<td>68.0</td>
+<td>455</td>
+<td>203</td>
+<td>187</td>
+<td>1,043</td>
+<td>0.87</td>
+<td>4.4×10<sup>−21</sup></td>
+<td>0.92</td>
+<td>1.5×10<sup>−27</sup></td>
+<td>0.86</td>
+<td>5.6×10<sup>−20</sup></td>
+</tr>
+<tr class="even">
+<td>Samoa</td>
+<td>EAP</td>
+<td>1970–2024</td>
+<td>55</td>
+<td>68.4</td>
+<td>3.4</td>
+<td>60.4</td>
+<td>71.8</td>
+<td>3,211</td>
+<td>776</td>
+<td>2,350</td>
+<td>4,881</td>
+<td>0.70</td>
+<td>2.2×10<sup>−9</sup></td>
+<td>0.72</td>
+<td>7.7×10<sup>−10</sup></td>
+<td>0.03</td>
+<td>0.807</td>
+</tr>
+<tr class="odd">
+<td>San Marino</td>
+<td>ECA</td>
+<td>1997–2023</td>
+<td>27</td>
+<td>83.0</td>
+<td>1.8</td>
+<td>79.7</td>
+<td>85.7</td>
+<td>50,757</td>
+<td>7,204</td>
+<td>40,507</td>
+<td>62,777</td>
+<td>−0.57</td>
+<td>0.002</td>
+<td>−0.57</td>
+<td>0.002</td>
+<td>0.44</td>
+<td>0.023</td>
+</tr>
+<tr class="even">
+<td>Sao Tome and Principe</td>
+<td>SSA</td>
+<td>1970–2024</td>
+<td>55</td>
+<td>62.1</td>
+<td>3.5</td>
+<td>56.3</td>
+<td>69.9</td>
+<td>1,148</td>
+<td>169</td>
+<td>940</td>
+<td>1,455</td>
+<td>0.66</td>
+<td>5.6×10<sup>−8</sup></td>
+<td>0.64</td>
+<td>1.1×10<sup>−7</sup></td>
+<td>0.06</td>
+<td>0.645</td>
+</tr>
+<tr class="odd">
+<td>Saudi Arabia</td>
+<td>MNA</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>66.5</td>
+<td>10.4</td>
+<td>45.3</td>
+<td>79.0</td>
+<td>29,516</td>
+<td>12,468</td>
+<td>16,039</td>
+<td>59,924</td>
+<td>−0.29</td>
+<td>0.019</td>
+<td>−0.25</td>
+<td>0.046</td>
+<td>0.12</td>
+<td>0.339</td>
+</tr>
+<tr class="even">
+<td>Senegal</td>
+<td>SSA</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>54.4</td>
+<td>9.9</td>
+<td>39.7</td>
+<td>68.9</td>
+<td>1,101</td>
+<td>136</td>
+<td>935</td>
+<td>1,518</td>
+<td>0.56</td>
+<td>1.6×10<sup>−6</sup></td>
+<td>0.55</td>
+<td>2.5×10<sup>−6</sup></td>
+<td>−0.04</td>
+<td>0.769</td>
+</tr>
+<tr class="odd">
+<td>Serbia</td>
+<td>ECA</td>
+<td>1995–2024</td>
+<td>30</td>
+<td>73.9</td>
+<td>1.6</td>
+<td>69.9</td>
+<td>76.1</td>
+<td>5,418</td>
+<td>1,527</td>
+<td>3,012</td>
+<td>8,580</td>
+<td>0.80</td>
+<td>1.1×10<sup>−7</sup></td>
+<td>0.82</td>
+<td>3.3×10<sup>−8</sup></td>
+<td>0.40</td>
+<td>0.034</td>
+</tr>
+<tr class="even">
+<td>Seychelles</td>
+<td>SSA</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>69.5</td>
+<td>4.4</td>
+<td>60.5</td>
+<td>77.2</td>
+<td>9,414</td>
+<td>4,639</td>
+<td>2,932</td>
+<td>19,482</td>
+<td>0.90</td>
+<td>2.2×10<sup>−24</sup></td>
+<td>0.96</td>
+<td>5.0×10<sup>−37</sup></td>
+<td>−0.19</td>
+<td>0.139</td>
+</tr>
+<tr class="odd">
+<td>Sierra Leone</td>
+<td>SSA</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>45.7</td>
+<td>7.6</td>
+<td>33.1</td>
+<td>62.0</td>
+<td>981</td>
+<td>144</td>
+<td>642</td>
+<td>1,206</td>
+<td>0.08</td>
+<td>0.550</td>
+<td>0.08</td>
+<td>0.511</td>
+<td>0.30</td>
+<td>0.016</td>
+</tr>
+<tr class="even">
+<td>Singapore</td>
+<td>EAP</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>75.5</td>
+<td>5.7</td>
+<td>65.6</td>
+<td>83.6</td>
+<td>29,027</td>
+<td>20,386</td>
+<td>3,612</td>
+<td>68,271</td>
+<td>0.97</td>
+<td>9.9×10<sup>−41</sup></td>
+<td>0.99</td>
+<td>1.2×10<sup>−51</sup></td>
+<td>−0.08</td>
+<td>0.548</td>
+</tr>
+<tr class="odd">
+<td>Slovak Republic</td>
+<td>ECA</td>
+<td>1990–2024</td>
+<td>35</td>
+<td>74.6</td>
+<td>2.1</td>
+<td>70.9</td>
+<td>78.4</td>
+<td>12,886</td>
+<td>4,258</td>
+<td>6,843</td>
+<td>19,776</td>
+<td>0.94</td>
+<td>5.2×10<sup>−17</sup></td>
+<td>0.94</td>
+<td>1.3×10<sup>−16</sup></td>
+<td>−0.14</td>
+<td>0.442</td>
+</tr>
+<tr class="even">
+<td>Slovenia</td>
+<td>ECA</td>
+<td>1990–2024</td>
+<td>35</td>
+<td>77.9</td>
+<td>3.1</td>
+<td>73.2</td>
+<td>82.3</td>
+<td>18,877</td>
+<td>4,249</td>
+<td>11,736</td>
+<td>26,135</td>
+<td>0.96</td>
+<td>5.4×10<sup>−19</sup></td>
+<td>0.96</td>
+<td>1.8×10<sup>−19</sup></td>
+<td>0.32</td>
+<td>0.065</td>
+</tr>
+<tr class="odd">
+<td>Solomon Islands</td>
+<td>EAP</td>
+<td>1980–2024</td>
+<td>45</td>
+<td>67.5</td>
+<td>1.8</td>
+<td>63.7</td>
+<td>70.7</td>
+<td>1,944</td>
+<td>189</td>
+<td>1,505</td>
+<td>2,300</td>
+<td>−0.03</td>
+<td>0.839</td>
+<td>−0.02</td>
+<td>0.872</td>
+<td>0.07</td>
+<td>0.640</td>
+</tr>
+<tr class="even">
+<td>Somalia, Fed. Rep.</td>
+<td>SSA</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>48.3</td>
+<td>6.1</td>
+<td>25.0</td>
+<td>59.0</td>
+<td>305</td>
+<td>83</td>
+<td>210</td>
+<td>507</td>
+<td>0.43</td>
+<td>3.0×10<sup>−4</sup></td>
+<td>0.38</td>
+<td>0.002</td>
+<td>−0.04</td>
+<td>0.727</td>
+</tr>
+<tr class="odd">
+<td>South Africa</td>
+<td>SSA</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>59.4</td>
+<td>4.0</td>
+<td>52.6</td>
+<td>66.3</td>
+<td>5,145</td>
+<td>629</td>
+<td>3,993</td>
+<td>6,171</td>
+<td>0.34</td>
+<td>0.006</td>
+<td>0.33</td>
+<td>0.008</td>
+<td>−0.09</td>
+<td>0.501</td>
+</tr>
+<tr class="even">
+<td>Spain</td>
+<td>ECA</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>77.3</td>
+<td>4.5</td>
+<td>69.1</td>
+<td>83.9</td>
+<td>19,197</td>
+<td>6,732</td>
+<td>6,285</td>
+<td>29,245</td>
+<td>0.97</td>
+<td>1.9×10<sup>−42</sup></td>
+<td>0.96</td>
+<td>9.9×10<sup>−37</sup></td>
+<td>0.26</td>
+<td>0.038</td>
+</tr>
+<tr class="odd">
+<td>Sri Lanka</td>
+<td>SAS</td>
+<td>1961–2024</td>
+<td>64</td>
+<td>69.7</td>
+<td>4.6</td>
+<td>61.2</td>
+<td>77.7</td>
+<td>1,964</td>
+<td>1,263</td>
+<td>659</td>
+<td>4,493</td>
+<td>0.93</td>
+<td>6.0×10<sup>−29</sup></td>
+<td>0.97</td>
+<td>2.7×10<sup>−41</sup></td>
+<td>0.08</td>
+<td>0.540</td>
+</tr>
+<tr class="even">
+<td>St.&nbsp;Kitts and Nevis</td>
+<td>LAC</td>
+<td>1977–2024</td>
+<td>48</td>
+<td>68.6</td>
+<td>2.8</td>
+<td>63.7</td>
+<td>72.3</td>
+<td>13,704</td>
+<td>5,610</td>
+<td>4,474</td>
+<td>22,298</td>
+<td>0.95</td>
+<td>1.1×10<sup>−24</sup></td>
+<td>0.95</td>
+<td>3.6×10<sup>−24</sup></td>
+<td>0.19</td>
+<td>0.201</td>
+</tr>
+<tr class="odd">
+<td>St.&nbsp;Lucia</td>
+<td>LAC</td>
+<td>1977–2024</td>
+<td>48</td>
+<td>71.1</td>
+<td>1.7</td>
+<td>67.0</td>
+<td>73.0</td>
+<td>8,631</td>
+<td>2,216</td>
+<td>4,232</td>
+<td>12,191</td>
+<td>0.88</td>
+<td>1.8×10<sup>−16</sup></td>
+<td>0.88</td>
+<td>2.5×10<sup>−16</sup></td>
+<td>0.14</td>
+<td>0.336</td>
+</tr>
+<tr class="even">
+<td>St.&nbsp;Vincent and the Grenadines</td>
+<td>LAC</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>68.2</td>
+<td>3.6</td>
+<td>58.6</td>
+<td>71.4</td>
+<td>4,489</td>
+<td>2,366</td>
+<td>1,645</td>
+<td>9,485</td>
+<td>0.71</td>
+<td>4.8×10<sup>−11</sup></td>
+<td>0.80</td>
+<td>7.5×10<sup>−16</sup></td>
+<td>0.05</td>
+<td>0.722</td>
+</tr>
+<tr class="odd">
+<td>Sudan</td>
+<td>SSA</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>57.0</td>
+<td>5.2</td>
+<td>49.6</td>
+<td>66.5</td>
+<td>954</td>
+<td>235</td>
+<td>578</td>
+<td>1,388</td>
+<td>0.67</td>
+<td>1.3×10<sup>−9</sup></td>
+<td>0.65</td>
+<td>5.4×10<sup>−9</sup></td>
+<td>0.01</td>
+<td>0.919</td>
+</tr>
+<tr class="even">
+<td>Suriname</td>
+<td>LAC</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>64.0</td>
+<td>4.8</td>
+<td>56.6</td>
+<td>73.8</td>
+<td>6,738</td>
+<td>1,322</td>
+<td>3,940</td>
+<td>9,303</td>
+<td>0.76</td>
+<td>1.8×10<sup>−13</sup></td>
+<td>0.74</td>
+<td>1.7×10<sup>−12</sup></td>
+<td>0.07</td>
+<td>0.575</td>
+</tr>
+<tr class="odd">
+<td>Sweden</td>
+<td>ECA</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>78.2</td>
+<td>3.2</td>
+<td>73.0</td>
+<td>84.1</td>
+<td>36,367</td>
+<td>11,413</td>
+<td>16,812</td>
+<td>54,316</td>
+<td>0.99</td>
+<td>2.4×10<sup>−56</sup></td>
+<td>0.98</td>
+<td>3.2×10<sup>−45</sup></td>
+<td>0.20</td>
+<td>0.113</td>
+</tr>
+<tr class="even">
+<td>Switzerland</td>
+<td>ECA</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>78.1</td>
+<td>4.1</td>
+<td>71.2</td>
+<td>84.4</td>
+<td>67,397</td>
+<td>15,882</td>
+<td>36,945</td>
+<td>93,360</td>
+<td>0.99</td>
+<td>1.0×10<sup>−56</sup></td>
+<td>0.98</td>
+<td>6.6×10<sup>−44</sup></td>
+<td>0.30</td>
+<td>0.017</td>
+</tr>
+<tr class="odd">
+<td>Syrian Arab Republic</td>
+<td>MNA</td>
+<td>1960–2022</td>
+<td>63</td>
+<td>66.5</td>
+<td>5.7</td>
+<td>52.7</td>
+<td>73.5</td>
+<td>1,004</td>
+<td>284</td>
+<td>517</td>
+<td>1,543</td>
+<td>0.77</td>
+<td>2.2×10<sup>−13</sup></td>
+<td>0.79</td>
+<td>8.2×10<sup>−15</sup></td>
+<td>0.33</td>
+<td>0.010</td>
+</tr>
+<tr class="even">
+<td>Tajikistan</td>
+<td>ECA</td>
+<td>1985–2024</td>
+<td>40</td>
+<td>65.7</td>
+<td>4.3</td>
+<td>55.5</td>
+<td>71.9</td>
+<td>891</td>
+<td>365</td>
+<td>370</td>
+<td>1,496</td>
+<td>0.25</td>
+<td>0.119</td>
+<td>0.31</td>
+<td>0.049</td>
+<td>0.28</td>
+<td>0.081</td>
+</tr>
+<tr class="odd">
+<td>Tanzania</td>
+<td>SSA</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>53.9</td>
+<td>7.2</td>
+<td>42.6</td>
+<td>67.2</td>
+<td>717</td>
+<td>213</td>
+<td>477</td>
+<td>1,121</td>
+<td>0.42</td>
+<td>5.2×10<sup>−4</sup></td>
+<td>0.41</td>
+<td>6.8×10<sup>−4</sup></td>
+<td>0.07</td>
+<td>0.583</td>
+</tr>
+<tr class="even">
+<td>Thailand</td>
+<td>EAP</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>66.9</td>
+<td>8.3</td>
+<td>50.6</td>
+<td>77.6</td>
+<td>3,084</td>
+<td>1,973</td>
+<td>592</td>
+<td>6,617</td>
+<td>0.93</td>
+<td>6.2×10<sup>−30</sup></td>
+<td>0.99</td>
+<td>1.1×10<sup>−56</sup></td>
+<td>0.05</td>
+<td>0.702</td>
+</tr>
+<tr class="odd">
+<td>Timor-Leste</td>
+<td>EAP</td>
+<td>1990–2024</td>
+<td>35</td>
+<td>59.0</td>
+<td>8.1</td>
+<td>45.1</td>
+<td>67.9</td>
+<td>1,114</td>
+<td>321</td>
+<td>631</td>
+<td>2,016</td>
+<td>0.78</td>
+<td>3.3×10<sup>−8</sup></td>
+<td>0.85</td>
+<td>8.6×10<sup>−11</sup></td>
+<td>0.72</td>
+<td>1.9×10<sup>−6</sup></td>
+</tr>
+<tr class="even">
+<td>Togo</td>
+<td>SSA</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>53.5</td>
+<td>5.2</td>
+<td>43.5</td>
+<td>62.9</td>
+<td>755</td>
+<td>112</td>
+<td>449</td>
+<td>1,054</td>
+<td>0.58</td>
+<td>4.1×10<sup>−7</sup></td>
+<td>0.58</td>
+<td>4.4×10<sup>−7</sup></td>
+<td>0.15</td>
+<td>0.222</td>
+</tr>
+<tr class="odd">
+<td>Tonga</td>
+<td>EAP</td>
+<td>1981–2024</td>
+<td>44</td>
+<td>69.8</td>
+<td>2.1</td>
+<td>66.3</td>
+<td>73.1</td>
+<td>3,733</td>
+<td>599</td>
+<td>2,589</td>
+<td>4,780</td>
+<td>0.95</td>
+<td>5.3×10<sup>−22</sup></td>
+<td>0.95</td>
+<td>2.4×10<sup>−22</sup></td>
+<td>0.10</td>
+<td>0.540</td>
+</tr>
+<tr class="even">
+<td>Trinidad and Tobago</td>
+<td>LAC</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>68.2</td>
+<td>3.1</td>
+<td>62.5</td>
+<td>73.6</td>
+<td>10,343</td>
+<td>5,119</td>
+<td>4,290</td>
+<td>20,033</td>
+<td>0.93</td>
+<td>3.8×10<sup>−29</sup></td>
+<td>0.95</td>
+<td>1.5×10<sup>−32</sup></td>
+<td>0.14</td>
+<td>0.276</td>
+</tr>
+<tr class="odd">
+<td>Tunisia</td>
+<td>MNA</td>
+<td>1961–2024</td>
+<td>64</td>
+<td>66.5</td>
+<td>9.4</td>
+<td>44.3</td>
+<td>76.7</td>
+<td>2,530</td>
+<td>1,049</td>
+<td>1,057</td>
+<td>4,153</td>
+<td>0.88</td>
+<td>3.1×10<sup>−21</sup></td>
+<td>0.93</td>
+<td>1.4×10<sup>−29</sup></td>
+<td>0.05</td>
+<td>0.700</td>
+</tr>
+<tr class="even">
+<td>Turkiye</td>
+<td>ECA</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>67.0</td>
+<td>8.2</td>
+<td>50.8</td>
+<td>77.7</td>
+<td>6,388</td>
+<td>3,483</td>
+<td>2,411</td>
+<td>15,395</td>
+<td>0.87</td>
+<td>1.4×10<sup>−20</sup></td>
+<td>0.96</td>
+<td>1.4×10<sup>−35</sup></td>
+<td>−0.03</td>
+<td>0.815</td>
+</tr>
+<tr class="odd">
+<td>Turkmenistan</td>
+<td>ECA</td>
+<td>1987–2024</td>
+<td>38</td>
+<td>66.6</td>
+<td>2.5</td>
+<td>63.5</td>
+<td>70.2</td>
+<td>4,011</td>
+<td>1,988</td>
+<td>1,812</td>
+<td>8,230</td>
+<td>0.87</td>
+<td>1.1×10<sup>−12</sup></td>
+<td>0.89</td>
+<td>6.8×10<sup>−14</sup></td>
+<td>0.34</td>
+<td>0.041</td>
+</tr>
+<tr class="even">
+<td>Tuvalu</td>
+<td>EAP</td>
+<td>1970–2024</td>
+<td>55</td>
+<td>62.5</td>
+<td>3.0</td>
+<td>54.7</td>
+<td>67.3</td>
+<td>2,728</td>
+<td>813</td>
+<td>1,315</td>
+<td>4,383</td>
+<td>0.76</td>
+<td>2.3×10<sup>−11</sup></td>
+<td>0.72</td>
+<td>8.2×10<sup>−10</sup></td>
+<td>−0.13</td>
+<td>0.345</td>
+</tr>
+<tr class="odd">
+<td>Uganda</td>
+<td>SSA</td>
+<td>1982–2024</td>
+<td>43</td>
+<td>54.8</td>
+<td>8.3</td>
+<td>43.3</td>
+<td>68.5</td>
+<td>615</td>
+<td>224</td>
+<td>330</td>
+<td>986</td>
+<td>0.99</td>
+<td>6.6×10<sup>−35</sup></td>
+<td>0.97</td>
+<td>8.4×10<sup>−27</sup></td>
+<td>−0.09</td>
+<td>0.564</td>
+</tr>
+<tr class="even">
+<td>Ukraine</td>
+<td>ECA</td>
+<td>1987–2024</td>
+<td>38</td>
+<td>70.1</td>
+<td>2.4</td>
+<td>67.1</td>
+<td>74.7</td>
+<td>2,184</td>
+<td>532</td>
+<td>1,312</td>
+<td>3,321</td>
+<td>0.43</td>
+<td>0.007</td>
+<td>0.47</td>
+<td>0.003</td>
+<td>0.10</td>
+<td>0.573</td>
+</tr>
+<tr class="odd">
+<td>United Arab Emirates</td>
+<td>MNA</td>
+<td>1970–2024</td>
+<td>55</td>
+<td>74.4</td>
+<td>6.8</td>
+<td>60.8</td>
+<td>83.1</td>
+<td>64,276</td>
+<td>23,394</td>
+<td>39,878</td>
+<td>117,073</td>
+<td>−0.74</td>
+<td>6.9×10<sup>−11</sup></td>
+<td>−0.79</td>
+<td>1.1×10<sup>−12</sup></td>
+<td>0.13</td>
+<td>0.367</td>
+</tr>
+<tr class="even">
+<td>United Kingdom</td>
+<td>ECA</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>76.3</td>
+<td>3.6</td>
+<td>70.8</td>
+<td>81.4</td>
+<td>32,063</td>
+<td>11,028</td>
+<td>15,324</td>
+<td>48,410</td>
+<td>0.99</td>
+<td>1.2×10<sup>−52</sup></td>
+<td>0.98</td>
+<td>5.9×10<sup>−47</sup></td>
+<td>0.28</td>
+<td>0.023</td>
+</tr>
+<tr class="odd">
+<td>United States</td>
+<td>NAM</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>75.0</td>
+<td>3.0</td>
+<td>69.8</td>
+<td>78.9</td>
+<td>40,950</td>
+<td>13,780</td>
+<td>18,992</td>
+<td>66,857</td>
+<td>0.95</td>
+<td>1.3×10<sup>−32</sup></td>
+<td>0.97</td>
+<td>2.5×10<sup>−40</sup></td>
+<td>−0.03</td>
+<td>0.806</td>
+</tr>
+<tr class="even">
+<td>Uruguay</td>
+<td>LAC</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>73.0</td>
+<td>3.4</td>
+<td>67.7</td>
+<td>78.4</td>
+<td>10,580</td>
+<td>4,046</td>
+<td>6,380</td>
+<td>19,024</td>
+<td>0.91</td>
+<td>3.8×10<sup>−25</sup></td>
+<td>0.94</td>
+<td>1.5×10<sup>−31</sup></td>
+<td>−0.18</td>
+<td>0.156</td>
+</tr>
+<tr class="odd">
+<td>Uzbekistan</td>
+<td>ECA</td>
+<td>1987–2024</td>
+<td>38</td>
+<td>68.2</td>
+<td>2.9</td>
+<td>64.7</td>
+<td>72.5</td>
+<td>2,301</td>
+<td>1,012</td>
+<td>1,248</td>
+<td>4,478</td>
+<td>0.95</td>
+<td>2.5×10<sup>−19</sup></td>
+<td>0.97</td>
+<td>1.6×10<sup>−24</sup></td>
+<td>0.76</td>
+<td>5.5×10<sup>−8</sup></td>
+</tr>
+<tr class="even">
+<td>Vanuatu</td>
+<td>EAP</td>
+<td>1979–2024</td>
+<td>46</td>
+<td>67.9</td>
+<td>2.8</td>
+<td>60.9</td>
+<td>71.7</td>
+<td>3,082</td>
+<td>159</td>
+<td>2,724</td>
+<td>3,350</td>
+<td>0.38</td>
+<td>0.009</td>
+<td>0.38</td>
+<td>0.009</td>
+<td>0.19</td>
+<td>0.214</td>
+</tr>
+<tr class="odd">
+<td>Venezuela, RB</td>
+<td>LAC</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>69.4</td>
+<td>4.1</td>
+<td>58.4</td>
+<td>73.3</td>
+<td>3,947</td>
+<td>957</td>
+<td>1,256</td>
+<td>5,126</td>
+<td>−0.40</td>
+<td>9.7×10<sup>−4</sup></td>
+<td>−0.36</td>
+<td>0.003</td>
+<td>0.21</td>
+<td>0.098</td>
+</tr>
+<tr class="even">
+<td>Viet Nam</td>
+<td>EAP</td>
+<td>1984–2024</td>
+<td>41</td>
+<td>72.2</td>
+<td>2.4</td>
+<td>66.9</td>
+<td>75.4</td>
+<td>1,759</td>
+<td>1,020</td>
+<td>595</td>
+<td>4,013</td>
+<td>0.83</td>
+<td>2.1×10<sup>−11</sup></td>
+<td>0.93</td>
+<td>7.2×10<sup>−19</sup></td>
+<td>0.02</td>
+<td>0.891</td>
+</tr>
+<tr class="odd">
+<td>Virgin Islands (U.S.)</td>
+<td>LAC</td>
+<td>2002–2022</td>
+<td>21</td>
+<td>78.5</td>
+<td>1.0</td>
+<td>76.9</td>
+<td>80.3</td>
+<td>40,567</td>
+<td>5,796</td>
+<td>34,007</td>
+<td>50,175</td>
+<td>−0.83</td>
+<td>4.0×10<sup>−6</sup></td>
+<td>−0.82</td>
+<td>5.0×10<sup>−6</sup></td>
+<td>−0.23</td>
+<td>0.333</td>
+</tr>
+<tr class="even">
+<td>West Bank and Gaza</td>
+<td>MNA</td>
+<td>1994–2024</td>
+<td>31</td>
+<td>72.2</td>
+<td>2.5</td>
+<td>65.2</td>
+<td>76.7</td>
+<td>2,756</td>
+<td>481</td>
+<td>1,837</td>
+<td>3,483</td>
+<td>0.70</td>
+<td>1.1×10<sup>−5</sup></td>
+<td>0.68</td>
+<td>2.2×10<sup>−5</sup></td>
+<td>−0.06</td>
+<td>0.759</td>
+</tr>
+<tr class="odd">
+<td>Yemen, Rep.</td>
+<td>MNA</td>
+<td>1990–2018</td>
+<td>29</td>
+<td>64.1</td>
+<td>3.1</td>
+<td>58.5</td>
+<td>68.0</td>
+<td>1,931</td>
+<td>344</td>
+<td>1,079</td>
+<td>2,356</td>
+<td>−0.01</td>
+<td>0.976</td>
+<td>−0.07</td>
+<td>0.715</td>
+<td>0.66</td>
+<td>1.4×10<sup>−4</sup></td>
+</tr>
+<tr class="even">
+<td>Zambia</td>
+<td>SSA</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>53.8</td>
+<td>5.4</td>
+<td>45.7</td>
+<td>66.5</td>
+<td>1,086</td>
+<td>190</td>
+<td>765</td>
+<td>1,355</td>
+<td>0.82</td>
+<td>1.1×10<sup>−16</sup></td>
+<td>0.82</td>
+<td>1.2×10<sup>−16</sup></td>
+<td>0.38</td>
+<td>0.002</td>
+</tr>
+<tr class="odd">
+<td>Zimbabwe</td>
+<td>SSA</td>
+<td>1960–2024</td>
+<td>65</td>
+<td>55.5</td>
+<td>5.2</td>
+<td>44.5</td>
+<td>63.1</td>
+<td>1,418</td>
+<td>235</td>
+<td>803</td>
+<td>1,789</td>
+<td>0.17</td>
+<td>0.176</td>
+<td>0.22</td>
+<td>0.078</td>
+<td>0.19</td>
+<td>0.123</td>
+</tr>
+</tbody>
+</table>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+(function() {
+  var tick = '#94a3b8', grid = '#1e2d45';
+  var crossSection = [{"x":256800.0,"y":89.8},{"x":85412.0,"y":86.7},{"x":67216.0,"y":85.3},{"x":33836.0,"y":85.2},{"x":54220.0,"y":84.2},{"x":59880.0,"y":84.2},{"x":50562.0,"y":84.0},{"x":82139.0,"y":84.0},{"x":100624.0,"y":83.9},{"x":46812.0,"y":83.8},{"x":40906.0,"y":83.6},{"x":65058.0,"y":83.5},{"x":35674.0,"y":83.4},{"x":133231.0,"y":83.4},{"x":52004.0,"y":83.1},{"x":33493.0,"y":83.0},{"x":206781.0,"y":83.0},{"x":39277.0,"y":83.0},{"x":87497.0,"y":82.9},{"x":49076.0,"y":82.9},{"x":54950.0,"y":82.9},{"x":56580.0,"y":82.7},{"x":44700.0,"y":82.6},{"x":55291.0,"y":82.3},{"x":49944.0,"y":82.2},{"x":52834.0,"y":82.2},{"x":32660.0,"y":82.2},{"x":68044.0,"y":82.1},{"x":106819.0,"y":82.0},{"x":63516.0,"y":81.9},{"x":27635.0,"y":81.9},{"x":23344.0,"y":81.9},{"x":54777.0,"y":81.9},{"x":81032.0,"y":80.9},{"x":29290.0,"y":80.4},{"x":16942.0,"y":80.3},{"x":81817.0,"y":80.3},{"x":17067.0,"y":80.3},{"x":36624.0,"y":80.2},{"x":9731.0,"y":79.9},{"x":49851.0,"y":79.9},{"x":34076.0,"y":79.6},{"x":18797.0,"y":79.2},{"x":3478.0,"y":79.2},{"x":25584.0,"y":79.0},{"x":23019.0,"y":78.9},{"x":32891.0,"y":78.9},{"x":14262.0,"y":78.8},{"x":6300.0,"y":78.8},{"x":12951.0,"y":78.7},{"x":31762.0,"y":78.6},{"x":8663.0,"y":78.5},{"x":30264.0,"y":78.4},{"x":21495.0,"y":78.3},{"x":12260.0,"y":78.2},{"x":7195.0,"y":78.2},{"x":5370.0,"y":77.9},{"x":6027.0,"y":77.7},{"x":22184.0,"y":77.7},{"x":12588.0,"y":77.4},{"x":21028.0,"y":77.4},{"x":3951.0,"y":77.3},{"x":8674.0,"y":77.3},{"x":36157.0,"y":77.2},{"x":24615.0,"y":77.2},{"x":18244.0,"y":76.9},{"x":3799.0,"y":76.8},{"x":22145.0,"y":76.7},{"x":38232.0,"y":76.7},{"x":13375.0,"y":76.7},{"x":8159.0,"y":76.7},{"x":11386.0,"y":76.6},{"x":4466.0,"y":76.5},{"x":18308.0,"y":76.5},{"x":22710.0,"y":76.4},{"x":10378.0,"y":76.3},{"x":11414.0,"y":76.3},{"x":7542.0,"y":76.3},{"x":2879.0,"y":76.2},{"x":4323.0,"y":76.1},{"x":27786.0,"y":76.1},{"x":15853.0,"y":76.1},{"x":22231.0,"y":76.0},{"x":5365.0,"y":75.9},{"x":7133.0,"y":75.9},{"x":4823.0,"y":75.7},{"x":3483.0,"y":75.7},{"x":5049.0,"y":75.6},{"x":11270.0,"y":75.4},{"x":12282.0,"y":75.3},{"x":15611.0,"y":75.2},{"x":2551.0,"y":75.2},{"x":6793.0,"y":75.2},{"x":3457.0,"y":75.0},{"x":6738.0,"y":74.9},{"x":7001.0,"y":74.9},{"x":5926.0,"y":74.8},{"x":2609.0,"y":74.7},{"x":7897.0,"y":74.7},{"x":13861.0,"y":74.6},{"x":3617.0,"y":74.5},{"x":4795.0,"y":74.3},{"x":7425.0,"y":74.3},{"x":3814.0,"y":74.2},{"x":5965.0,"y":73.7},{"x":3831.0,"y":73.7},{"x":4876.0,"y":73.6},{"x":5758.0,"y":73.5},{"x":12879.0,"y":73.3},{"x":3227.0,"y":73.1},{"x":633.0,"y":73.0},{"x":1382.0,"y":73.0},{"x":2138.0,"y":72.9},{"x":8284.0,"y":72.8},{"x":5522.0,"y":72.7},{"x":4275.0,"y":72.5},{"x":6232.0,"y":72.4},{"x":20474.0,"y":72.4},{"x":14159.0,"y":72.3},{"x":1055.0,"y":72.1},{"x":1178.0,"y":71.9},{"x":6034.0,"y":71.9},{"x":5839.0,"y":71.9},{"x":2430.0,"y":71.4},{"x":1224.0,"y":70.8},{"x":3804.0,"y":70.8},{"x":1698.0,"y":70.6},{"x":5140.0,"y":70.5},{"x":1502.0,"y":70.5},{"x":1943.0,"y":70.4},{"x":7803.0,"y":70.4},{"x":1360.0,"y":70.3},{"x":6800.0,"y":70.1},{"x":2384.0,"y":70.1},{"x":2966.0,"y":70.1},{"x":1002.0,"y":69.7},{"x":2067.0,"y":69.0},{"x":7888.0,"y":68.9},{"x":509.0,"y":68.8},{"x":2530.0,"y":68.2},{"x":251.0,"y":68.1},{"x":1560.0,"y":67.8},{"x":797.0,"y":67.8},{"x":2991.0,"y":67.7},{"x":1056.0,"y":67.7},{"x":2195.0,"y":67.2},{"x":1331.0,"y":66.9},{"x":1027.0,"y":66.6},{"x":7826.0,"y":66.4},{"x":3381.0,"y":65.9},{"x":4188.0,"y":65.9},{"x":2136.0,"y":65.9},{"x":1706.0,"y":65.6},{"x":1555.0,"y":64.6},{"x":988.0,"y":64.5},{"x":1720.0,"y":64.2},{"x":873.0,"y":64.2},{"x":6678.0,"y":63.9},{"x":2592.0,"y":63.2},{"x":1044.0,"y":63.2},{"x":1394.0,"y":63.0},{"x":2916.0,"y":62.9},{"x":660.0,"y":62.6},{"x":2139.0,"y":62.2},{"x":799.0,"y":61.6},{"x":638.0,"y":60.9},{"x":3756.0,"y":60.7},{"x":916.0,"y":60.2},{"x":949.0,"y":60.0},{"x":758.0,"y":59.4},{"x":622.0,"y":58.3},{"x":597.0,"y":56.5},{"x":496.0,"y":56.4},{"x":414.0,"y":54.4},{"x":2478.0,"y":72.9}];
+  var us = [{"x":18991.5,"y":69.77,"year":1960},{"x":19108.9,"y":70.27,"year":1961},{"x":19965.1,"y":70.12,"year":1962},{"x":20545.8,"y":69.92,"year":1963},{"x":21437.6,"y":70.17,"year":1964},{"x":22526.2,"y":70.21,"year":1965},{"x":23714.9,"y":70.21,"year":1966},{"x":24044.6,"y":70.56,"year":1967},{"x":24948.4,"y":69.95,"year":1968},{"x":25471.6,"y":70.51,"year":1969},{"x":25231.1,"y":70.81,"year":1970},{"x":25734.5,"y":71.11,"year":1971},{"x":26798.5,"y":71.16,"year":1972},{"x":28042.6,"y":71.36,"year":1973},{"x":27637.3,"y":71.96,"year":1974},{"x":27309.9,"y":72.6,"year":1975},{"x":28509.1,"y":72.86,"year":1976},{"x":29529.0,"y":73.26,"year":1977},{"x":30835.0,"y":73.36,"year":1978},{"x":31462.1,"y":73.8,"year":1979},{"x":31081.6,"y":73.61,"year":1980},{"x":31559.1,"y":74.01,"year":1981},{"x":30696.1,"y":74.36,"year":1982},{"x":31810.9,"y":74.46,"year":1983},{"x":33818.8,"y":74.56,"year":1984},{"x":34918.1,"y":74.56,"year":1985},{"x":35794.9,"y":74.61,"year":1986},{"x":36701.9,"y":74.77,"year":1987},{"x":37889.4,"y":74.77,"year":1988},{"x":38911.5,"y":75.02,"year":1989},{"x":39200.1,"y":75.21,"year":1990},{"x":38637.8,"y":75.37,"year":1991},{"x":39447.9,"y":75.62,"year":1992},{"x":40002.5,"y":75.42,"year":1993},{"x":41107.0,"y":75.62,"year":1994},{"x":41710.8,"y":75.62,"year":1995},{"x":42783.8,"y":76.03,"year":1996},{"x":44151.7,"y":76.43,"year":1997},{"x":45596.4,"y":76.58,"year":1998},{"x":47234.2,"y":76.58,"year":1999},{"x":48616.3,"y":76.64,"year":2000},{"x":48597.4,"y":76.84,"year":2001},{"x":48967.4,"y":76.94,"year":2002},{"x":49905.5,"y":77.04,"year":2003},{"x":51348.3,"y":77.49,"year":2004},{"x":52649.6,"y":77.49,"year":2005},{"x":53596.3,"y":77.69,"year":2006},{"x":54152.8,"y":77.99,"year":2007},{"x":53704.0,"y":78.04,"year":2008},{"x":51863.6,"y":78.39,"year":2009},{"x":52812.7,"y":78.54,"year":2010},{"x":53215.5,"y":78.64,"year":2011},{"x":54000.8,"y":78.74,"year":2012},{"x":54728.9,"y":78.74,"year":2013},{"x":55665.2,"y":78.84,"year":2014},{"x":56849.5,"y":78.69,"year":2015},{"x":57430.8,"y":78.54,"year":2016},{"x":58436.0,"y":78.54,"year":2017},{"x":59817.7,"y":78.64,"year":2018},{"x":61048.0,"y":78.79,"year":2019},{"x":59533.6,"y":76.98,"year":2020},{"x":63096.8,"y":76.33,"year":2021},{"x":64322.2,"y":77.43,"year":2022},{"x":65667.3,"y":78.39,"year":2023},{"x":66856.5,"y":78.89,"year":2024}];
+
+  new Chart(document.getElementById('crossPlot'), {
+    type: 'scatter',
+    data: { datasets: [{ label: 'Country', data: crossSection, backgroundColor: 'rgba(96,165,250,0.55)', pointRadius: 4 }] },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      scales: {
+        x: { type: 'logarithmic', title: { display: true, text: 'GDP per capita (current US$, log scale)', color: tick }, ticks: { color: tick }, grid: { color: grid } },
+        y: { title: { display: true, text: 'Life expectancy (years)', color: tick }, ticks: { color: tick }, grid: { color: grid } }
+      },
+      plugins: { legend: { display: false },
+        tooltip: { callbacks: { label: function(ctx) { var d = ctx.raw; return '$' + Math.round(d.x).toLocaleString() + ', ' + d.y + ' yrs'; } } } }
+    }
+  });
+
+  new Chart(document.getElementById('tsPlot'), {
+    type: 'scatter',
+    data: { datasets: [{ label: 'United States, year', data: us, backgroundColor: 'rgba(245,158,11,0.75)', pointRadius: 4 }] },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      scales: {
+        x: { type: 'linear', title: { display: true, text: 'GDP per capita (constant 2015 US$)', color: tick }, ticks: { color: tick }, grid: { color: grid } },
+        y: { title: { display: true, text: 'Life expectancy (years)', color: tick }, ticks: { color: tick }, grid: { color: grid } }
+      },
+      plugins: { legend: { display: false },
+        tooltip: { callbacks: { label: function(ctx) { var d = ctx.raw; return d.year + ': $' + Math.round(d.x).toLocaleString() + ', ' + d.y.toFixed(1) + ' yrs'; } } } }
+    }
+  });
+
+  var D = [{"c":"Afghanistan","k":"MNA","x":453,"a":0.543,"b":0.083},{"c":"Albania","k":"ECA","x":2927,"a":0.848,"b":0.163},{"c":"Algeria","k":"MNA","x":3632,"a":0.858,"b":0.457},{"c":"American Samoa","k":"EAP","x":12732,"a":-0.153,"b":0.166},{"c":"Andorra","k":"ECA","x":35726,"a":0.129,"b":0.498},{"c":"Angola","k":"SSA","x":2845,"a":0.526,"b":0.336},{"c":"Antigua and Barbuda","k":"LAC","x":14150,"a":0.755,"b":-0.1},{"c":"Argentina","k":"LAC","x":10448,"a":0.828,"b":-0.029},{"c":"Armenia","k":"ECA","x":2591,"a":0.872,"b":0.178},{"c":"Aruba","k":"LAC","x":26856,"a":0.511,"b":0.151},{"c":"Australia","k":"EAP","x":39964,"a":0.986,"b":-0.087},{"c":"Austria","k":"ECA","x":31525,"a":0.963,"b":0.318},{"c":"Azerbaijan","k":"ECA","x":3631,"a":0.88,"b":0.336},{"c":"Bahamas, The","k":"LAC","x":28019,"a":0.744,"b":-0.131},{"c":"Bahrain","k":"MNA","x":22154,"a":0.691,"b":0.159},{"c":"Bangladesh","k":"SAS","x":720,"a":0.875,"b":-0.29},{"c":"Barbados","k":"LAC","x":18159,"a":0.928,"b":-0.036},{"c":"Belarus","k":"ECA","x":4404,"a":0.841,"b":0.187},{"c":"Belgium","k":"ECA","x":29791,"a":0.962,"b":0.354},{"c":"Belize","k":"LAC","x":4181,"a":0.918,"b":0.054},{"c":"Benin","k":"SSA","x":838,"a":0.859,"b":-0.147},{"c":"Bermuda","k":"NAM","x":88534,"a":0.922,"b":0.047},{"c":"Bhutan","k":"SAS","x":1497,"a":0.987,"b":0.185},{"c":"Bolivia","k":"LAC","x":2100,"a":0.812,"b":0.356},{"c":"Bosnia and Herzegovina","k":"ECA","x":3502,"a":0.757,"b":0.347},{"c":"Botswana","k":"SSA","x":3741,"a":0.43,"b":-0.064},{"c":"Brazil","k":"LAC","x":6367,"a":0.943,"b":0.163},{"c":"Brunei Darussalam","k":"EAP","x":44233,"a":-0.928,"b":0.065},{"c":"Bulgaria","k":"ECA","x":5579,"a":0.869,"b":0.107},{"c":"Burkina Faso","k":"SSA","x":423,"a":0.961,"b":0.039},{"c":"Burundi","k":"SSA","x":287,"a":-0.359,"b":0.148},{"c":"Cabo Verde","k":"SSA","x":2208,"a":0.986,"b":0.552},{"c":"Cambodia","k":"EAP","x":1031,"a":0.475,"b":-0.211},{"c":"Cameroon","k":"SSA","x":1248,"a":0.684,"b":0.061},{"c":"Canada","k":"NAM","x":32372,"a":0.982,"b":0.054},{"c":"Central African Republic","k":"SSA","x":494,"a":0.017,"b":-0.015},{"c":"Chad","k":"SSA","x":727,"a":0.439,"b":0.258},{"c":"Chile","k":"LAC","x":7539,"a":0.905,"b":-0.087},{"c":"China","k":"EAP","x":3095,"a":0.9,"b":-0.583},{"c":"Colombia","k":"LAC","x":4017,"a":0.983,"b":0.241},{"c":"Comoros","k":"SSA","x":1256,"a":0.768,"b":0.139},{"c":"Congo, Dem. Rep.","k":"SSA","x":795,"a":-0.813,"b":0.137},{"c":"Congo, Rep.","k":"SSA","x":1947,"a":0.514,"b":0.082},{"c":"Costa Rica","k":"LAC","x":7583,"a":0.911,"b":-0.026},{"c":"Cote d'Ivoire","k":"SSA","x":1970,"a":-0.005,"b":0.412},{"c":"Croatia","k":"ECA","x":11360,"a":0.931,"b":0.202},{"c":"Cuba","k":"LAC","x":5133,"a":0.803,"b":0.079},{"c":"Curacao","k":"LAC","x":19654,"a":-0.766,"b":0.114},{"c":"Cyprus","k":"ECA","x":20247,"a":0.957,"b":0.06},{"c":"Czechia","k":"ECA","x":15496,"a":0.953,"b":-0.042},{"c":"Denmark","k":"ECA","x":40474,"a":0.894,"b":-0.119},{"c":"Dominica","k":"LAC","x":6545,"a":0.218,"b":0.403},{"c":"Dominican Republic","k":"LAC","x":3916,"a":0.939,"b":0.326},{"c":"Ecuador","k":"LAC","x":4150,"a":0.939,"b":0.465},{"c":"Egypt, Arab Rep.","k":"MNA","x":2127,"a":0.986,"b":0.265},{"c":"El Salvador","k":"LAC","x":3119,"a":0.566,"b":0.381},{"c":"Equatorial Guinea","k":"SSA","x":5014,"a":0.788,"b":-0.071},{"c":"Eritrea","k":"SSA","x":800,"a":-0.35,"b":-0.08},{"c":"Estonia","k":"ECA","x":14207,"a":0.942,"b":0.052},{"c":"Eswatini","k":"SSA","x":2273,"a":-0.13,"b":-0.007},{"c":"Ethiopia","k":"SSA","x":361,"a":0.844,"b":0.064},{"c":"Fiji","k":"EAP","x":3722,"a":0.868,"b":0.109},{"c":"Finland","k":"ECA","x":30706,"a":0.97,"b":-0.014},{"c":"France","k":"ECA","x":27411,"a":0.959,"b":0.323},{"c":"French Polynesia","k":"EAP","x":23016,"a":-0.687,"b":0.056},{"c":"Gabon","k":"SSA","x":7363,"a":0.406,"b":0.301},{"c":"Gambia, The","k":"SSA","x":644,"a":0.515,"b":-0.125},{"c":"Georgia","k":"ECA","x":3042,"a":0.529,"b":0.245},{"c":"Germany","k":"ECA","x":29749,"a":0.973,"b":0.18},{"c":"Ghana","k":"SSA","x":1195,"a":0.668,"b":0.123},{"c":"Greece","k":"ECA","x":15605,"a":0.882,"b":0.039},{"c":"Greenland","k":"ECA","x":32385,"a":0.938,"b":-0.048},{"c":"Grenada","k":"LAC","x":6473,"a":0.946,"b":0.064},{"c":"Guam","k":"EAP","x":33192,"a":0.566,"b":0.664},{"c":"Guatemala","k":"LAC","x":3086,"a":0.869,"b":0.018},{"c":"Guinea","k":"SSA","x":637,"a":0.931,"b":-0.107},{"c":"Guinea-Bissau","k":"SSA","x":585,"a":0.851,"b":0.028},{"c":"Guyana","k":"LAC","x":4770,"a":0.808,"b":0.262},{"c":"Haiti","k":"LAC","x":1541,"a":-0.695,"b":0.265},{"c":"Honduras","k":"LAC","x":1109,"a":0.916,"b":-0.019},{"c":"Hong Kong SAR, China","k":"EAP","x":23385,"a":0.989,"b":0.104},{"c":"Hungary","k":"ECA","x":8756,"a":0.779,"b":-0.047},{"c":"Iceland","k":"ECA","x":37637,"a":0.962,"b":-0.124},{"c":"India","k":"SAS","x":817,"a":0.959,"b":0.097},{"c":"Indonesia","k":"EAP","x":1814,"a":0.958,"b":0.088},{"c":"Iran, Islamic Rep.","k":"MNA","x":4456,"a":0.346,"b":0.073},{"c":"Iraq","k":"MNA","x":2749,"a":0.797,"b":-0.207},{"c":"Ireland","k":"ECA","x":34599,"a":0.98,"b":-0.122},{"c":"Isle of Man","k":"ECA","x":55745,"a":0.991,"b":0.261},{"c":"Israel","k":"MNA","x":25643,"a":0.951,"b":-0.265},{"c":"Italy","k":"ECA","x":25304,"a":0.934,"b":0.3},{"c":"Jamaica","k":"LAC","x":5068,"a":0.475,"b":0.021},{"c":"Japan","k":"EAP","x":25606,"a":0.975,"b":0.298},{"c":"Jordan","k":"MNA","x":4279,"a":0.219,"b":0.057},{"c":"Kazakhstan","k":"ECA","x":7498,"a":0.918,"b":0.351},{"c":"Kenya","k":"SSA","x":1229,"a":0.926,"b":0.127},{"c":"Kiribati","k":"EAP","x":1646,"a":-0.34,"b":0.03},{"c":"Korea, Rep.","k":"EAP","x":14321,"a":0.993,"b":0.05},{"c":"Kuwait","k":"MNA","x":32377,"a":-0.345,"b":0.106},{"c":"Kyrgyz Republic","k":"ECA","x":965,"a":0.608,"b":0.387},{"c":"Lao PDR","k":"EAP","x":1369,"a":0.994,"b":0.182},{"c":"Latvia","k":"ECA","x":10295,"a":0.928,"b":0.042},{"c":"Lebanon","k":"MNA","x":6447,"a":0.882,"b":0.256},{"c":"Lesotho","k":"SSA","x":645,"a":-0.206,"b":-0.088},{"c":"Liberia","k":"SSA","x":1522,"a":-0.627,"b":0.586},{"c":"Libya","k":"MNA","x":11478,"a":0.335,"b":0.456},{"c":"Lithuania","k":"ECA","x":11057,"a":0.904,"b":0.153},{"c":"Luxembourg","k":"ECA","x":70151,"a":0.971,"b":0.127},{"c":"Macao SAR, China","k":"EAP","x":47612,"a":0.816,"b":-0.038},{"c":"Madagascar","k":"SSA","x":570,"a":-0.882,"b":0.28},{"c":"Malawi","k":"SSA","x":414,"a":0.905,"b":0.064},{"c":"Malaysia","k":"EAP","x":5392,"a":0.98,"b":0.17},{"c":"Maldives","k":"SAS","x":5956,"a":0.985,"b":0.106},{"c":"Mali","k":"SSA","x":703,"a":0.909,"b":0.035},{"c":"Malta","k":"MNA","x":15263,"a":0.979,"b":0.127},{"c":"Marshall Islands","k":"EAP","x":3369,"a":0.879,"b":0.098},{"c":"Mauritania","k":"SSA","x":1519,"a":-0.082,"b":0.203},{"c":"Mauritius","k":"SSA","x":5032,"a":0.953,"b":-0.018},{"c":"Mexico","k":"LAC","x":8072,"a":0.961,"b":0.338},{"c":"Micronesia, Fed. Sts.","k":"EAP","x":2579,"a":0.893,"b":0.085},{"c":"Moldova","k":"ECA","x":2400,"a":0.762,"b":0.195},{"c":"Monaco","k":"ECA","x":125842,"a":0.921,"b":-0.357},{"c":"Mongolia","k":"EAP","x":2473,"a":0.901,"b":-0.019},{"c":"Montenegro","k":"ECA","x":5969,"a":0.857,"b":0.134},{"c":"Morocco","k":"MNA","x":2016,"a":0.984,"b":0.238},{"c":"Mozambique","k":"SSA","x":379,"a":0.967,"b":0.274},{"c":"Myanmar","k":"EAP","x":449,"a":0.891,"b":0.041},{"c":"Namibia","k":"SSA","x":3606,"a":0.285,"b":-0.008},{"c":"Naoero","k":"EAP","x":17435,"a":-0.704,"b":0.086},{"c":"Nepal","k":"SAS","x":545,"a":0.928,"b":0.021},{"c":"Netherlands","k":"ECA","x":33363,"a":0.951,"b":0.058},{"c":"New Zealand","k":"EAP","x":28967,"a":0.974,"b":-0.083},{"c":"Nicaragua","k":"LAC","x":1879,"a":-0.262,"b":0.237},{"c":"Niger","k":"SSA","x":549,"a":-0.588,"b":0.128},{"c":"Nigeria","k":"SSA","x":1846,"a":0.612,"b":0.417},{"c":"North Macedonia","k":"ECA","x":4303,"a":0.846,"b":0.168},{"c":"Northern Mariana Islands","k":"EAP","x":19828,"a":-0.513,"b":-0.095},{"c":"Norway","k":"ECA","x":53602,"a":0.934,"b":-0.18},{"c":"Oman","k":"MNA","x":15246,"a":0.885,"b":0.206},{"c":"Pakistan","k":"MNA","x":976,"a":0.982,"b":0.156},{"c":"Palau","k":"EAP","x":13213,"a":0.721,"b":0.034},{"c":"Panama","k":"LAC","x":7432,"a":0.949,"b":0.542},{"c":"Papua New Guinea","k":"EAP","x":2083,"a":0.759,"b":0.33},{"c":"Paraguay","k":"LAC","x":3896,"a":0.935,"b":-0.06},{"c":"Peru","k":"LAC","x":4089,"a":0.704,"b":0.051},{"c":"Philippines","k":"EAP","x":1990,"a":0.841,"b":-0.047},{"c":"Poland","k":"ECA","x":10125,"a":0.95,"b":0.143},{"c":"Portugal","k":"ECA","x":14183,"a":0.959,"b":0.104},{"c":"Puerto Rico (US)","k":"LAC","x":20400,"a":0.913,"b":-0.024},{"c":"Qatar","k":"MNA","x":59439,"a":0.136,"b":0.172},{"c":"Romania","k":"ECA","x":7377,"a":0.937,"b":0.011},{"c":"Russian Federation","k":"ECA","x":7814,"a":0.85,"b":0.257},{"c":"Rwanda","k":"SSA","x":455,"a":0.921,"b":0.862},{"c":"Samoa","k":"EAP","x":3211,"a":0.717,"b":0.034},{"c":"San Marino","k":"ECA","x":50757,"a":-0.573,"b":0.445},{"c":"Sao Tome and Principe","k":"SSA","x":1148,"a":0.644,"b":0.064},{"c":"Saudi Arabia","k":"MNA","x":29516,"a":-0.249,"b":0.121},{"c":"Senegal","k":"SSA","x":1101,"a":0.547,"b":-0.037},{"c":"Serbia","k":"ECA","x":5418,"a":0.818,"b":0.395},{"c":"Seychelles","k":"SSA","x":9414,"a":0.961,"b":-0.187},{"c":"Sierra Leone","k":"SSA","x":981,"a":0.083,"b":0.3},{"c":"Singapore","k":"EAP","x":29027,"a":0.987,"b":-0.077},{"c":"Slovak Republic","k":"ECA","x":12886,"a":0.937,"b":-0.136},{"c":"Slovenia","k":"ECA","x":18877,"a":0.958,"b":0.321},{"c":"Solomon Islands","k":"EAP","x":1944,"a":-0.025,"b":0.073},{"c":"Somalia, Fed. Rep.","k":"SSA","x":305,"a":0.383,"b":-0.044},{"c":"South Africa","k":"SSA","x":5145,"a":0.328,"b":-0.086},{"c":"Spain","k":"ECA","x":19197,"a":0.961,"b":0.26},{"c":"Sri Lanka","k":"SAS","x":1964,"a":0.973,"b":0.079},{"c":"St. Kitts and Nevis","k":"LAC","x":13704,"a":0.946,"b":0.19},{"c":"St. Lucia","k":"LAC","x":8631,"a":0.878,"b":0.144},{"c":"St. Vincent and the Grenadines","k":"LAC","x":4489,"a":0.804,"b":0.045},{"c":"Sudan","k":"SSA","x":954,"a":0.648,"b":0.013},{"c":"Suriname","k":"LAC","x":6738,"a":0.741,"b":0.071},{"c":"Sweden","k":"ECA","x":36367,"a":0.979,"b":0.2},{"c":"Switzerland","k":"ECA","x":67397,"a":0.977,"b":0.296},{"c":"Syrian Arab Republic","k":"MNA","x":1004,"a":0.794,"b":0.326},{"c":"Tajikistan","k":"ECA","x":891,"a":0.313,"b":0.283},{"c":"Tanzania","k":"SSA","x":717,"a":0.411,"b":0.07},{"c":"Thailand","k":"EAP","x":3084,"a":0.991,"b":0.049},{"c":"Timor-Leste","k":"EAP","x":1114,"a":0.852,"b":0.716},{"c":"Togo","k":"SSA","x":755,"a":0.579,"b":0.155},{"c":"Tonga","k":"EAP","x":3733,"a":0.947,"b":0.096},{"c":"Trinidad and Tobago","k":"LAC","x":10343,"a":0.946,"b":0.138},{"c":"Tunisia","k":"MNA","x":2530,"a":0.935,"b":0.049},{"c":"Turkiye","k":"ECA","x":6388,"a":0.957,"b":-0.03},{"c":"Turkmenistan","k":"ECA","x":4011,"a":0.891,"b":0.337},{"c":"Tuvalu","k":"EAP","x":2728,"a":0.716,"b":-0.131},{"c":"Uganda","k":"SSA","x":615,"a":0.97,"b":-0.092},{"c":"Ukraine","k":"ECA","x":2184,"a":0.473,"b":0.096},{"c":"United Arab Emirates","k":"MNA","x":64276,"a":-0.787,"b":0.125},{"c":"United Kingdom","k":"ECA","x":32063,"a":0.982,"b":0.284},{"c":"United States","k":"NAM","x":40950,"a":0.97,"b":-0.031},{"c":"Uruguay","k":"LAC","x":10580,"a":0.942,"b":-0.18},{"c":"Uzbekistan","k":"ECA","x":2301,"a":0.973,"b":0.758},{"c":"Vanuatu","k":"EAP","x":3082,"a":0.383,"b":0.189},{"c":"Venezuela, RB","k":"LAC","x":3947,"a":-0.357,"b":0.209},{"c":"Viet Nam","k":"EAP","x":1759,"a":0.933,"b":0.022},{"c":"Virgin Islands (U.S.)","k":"LAC","x":40567,"a":-0.821,"b":-0.228},{"c":"West Bank and Gaza","k":"MNA","x":2756,"a":0.684,"b":-0.058},{"c":"Yemen, Rep.","k":"MNA","x":1931,"a":-0.071,"b":0.658},{"c":"Zambia","k":"SSA","x":1086,"a":0.816,"b":0.375},{"c":"Zimbabwe","k":"SSA","x":1418,"a":0.22,"b":0.195}];
+  var REG = [["SSA","Sub-Saharan Africa","#ef4444"],["MNA","Middle East & North Africa","#f59e0b"],["SAS","South Asia","#a78bfa"],
+             ["EAP","East Asia & Pacific","#f472b6"],["ECA","Europe & Central Asia","#60a5fa"],["LAC","Latin America & Caribbean","#22c55e"],
+             ["NAM","North America","#e2e8f0"]];
+  var mode = 'a', chart;
+  function build(m) {
+    return REG.map(function(k) {
+      return { label: k[1], backgroundColor: k[2] + 'CC', borderColor: k[2], pointRadius: 4.5, pointHoverRadius: 7,
+        data: D.filter(function(d) { return d.k === k[0] && d[m] !== null; }).map(function(d) { return { x: d.x, y: d[m], c: d.c }; }) };
+    });
+  }
+  function styleBtns() {
+    [['btnLevels','a'],['btnChanges','b']].forEach(function(p) {
+      var b = document.getElementById(p[0]);
+      b.style.background = (p[1] === mode) ? '#2563eb' : '#0d1424';
+      b.style.color = (p[1] === mode) ? '#ffffff' : tick;
+    });
+  }
+  function legend() {
+    var el = document.getElementById('regionLegend'); el.innerHTML = '';
+    REG.forEach(function(k, i) {
+      var s = document.createElement('span'); var hidden = !chart.isDatasetVisible(i);
+      s.style.cssText = 'display:flex;align-items:center;gap:4px;cursor:pointer;' + (hidden ? 'opacity:0.35;text-decoration:line-through;' : '');
+      s.innerHTML = '<span style="width:10px;height:10px;border-radius:50%;background:' + k[2] + ';"></span>' + k[1] + ' (' + D.filter(function(d) { return d.k === k[0]; }).length + ')';
+      s.onclick = function() { chart.setDatasetVisibility(i, !chart.isDatasetVisible(i)); chart.update(); legend(); };
+      el.appendChild(s);
+    });
+  }
+  window.setRegionMode = function(m) {
+    mode = m; var ds = build(m);
+    chart.data.datasets.forEach(function(d, i) { d.data = ds[i].data; });
+    chart.options.scales.y.title.text = (m === 'a') ? 'Within-country r (life expectancy vs ln GDP pc, levels)' : 'Within-country r (year-over-year changes)';
+    chart.update(); styleBtns();
+  };
+  chart = new Chart(document.getElementById('regionPlot'), {
+    type: 'scatter', data: { datasets: build('a') },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      scales: {
+        x: { type: 'logarithmic', title: { display: true, text: 'Average GDP per capita over the country\'s years (constant 2015 US$, log scale)', color: tick }, ticks: { color: tick }, grid: { color: grid } },
+        y: { min: -1, max: 1, title: { display: true, text: 'Within-country r (life expectancy vs ln GDP pc, levels)', color: tick }, ticks: { color: tick },
+             grid: { color: function(c) { return c.tick && c.tick.value === 0 ? '#64748b' : grid; }, lineWidth: function(c) { return c.tick && c.tick.value === 0 ? 1.5 : 1; } } }
+      },
+      plugins: { legend: { display: false },
+        tooltip: { callbacks: { label: function(ctx) { var d = ctx.raw; return d.c + ' (' + ctx.dataset.label + '): $' + Math.round(d.x).toLocaleString() + ', r = ' + d.y.toFixed(2); } } } }
+    }
+  });
+  legend(); styleBtns();
+})();
+</script>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/mlss5\.github\.io\/data-stories\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>© 2025 Machine Learning for Social Science</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+<script src="site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>
